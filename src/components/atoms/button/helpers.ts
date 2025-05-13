@@ -1,18 +1,9 @@
-import React from 'react'
-import styled, { css } from 'styled-components'
+import { css } from 'styled-components'
 
-import { theme } from '../styles/theme'
+import { theme } from '../../../styles/theme'
+import type { ButtonSize, ButtonVariant } from '../../../styles/theme.types'
 
-type ButtonVariant = 'primary' | 'success' | 'warning' | 'danger' | 'neutral'
-type ButtonSize = 'small' | 'medium' | 'large' | 'xlarge'
-
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  label: string
-  variant?: ButtonVariant
-  size?: ButtonSize
-}
-
-const getVariantStyle = (variant: ButtonVariant) => {
+export const getVariantStyle = (variant: ButtonVariant) => {
   const color = theme.colors[variant]
 
   if (variant === 'neutral') {
@@ -37,6 +28,7 @@ const getVariantStyle = (variant: ButtonVariant) => {
       }
     `
   }
+
   return css`
     background-color: ${color.hue100};
     color: white;
@@ -58,7 +50,7 @@ const getVariantStyle = (variant: ButtonVariant) => {
   `
 }
 
-const getSizeStyle = (size: ButtonSize) => {
+export const getSizeStyle = (size: ButtonSize) => {
   const sizeMap = {
     small: {
       fontSize: theme.typography.fontSize.xSmall,
@@ -89,38 +81,9 @@ const getSizeStyle = (size: ButtonSize) => {
   const { fontSize, padding, height, radius } = sizeMap[size]
 
   return css`
-    display: flex;
-    align-items: center;
-    justify-content: center;
     font-size: ${fontSize};
     padding: ${padding};
     height: ${height};
     border-radius: ${radius};
   `
 }
-
-const StyledButton = styled.button<Required<Pick<ButtonProps, 'variant' | 'size'>>>`
-  border: none;
-  font-weight: ${theme.typography.fontWeight.medium};
-  line-height: ${theme.typography.lineHeight.base};
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-
-  ${props => getVariantStyle(props.variant)}
-  ${props => getSizeStyle(props.size)}
-`
-
-const Button: React.FC<ButtonProps> = ({
-  label,
-  variant = 'primary',
-  size = 'medium',
-  ...rest
-}) => {
-  return (
-    <StyledButton variant={variant} size={size} {...rest}>
-      {label}
-    </StyledButton>
-  )
-}
-
-export default Button
