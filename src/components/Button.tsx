@@ -19,25 +19,24 @@ const getVariantStyle = (variant: ButtonVariant) => {
     return css`
       background-color: ${theme.colors.neutral.hue0};
       color: ${theme.colors.neutral.hue500};
-      border: 1px solid ${theme.colors.neutral.hue200};
+      border: 1px solid ${theme.colors.neutral.hue100};
 
       &:hover {
         background-color: ${theme.colors.neutral.hue50};
       }
 
       &:active {
-        background-color: ${theme.colors.neutral.hue100};
+        background-color: ${theme.colors.neutral.hue0};
       }
 
       &:disabled {
         background-color: ${theme.colors.neutral.hue50};
         color: ${theme.colors.neutral.hue200};
-        border: 1px solid ${theme.colors.neutral.hue100};
+        border: 1px solid ${theme.colors.neutral.hue50};
         cursor: not-allowed;
       }
     `
   }
-
   return css`
     background-color: ${color.hue100};
     color: white;
