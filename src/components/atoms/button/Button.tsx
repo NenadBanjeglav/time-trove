@@ -17,10 +17,12 @@ const Button: React.FC<ButtonProps> = ({
   ...rest
 }) => {
   return (
-    <StyledButton variant={variant} size={size} {...rest}>
+    <StyledButton $variant={variant} $size={size} {...rest}>
       {label}
     </StyledButton>
   )
 }
 
 export default Button
+
+export type { ButtonProps }

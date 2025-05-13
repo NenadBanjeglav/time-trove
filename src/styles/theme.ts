@@ -1,6 +1,4 @@
-import type { ThemeType } from './theme.types'
-
-export const theme: ThemeType = {
+export const theme = {
   typography: {
     fontSize: {
       xSmall: '12px',
@@ -90,3 +88,5 @@ export const theme: ThemeType = {
     variants: ['primary', 'success', 'warning', 'danger', 'neutral'],
   },
 }
+
+export type ThemeType = typeof theme

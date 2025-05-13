@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import { AppLayout, PublicLayout, Dashboard, Login, Register, NotFound } from './pages'
+import ProtectedRoute from './pages/ProtectedRoute'
 import { ROUTES } from './routes'
 
 const App = () => {
@@ -8,7 +9,14 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         {/* Protected App Routes */}
-        <Route element={<AppLayout />}>
+
+        <Route
+          element={
+            <ProtectedRoute>
+              <AppLayout />
+            </ProtectedRoute>
+          }
+        >
           <Route index element={<Dashboard />} />
         </Route>
 

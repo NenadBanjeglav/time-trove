@@ -5,7 +5,7 @@ import type { ButtonSize, ButtonVariant } from '../../../styles/theme.types'
 
 import { getSizeStyle, getVariantStyle } from './helpers'
 
-export const StyledButton = styled.button<{ variant: ButtonVariant; size: ButtonSize }>`
+export const StyledButton = styled.button<{ $variant: ButtonVariant; $size: ButtonSize }>`
   font-weight: ${theme.typography.fontWeight.medium};
   line-height: ${theme.typography.lineHeight.base};
   cursor: pointer;
@@ -14,6 +14,6 @@ export const StyledButton = styled.button<{ variant: ButtonVariant; size: Button
   align-items: center;
   justify-content: center;
 
-  ${props => getVariantStyle(props.variant)}
-  ${props => getSizeStyle(props.size)}
+  ${props => getVariantStyle(props.$variant)}
+  ${props => getSizeStyle(props.$size)}
 `
