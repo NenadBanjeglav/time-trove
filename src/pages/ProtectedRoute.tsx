@@ -6,7 +6,7 @@ import Spinner from '../components/atoms/Spinner'
 
 const FullPage = styled.div`
   height: 100vh;
-  background-color: var(--color-grey-50);
+  background-color: ${({ theme }) => theme.colors.neutral.hue100};
   display: flex;
   justify-content: center;
   align-items: center;
