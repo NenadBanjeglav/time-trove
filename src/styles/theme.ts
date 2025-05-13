@@ -31,7 +31,7 @@ export type ThemeType = {
       hue100: string
       hue200: string
     }
-    neutrals: {
+    neutral: {
       hue0: string
       hue50: string
       hue100: string
@@ -94,7 +94,7 @@ export const theme: ThemeType = {
       hue100: '#925FF0',
       hue200: '#6F38D2',
     },
-    neutrals: {
+    neutral: {
       hue0: '#FFFFFF',
       hue50: '#F8F8F8',
       hue100: '#DDE2E8',
