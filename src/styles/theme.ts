@@ -1,83 +1,125 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-export const theme = {
+export type ThemeType = {
+  typography: {
+    fontSize: {
+      xSmall: string
+      small: string
+      base: string
+      large: string
+      h2: string
+      h1: string
+    }
+    lineHeight: {
+      xSmall: string
+      small: string
+      base: string
+      large: string
+      h2: string
+      h1: string
+    }
+    fontWeight: {
+      regular: number
+      medium: number
+      semiBold: number
+      bold: number
+    }
+  }
+
   colors: {
-    neutrals: {
-      0: '#FFFFFF',
-      50: '#F8F8F8',
-      100: '#DDE2E8',
-      200: '#A0A9B1',
-      300: '#5F6368',
-      400: '#2E3237',
-      500: '#000000',
-    },
-    system: {
-      success: {
-        0: '#FFFFFF',
-        50: '#4BE381',
-        100: '#2ED573',
-        200: '#1DB863',
-      },
-      warning: {
-        0: '#FFFFFF',
-        50: '#FFC266',
-        100: '#FFA940',
-        200: '#FF8C1A',
-      },
-      danger: {
-        0: '#FFFFFF',
-        50: '#FF6B6B',
-        100: '#FF4D4F',
-        200: '#D9363E',
-      },
-    },
     primary: {
-      0: '#F5F0FF',
-      50: '#B197FC',
-      100: '#925FF0',
-      200: '#6F38D2',
+      hue0: string
+      hue50: string
+      hue100: string
+      hue200: string
+    }
+    neutrals: {
+      hue0: string
+      hue50: string
+      hue100: string
+      hue200: string
+      hue300: string
+      hue400: string
+      hue500: string
+    }
+    success: {
+      hue0: string
+      hue50: string
+      hue100: string
+      hue200: string
+    }
+    warning: {
+      hue0: string
+      hue50: string
+      hue100: string
+      hue200: string
+    }
+    danger: {
+      hue0: string
+      hue50: string
+      hue100: string
+      hue200: string
+    }
+  }
+}
+
+export const theme: ThemeType = {
+  typography: {
+    fontSize: {
+      xSmall: '12px',
+      small: '14px',
+      base: '16px',
+      large: '20px',
+      h2: '24px',
+      h1: '32px',
+    },
+    lineHeight: {
+      xSmall: '16px',
+      small: '20px',
+      base: '24px',
+      large: '28px',
+      h2: '32px',
+      h1: '40px',
+    },
+    fontWeight: {
+      regular: 400,
+      medium: 500,
+      semiBold: 600,
+      bold: 700,
     },
   },
 
-  typography: {
-    body: {
-      large: {
-        regular: { fontSize: '20px', lineHeight: '28px', fontWeight: 400 },
-        medium: { fontSize: '20px', lineHeight: '28px', fontWeight: 500 },
-        semiBold: { fontSize: '20px', lineHeight: '28px', fontWeight: 600 },
-        bold: { fontSize: '20px', lineHeight: '28px', fontWeight: 700 },
-      },
-      base: {
-        regular: { fontSize: '16px', lineHeight: '24px', fontWeight: 400 },
-        medium: { fontSize: '16px', lineHeight: '24px', fontWeight: 500 },
-        semiBold: { fontSize: '16px', lineHeight: '24px', fontWeight: 600 },
-        bold: { fontSize: '16px', lineHeight: '24px', fontWeight: 700 },
-      },
-      small: {
-        regular: { fontSize: '14px', lineHeight: '20px', fontWeight: 400 },
-        medium: { fontSize: '14px', lineHeight: '20px', fontWeight: 500 },
-        semiBold: { fontSize: '14px', lineHeight: '20px', fontWeight: 600 },
-        bold: { fontSize: '14px', lineHeight: '20px', fontWeight: 700 },
-      },
-      xSmall: {
-        regular: { fontSize: '12px', lineHeight: '16px', fontWeight: 400 },
-        medium: { fontSize: '12px', lineHeight: '16px', fontWeight: 500 },
-        semiBold: { fontSize: '12px', lineHeight: '16px', fontWeight: 600 },
-        bold: { fontSize: '12px', lineHeight: '16px', fontWeight: 700 },
-      },
+  colors: {
+    primary: {
+      hue0: '#F5F0FF',
+      hue50: '#B197FC',
+      hue100: '#925FF0',
+      hue200: '#6F38D2',
     },
-    heading: {
-      h1: {
-        regular: { fontSize: '32px', lineHeight: '40px', fontWeight: 400 },
-        medium: { fontSize: '32px', lineHeight: '40px', fontWeight: 500 },
-        semiBold: { fontSize: '32px', lineHeight: '40px', fontWeight: 600 },
-        bold: { fontSize: '32px', lineHeight: '40px', fontWeight: 700 },
-      },
-      h2: {
-        regular: { fontSize: '24px', lineHeight: '32px', fontWeight: 400 },
-        medium: { fontSize: '24px', lineHeight: '32px', fontWeight: 500 },
-        semiBold: { fontSize: '24px', lineHeight: '32px', fontWeight: 600 },
-        bold: { fontSize: '24px', lineHeight: '32px', fontWeight: 700 },
-      },
+    neutrals: {
+      hue0: '#FFFFFF',
+      hue50: '#F8F8F8',
+      hue100: '#DDE2E8',
+      hue200: '#A0A9B1',
+      hue300: '#5F6368',
+      hue400: '#2E3237',
+      hue500: '#000000',
+    },
+    success: {
+      hue0: '#FFFFFF',
+      hue50: '#4BE381',
+      hue100: '#2ED573',
+      hue200: '#1DB863',
+    },
+    warning: {
+      hue0: '#FFFFFF',
+      hue50: '#FFC266',
+      hue100: '#FFA940',
+      hue200: '#FF8C1A',
+    },
+    danger: {
+      hue0: '#FFFFFF',
+      hue50: '#FF6B6B',
+      hue100: '#FF4D4F',
+      hue200: '#D9363E',
     },
   },
 }
