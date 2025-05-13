@@ -15,9 +15,33 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const getVariantStyle = (variant: ButtonVariant) => {
   const color = theme.colors[variant]
 
+  if (variant === 'neutral') {
+    return css`
+      background-color: ${theme.colors.neutral.hue0};
+      color: ${theme.colors.neutral.hue500};
+      border: 1px solid ${theme.colors.neutral.hue200};
+
+      &:hover {
+        background-color: ${theme.colors.neutral.hue50};
+      }
+
+      &:active {
+        background-color: ${theme.colors.neutral.hue100};
+      }
+
+      &:disabled {
+        background-color: ${theme.colors.neutral.hue50};
+        color: ${theme.colors.neutral.hue200};
+        border: 1px solid ${theme.colors.neutral.hue100};
+        cursor: not-allowed;
+      }
+    `
+  }
+
   return css`
     background-color: ${color.hue100};
-    color: ${variant === 'neutral' ? theme.colors.neutral.hue500 : 'white'};
+    color: white;
+    border: none;
 
     &:hover {
       background-color: ${color.hue50};
