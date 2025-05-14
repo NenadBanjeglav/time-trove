@@ -1,11 +1,10 @@
 import { Button } from '../components/atoms/button/Button'
 
-const Dashboard = () => {
+export const Dashboard = () => {
   return (
     <div>
       <Button variant="primary" size="medium" label="Click me" />
+      <Button variant="success" size="large" label="Button" />
     </div>
   )
 }
-
-export default Dashboard

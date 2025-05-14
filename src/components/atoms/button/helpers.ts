@@ -1,29 +1,31 @@
 import { css } from 'styled-components'
 
+import type { ButtonSize } from '../../../styles/theme.types'
+import type { ButtonVariant } from './Button'
 import { theme } from '../../../styles/theme'
-import type { ButtonSize, ButtonVariant } from '../../../styles/theme.types'
 
 export const getVariantStyle = (variant: ButtonVariant) => {
   const color = theme.colors[variant]
+  const neutral = theme.colors.neutral
 
   if (variant === 'neutral') {
     return css`
-      background-color: ${theme.colors.neutral.hue0};
-      color: ${theme.colors.neutral.hue500};
-      border: 1px solid ${theme.colors.neutral.hue100};
+      background-color: ${neutral.hue0};
+      color: ${neutral.hue500};
+      border: 1px solid ${neutral.hue100};
 
       &:hover {
-        background-color: ${theme.colors.neutral.hue50};
+        background-color: ${neutral.hue50};
       }
 
       &:active {
-        background-color: ${theme.colors.neutral.hue0};
+        background-color: ${neutral.hue0};
       }
 
       &:disabled {
-        background-color: ${theme.colors.neutral.hue50};
-        color: ${theme.colors.neutral.hue200};
-        border: 1px solid ${theme.colors.neutral.hue50};
+        background-color: ${neutral.hue50};
+        color: ${neutral.hue200};
+        border: 1px solid ${neutral.hue50};
         cursor: not-allowed;
       }
     `
@@ -43,8 +45,8 @@ export const getVariantStyle = (variant: ButtonVariant) => {
     }
 
     &:disabled {
-      background-color: ${theme.colors.neutral.hue50};
-      color: ${theme.colors.neutral.hue200};
+      background-color: ${neutral.hue50};
+      color: ${neutral.hue200};
       cursor: not-allowed;
     }
   `

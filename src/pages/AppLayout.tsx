@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
 
-const AppLayout = () => {
+export const AppLayout = () => {
   return (
     <div>
       <nav>Navbar</nav>
@@ -8,5 +8,3 @@ const AppLayout = () => {
     </div>
   )
 }
-
-export default AppLayout

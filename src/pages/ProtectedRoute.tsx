@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import Spinner from '../components/atoms/Spinner'
+import { Spinner } from '../components/atoms/Spinner'
 
 const FullPage = styled.div`
   height: 100vh;
@@ -11,7 +11,7 @@ const FullPage = styled.div`
   align-items: center;
 `
 
-const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const navigate = useNavigate()
 
   const [isLoading, setIsLoading] = useState(true)
@@ -41,5 +41,3 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 
   return null
 }
-
-export default ProtectedRoute

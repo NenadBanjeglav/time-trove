@@ -4,7 +4,6 @@ export type FontWeightType = keyof ThemeType['typography']['fontWeight']
 export type Pallete = keyof ThemeType['colors']
 export type Color<T extends Pallete> = keyof ThemeType['colors'][T]
 export type ButtonSize = keyof ThemeType['button']['sizes']
-export type ButtonVariant = 'primary' | 'success' | 'warning' | 'danger' | 'neutral'
 
 export type ThemeType = {
   typography: {
@@ -75,26 +74,29 @@ export type ThemeType = {
         padding: string
         height: string
         radius: string
+        minWidth: string
       }
       medium: {
         fontSize: string
         padding: string
         height: string
         radius: string
+        minWidth: string
       }
       large: {
         fontSize: string
         padding: string
         height: string
         radius: string
+        minWidth: string
       }
       xlarge: {
         fontSize: string
         padding: string
         height: string
         radius: string
+        minWidth: string
       }
     }
-    variants: ButtonVariant[]
   }
 }
