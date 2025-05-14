@@ -38,6 +38,7 @@ export const DefaultButton: Story = {
 
 export const LoadingButton: Story = {
   args: {
+    label: '',
     variant: variants[0],
     size: sizes[0],
     children: <Spinner />,

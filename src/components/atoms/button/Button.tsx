@@ -8,9 +8,9 @@ export const buttonVariants = ['primary', 'success', 'warning', 'danger', 'neutr
 export type ButtonVariant = (typeof buttonVariants)[number]
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  label?: string
+  label: string
   variant?: ButtonVariant
-  size?: ButtonSize
+  size: ButtonSize
   icon?: React.ReactNode
   children?: React.ReactNode
   loading?: boolean
