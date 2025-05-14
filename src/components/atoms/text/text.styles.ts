@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import type { FontSizeType, FontWeightType, LineHeightType } from '../../../styles/theme.types'
 
 type StyledProps = {
@@ -8,9 +8,7 @@ type StyledProps = {
 }
 
 export const StyledText = styled.span<StyledProps>`
-  ${({ theme, $fontSize, $fontWeight, $lineHeight }) => css`
-    font-size: ${theme.typography.fontSize[$fontSize]};
-    font-weight: ${theme.typography.fontWeight[$fontWeight]};
-    line-height: ${theme.typography.lineHeight[$lineHeight]};
-  `}
+  font-size: ${({ theme, $fontSize }) => theme.typography.fontSize[$fontSize]};
+  font-weight: ${({ theme, $fontWeight }) => theme.typography.fontWeight[$fontWeight]};
+  line-height: ${({ theme, $lineHeight }) => theme.typography.lineHeight[$lineHeight]};
 `
