@@ -2,13 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { theme } from '../../../styles/theme'
 import type { ButtonSize, ButtonVariant } from '../../../styles/theme.types'
-
-import Button from './Button'
+import { Button } from './Button'
 
 const variants = theme.button.variants as ButtonVariant[]
-const sizes: ButtonSize[] = Object.keys(theme.button).filter(
-  (key): key is ButtonSize => key !== 'variants'
-)
+const sizes = Object.keys(theme.button.sizes) as ButtonSize[]
 
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
@@ -41,9 +38,7 @@ export const Playground: Story = {
 export const AllVariants = {
   render: () => {
     const variants = theme.button.variants
-    const sizes = Object.keys(theme.button).filter(
-      (key): key is ButtonSize => key !== 'variants'
-    ) as ButtonSize[]
+    const sizes = Object.keys(theme.button.sizes) as ButtonSize[]
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>

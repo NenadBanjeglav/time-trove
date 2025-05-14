@@ -1,4 +1,6 @@
-export const theme = {
+import type { ThemeType } from './theme.types'
+
+export const theme: ThemeType = {
   typography: {
     fontSize: {
       xSmall: '12px',
@@ -61,32 +63,32 @@ export const theme = {
   },
 
   button: {
-    small: {
-      fontSize: '12px',
-      padding: '8px 8px',
-      height: '32px',
-      radius: '8px',
-    },
-    medium: {
-      fontSize: '14px',
-      padding: '8px 14px',
-      height: '40px',
-      radius: '12px',
-    },
-    large: {
-      fontSize: '16px',
-      padding: '8px 16px',
-      height: '48px',
-      radius: '12px',
-    },
-    xlarge: {
-      fontSize: '20px',
-      padding: '8px 24px',
-      height: '56px',
-      radius: '12px',
+    sizes: {
+      small: {
+        fontSize: '12px',
+        padding: '8px 8px',
+        height: '32px',
+        radius: '8px',
+      },
+      medium: {
+        fontSize: '14px',
+        padding: '8px 14px',
+        height: '40px',
+        radius: '12px',
+      },
+      large: {
+        fontSize: '16px',
+        padding: '8px 16px',
+        height: '48px',
+        radius: '12px',
+      },
+      xlarge: {
+        fontSize: '20px',
+        padding: '8px 24px',
+        height: '56px',
+        radius: '12px',
+      },
     },
     variants: ['primary', 'success', 'warning', 'danger', 'neutral'],
   },
 }
-
-export type ThemeType = typeof theme

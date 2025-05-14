@@ -1,63 +1,100 @@
-export type ColorScale = {
-  hue0: string
-  hue50: string
-  hue100: string
-  hue200: string
-}
-
-export type ColorScaleNeutral = {
-  hue0: string
-  hue50: string
-  hue100: string
-  hue200: string
-  hue300: string
-  hue400: string
-  hue500: string
-}
-
-export type FontSizes = {
-  xSmall: string
-  small: string
-  base: string
-  large: string
-  h2: string
-  h1: string
-}
-export type LineHeights = FontSizes
-
-export type FontWeights = {
-  regular: number
-  medium: number
-  semiBold: number
-  bold: number
-}
-
-export type ButtonSize = 'small' | 'medium' | 'large' | 'xlarge'
+export type FontSizeType = keyof ThemeType['typography']['fontSize']
+export type LineHeightType = keyof ThemeType['typography']['lineHeight']
+export type FontWeightType = keyof ThemeType['typography']['fontWeight']
+export type Pallete = keyof ThemeType['colors']
+export type Color<T extends Pallete> = keyof ThemeType['colors'][T]
+export type ButtonSize = keyof ThemeType['button']['sizes']
 export type ButtonVariant = 'primary' | 'success' | 'warning' | 'danger' | 'neutral'
 
 export type ThemeType = {
   typography: {
-    fontSize: FontSizes
-    lineHeight: LineHeights
-    fontWeight: FontWeights
+    fontSize: {
+      xSmall: string
+      small: string
+      base: string
+      large: string
+      h2: string
+      h1: string
+    }
+    lineHeight: {
+      xSmall: string
+      small: string
+      base: string
+      large: string
+      h2: string
+      h1: string
+    }
+    fontWeight: {
+      regular: number
+      medium: number
+      semiBold: number
+      bold: number
+    }
   }
 
   colors: {
-    primary: ColorScale
-    success: ColorScale
-    warning: ColorScale
-    danger: ColorScale
-    neutral: ColorScaleNeutral
+    primary: {
+      hue0: string
+      hue50: string
+      hue100: string
+      hue200: string
+    }
+    neutral: {
+      hue0: string
+      hue50: string
+      hue100: string
+      hue200: string
+      hue300: string
+      hue400: string
+      hue500: string
+    }
+    success: {
+      hue0: string
+      hue50: string
+      hue100: string
+      hue200: string
+    }
+    warning: {
+      hue0: string
+      hue50: string
+      hue100: string
+      hue200: string
+    }
+    danger: {
+      hue0: string
+      hue50: string
+      hue100: string
+      hue200: string
+    }
   }
 
   button: {
-    [key in ButtonSize]: {
-      fontSize: string
-      padding: string
-      height: string
-      radius: string
+    sizes: {
+      small: {
+        fontSize: string
+        padding: string
+        height: string
+        radius: string
+      }
+      medium: {
+        fontSize: string
+        padding: string
+        height: string
+        radius: string
+      }
+      large: {
+        fontSize: string
+        padding: string
+        height: string
+        radius: string
+      }
+      xlarge: {
+        fontSize: string
+        padding: string
+        height: string
+        radius: string
+      }
     }
-  } & {
     variants: ButtonVariant[]
   }
 }

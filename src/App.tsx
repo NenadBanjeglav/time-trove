@@ -8,7 +8,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Protected App Routes */}
+     
 
         <Route
           element={
@@ -20,7 +20,7 @@ const App = () => {
           <Route index element={<Dashboard />} />
         </Route>
 
-        {/* Public Routes */}
+        
         <Route element={<PublicLayout />}>
           <Route path={ROUTES.login} element={<Login />} />
           <Route path={ROUTES.register} element={<Register />} />

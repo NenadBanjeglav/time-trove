@@ -10,7 +10,7 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   size?: ButtonSize
 }
 
-const Button: React.FC<ButtonProps> = ({
+export const Button: React.FC<ButtonProps> = ({
   label,
   variant = 'primary',
   size = 'medium',
@@ -22,7 +22,3 @@ const Button: React.FC<ButtonProps> = ({
     </StyledButton>
   )
 }
-
-export default Button
-
-export type { ButtonProps }
