@@ -1,65 +1,4 @@
-export type ThemeType = {
-  typography: {
-    fontSize: {
-      xSmall: string
-      small: string
-      base: string
-      large: string
-      h2: string
-      h1: string
-    }
-    lineHeight: {
-      xSmall: string
-      small: string
-      base: string
-      large: string
-      h2: string
-      h1: string
-    }
-    fontWeight: {
-      regular: number
-      medium: number
-      semiBold: number
-      bold: number
-    }
-  }
-
-  colors: {
-    primary: {
-      hue0: string
-      hue50: string
-      hue100: string
-      hue200: string
-    }
-    neutrals: {
-      hue0: string
-      hue50: string
-      hue100: string
-      hue200: string
-      hue300: string
-      hue400: string
-      hue500: string
-    }
-    success: {
-      hue0: string
-      hue50: string
-      hue100: string
-      hue200: string
-    }
-    warning: {
-      hue0: string
-      hue50: string
-      hue100: string
-      hue200: string
-    }
-    danger: {
-      hue0: string
-      hue50: string
-      hue100: string
-      hue200: string
-    }
-  }
-}
+import type { ThemeType } from './theme.types'
 
 export const theme: ThemeType = {
   typography: {
@@ -94,7 +33,7 @@ export const theme: ThemeType = {
       hue100: '#925FF0',
       hue200: '#6F38D2',
     },
-    neutrals: {
+    neutral: {
       hue0: '#FFFFFF',
       hue50: '#F8F8F8',
       hue100: '#DDE2E8',
@@ -120,6 +59,39 @@ export const theme: ThemeType = {
       hue50: '#FF6B6B',
       hue100: '#FF4D4F',
       hue200: '#D9363E',
+    },
+  },
+
+  button: {
+    sizes: {
+      small: {
+        fontSize: '12px',
+        padding: '8px 8px',
+        height: '32px',
+        radius: '8px',
+        minWidth: '72px',
+      },
+      medium: {
+        fontSize: '14px',
+        padding: '8px 14px',
+        height: '40px',
+        radius: '12px',
+        minWidth: '91px',
+      },
+      large: {
+        fontSize: '16px',
+        padding: '8px 16px',
+        height: '48px',
+        radius: '12px',
+        minWidth: '77px',
+      },
+      xlarge: {
+        fontSize: '20px',
+        padding: '8px 24px',
+        height: '56px',
+        radius: '12px',
+        minWidth: '125px',
+      },
     },
   },
 }

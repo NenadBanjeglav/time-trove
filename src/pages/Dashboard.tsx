@@ -1,5 +1,10 @@
-const Dashboard = () => {
-  return <div>Dashboard</div>
-}
+import { Button } from '../components/atoms/button/Button'
 
-export default Dashboard
+export const Dashboard = () => {
+  return (
+    <div>
+      <Button variant="primary" size="medium" label="Click me" />
+      <Button variant="success" size="large" label="Button" />
+    </div>
+  )
+}
