@@ -32,8 +32,8 @@ type Story = StoryObj<typeof Button>
 export const Playground: Story = {
   args: {
     label: 'Button',
-    variant: 'primary',
-    size: 'medium',
+    variant: variants[0],
+    size: sizes[0],
     disabled: false,
   },
 }
