@@ -1,6 +1,5 @@
 import { css } from 'styled-components'
 
-import type { ButtonSize } from '../../../styles/theme.types'
 import type { ButtonVariant } from './Button'
 import { theme } from '../../../styles/theme'
 
@@ -49,43 +48,5 @@ export const getVariantStyle = (variant: ButtonVariant) => {
       color: ${neutral.hue200};
       cursor: not-allowed;
     }
-  `
-}
-
-export const getSizeStyle = (size: ButtonSize) => {
-  const sizeMap = {
-    small: {
-      fontSize: theme.typography.fontSize.xSmall,
-      padding: '8px 8px',
-      height: '32px',
-      radius: '8px',
-    },
-    medium: {
-      fontSize: theme.typography.fontSize.small,
-      padding: '8px 14px',
-      height: '40px',
-      radius: '12px',
-    },
-    large: {
-      fontSize: theme.typography.fontSize.base,
-      padding: '8px 16px',
-      height: '48px',
-      radius: '12px',
-    },
-    xlarge: {
-      fontSize: theme.typography.fontSize.large,
-      padding: '8px 24px',
-      height: '56px',
-      radius: '12px',
-    },
-  }
-
-  const { fontSize, padding, height, radius } = sizeMap[size]
-
-  return css`
-    font-size: ${fontSize};
-    padding: ${padding};
-    height: ${height};
-    border-radius: ${radius};
   `
 }
