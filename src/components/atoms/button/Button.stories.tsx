@@ -5,7 +5,7 @@ import type { ButtonSize, ButtonVariant } from '../../../styles/theme.types'
 
 import Button from './Button'
 
-const variants: ButtonVariant[] = theme.button.variants
+const variants = theme.button.variants as ButtonVariant[]
 const sizes: ButtonSize[] = Object.keys(theme.button).filter(
   (key): key is ButtonSize => key !== 'variants'
 )
@@ -52,7 +52,12 @@ export const AllVariants = {
             <h4 style={{ margin: 0, fontWeight: 600 }}>{variant}</h4>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
               {sizes.map(size => (
-                <Button key={`${variant}-${size}`} label="Button" variant={variant} size={size} />
+                <Button
+                  key={`${variant}-${size}`}
+                  label="Button"
+                  variant={variant as ButtonVariant}
+                  size={size}
+                />
               ))}
             </div>
           </div>
