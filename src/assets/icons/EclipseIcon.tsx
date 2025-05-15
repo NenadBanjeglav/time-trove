@@ -2,7 +2,7 @@ import React from 'react'
 
 type Props = React.SVGProps<SVGSVGElement>
 
-const EclipseIcon: React.FC<Props> = props => (
+export const EclipseIcon: React.FC<Props> = props => (
   <svg
     width="20"
     height="20"
@@ -20,5 +20,3 @@ const EclipseIcon: React.FC<Props> = props => (
     />
   </svg>
 )
-
-export default EclipseIcon

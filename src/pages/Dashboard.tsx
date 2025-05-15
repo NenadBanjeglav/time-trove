@@ -1,4 +1,7 @@
+import { AlertIcon } from '../assets/icons/AlertIcon'
+import { DeleteIcon } from '../assets/icons/DeleteIcon'
 import { Button } from '../components/atoms/button/Button'
+import { Icon } from '../components/atoms/icon/Icon'
 import { Text } from '../components/atoms/text/Text'
 
 export const Dashboard = () => {
@@ -13,6 +16,10 @@ export const Dashboard = () => {
         Success
       </Text>
       <Text>Default</Text>
+
+      <Icon pallete="primary" color="hue200" icon={DeleteIcon} iconSize="small" />
+
+      <Icon pallete="danger" color="hue200" icon={AlertIcon} iconSize="large" />
     </div>
   )
 }
