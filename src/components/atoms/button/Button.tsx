@@ -1,32 +1,29 @@
 import React from 'react'
 
-import type { ButtonSize } from '../../../styles/theme.types'
+import type { ButtonSize, Pallete } from '../../../styles/theme.types'
+import { Spinner } from '../icon/Spinner'
 
 import { StyledButton } from './button.styles'
 
-export const buttonVariants = ['primary', 'success', 'warning', 'danger', 'neutral'] as const
-export type ButtonVariant = (typeof buttonVariants)[number]
-
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  label: string
-  variant?: ButtonVariant
-  size: ButtonSize
+  variant?: Pallete
+  size?: ButtonSize
   icon?: React.ReactNode
-  children?: React.ReactNode
   loading?: boolean
+  children?: React.ReactNode
 }
 
 export const Button: React.FC<ButtonProps> = ({
-  label,
   variant = 'primary',
   size = 'medium',
-  children,
+
+  loading = false,
+  children = 'Button',
   ...rest
 }) => {
   return (
-    <StyledButton $variant={variant} $size={size} {...rest}>
-      {label}
-      {children}
+    <StyledButton $variant={variant} $size={size} disabled={loading} {...rest}>
+      {loading ? <Spinner size="small" /> : children}
     </StyledButton>
   )
 }

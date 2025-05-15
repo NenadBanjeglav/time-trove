@@ -1,9 +1,9 @@
-import { css } from 'styled-components'
+import { css, useTheme } from 'styled-components'
 
-import type { ButtonVariant } from './Button'
-import { theme } from '../../../styles/theme'
+import type { Pallete } from '../../../styles/theme.types'
 
-export const getVariantStyle = (variant: ButtonVariant) => {
+export const getVariantStyle = (variant: Pallete) => {
+  const theme = useTheme()
   const color = theme.colors[variant]
   const neutral = theme.colors.neutral
 

@@ -7,8 +7,9 @@ import { Text } from '../components/atoms/text/Text'
 export const Dashboard = () => {
   return (
     <div>
-      <Button variant="primary" size="medium" label="Click me" />
-      <Button variant="success" size="large" label="Button" />
+      <Button variant="primary" size="medium" />
+      <Button variant="success" size="large" />
+      <Button loading />
       <Text pallete="primary" color="hue200" fontSize="xSmall" fontWeight="medium" as="span">
         Random text
       </Text>
@@ -22,6 +23,11 @@ export const Dashboard = () => {
       <Icon pallete="danger" color="hue200" icon={AlertIcon} iconSize="large" />
 
       <Text>DEFAULT</Text>
+
+      <Button variant="warning">
+        Alert
+        <Icon icon={AlertIcon} pallete="danger" color="hue0" iconSize="small" />
+      </Button>
     </div>
   )
 }
