@@ -1,4 +1,5 @@
 import type { FontSizeType, FontWeightType, LineHeightType } from '../../../styles/theme.types'
+
 import { StyledText } from './text.styles'
 
 type TextProps = {
@@ -7,6 +8,7 @@ type TextProps = {
   lineHeight?: LineHeightType
   fontWeight?: FontWeightType
   children: React.ReactNode
+  textAlign?: string
 }
 
 export const Text: React.FC<TextProps> = ({
@@ -14,10 +16,17 @@ export const Text: React.FC<TextProps> = ({
   fontSize = 'base',
   fontWeight = 'regular',
   lineHeight = 'base',
-  children,
+  children = 'Random text',
+  textAlign = 'left',
 }) => {
   return (
-    <StyledText as={as} $fontSize={fontSize} $lineHeight={lineHeight} $fontWeight={fontWeight}>
+    <StyledText
+      as={as}
+      $fontSize={fontSize}
+      $lineHeight={lineHeight}
+      $fontWeight={fontWeight}
+      $textAlign={textAlign}
+    >
       {children}
     </StyledText>
   )
