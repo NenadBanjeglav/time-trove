@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
-import type { Color, Pallete, RemString } from '../../../styles/theme.types'
+import type { Color, Pallete, RemSizeType } from '../../../styles/theme.types'
 
 type StyledIconProps<T extends Pallete = Pallete> = {
-  $size: RemString
+  $size: RemSizeType
   $pallete: T
   $color: Color<T>
 }

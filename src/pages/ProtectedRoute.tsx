@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+
 import { Spinner } from '../components/atoms/Spinner'
 
 const FullPage = styled.div`
