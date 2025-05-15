@@ -1,47 +1,51 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { theme } from '../../../styles/theme'
-import type { ButtonSize } from '../../../styles/theme.types'
-import { Button, buttonVariants } from './Button'
-import { Spinner } from '../Spinner'
+import type { Pallete, ButtonSize } from '../../../styles/theme.types'
 
-const variants = buttonVariants
+import { Button } from './Button'
+
 const sizes = Object.keys(theme.button.sizes) as ButtonSize[]
+const variants = Object.keys(theme.colors) as Pallete[]
 
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
   component: Button,
   tags: ['autodocs'],
   argTypes: {
+    size: {
+      control: 'select',
+      options: sizes,
+    },
     variant: {
       control: 'select',
       options: variants,
     },
-    size: {
-      control: 'radio',
-      options: sizes,
+    loading: {
+      control: 'boolean',
     },
+    icon: {
+      control: false,
+    },
+    children: {
+      control: 'text',
+    },
+  },
+  args: {
+    variant: 'primary',
+    size: 'medium',
+    children: 'Click Me',
+    loading: false,
   },
 }
 
 export default meta
 type Story = StoryObj<typeof Button>
 
-export const DefaultButton: Story = {
-  args: {
-    label: 'Button',
-    variant: variants[0],
-    size: sizes[0],
-    disabled: false,
-  },
-}
+export const Default: Story = {}
 
-export const LoadingButton: Story = {
+export const Loading: Story = {
   args: {
-    label: '',
-    variant: variants[0],
-    size: sizes[0],
-    children: <Spinner />,
-    disabled: false,
+    loading: true,
   },
 }
