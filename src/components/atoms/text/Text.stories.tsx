@@ -46,7 +46,7 @@ const meta: Meta<typeof Text> = {
   },
   args: {
     pallete: 'neutral',
-    color: 'hue500',
+    color: 'hue200',
   },
 }
 
@@ -61,7 +61,7 @@ export const NeutralText: Story = {
     fontWeight: 'regular',
     as: 'span',
     pallete: 'neutral',
-    color: 'hue500',
+    color: 'hue100',
   },
   argTypes: {
     color: {

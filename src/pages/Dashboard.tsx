@@ -20,6 +20,8 @@ export const Dashboard = () => {
       <Icon pallete="primary" color="hue200" icon={DeleteIcon} iconSize="small" />
 
       <Icon pallete="danger" color="hue200" icon={AlertIcon} iconSize="large" />
+
+      <Text>DEFAULT</Text>
     </div>
   )
 }

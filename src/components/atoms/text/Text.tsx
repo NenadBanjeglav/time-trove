@@ -16,7 +16,6 @@ type BaseTextProps = {
   lineHeight?: LineHeightType
   fontWeight?: FontWeightType
   textAlign?: TextAlignType
-  isVisible?: boolean
   children?: React.ReactNode
 }
 
@@ -26,10 +25,9 @@ export const Text = <T extends Pallete = 'neutral'>({
   fontWeight = 'regular',
   lineHeight = 'base',
   textAlign = 'start',
-  isVisible = true,
   children = 'Random Text',
   pallete = 'neutral' as T,
-  color = 'hue200' as Color<T>,
+  color = 'hue500' as Color<T>,
 }: BaseTextProps & {
   pallete?: T
   color?: Color<T>
@@ -43,7 +41,6 @@ export const Text = <T extends Pallete = 'neutral'>({
       $lineHeight={lineHeight}
       $fontWeight={fontWeight}
       $textAlign={textAlign}
-      $isVisible={isVisible}
       $pallete={pallete}
       $color={color}
     >

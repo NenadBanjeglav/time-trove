@@ -7,7 +7,6 @@ import { createStyledIcon } from './icon.styles'
 
 type IconProps<T extends Pallete = Pallete> = {
   iconSize?: IconSize
-
   pallete: T
   color: Color<T>
   icon: FC<SVGProps<SVGSVGElement>>
