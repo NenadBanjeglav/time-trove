@@ -1,27 +1,38 @@
+export type RemString = `${number}rem`
+
+export type Padding =
+  | RemString
+  | `${RemString} ${RemString}`
+  | `${RemString} ${RemString} ${RemString}`
+  | `${RemString} ${RemString} ${RemString} ${RemString}`
+
+export type Margin = Padding
+
 export type FontSizeType = keyof ThemeType['typography']['fontSize']
 export type LineHeightType = keyof ThemeType['typography']['lineHeight']
 export type FontWeightType = keyof ThemeType['typography']['fontWeight']
 export type Pallete = keyof ThemeType['colors']
 export type Color<T extends Pallete> = keyof ThemeType['colors'][T]
 export type ButtonSize = keyof ThemeType['button']['sizes']
+export type IconSize = keyof ThemeType['iconSize']
 
 export type ThemeType = {
   typography: {
     fontSize: {
-      xSmall: string
-      small: string
-      base: string
-      large: string
-      h2: string
-      h1: string
+      xSmall: RemString
+      small: RemString
+      base: RemString
+      large: RemString
+      h2: RemString
+      h1: RemString
     }
     lineHeight: {
-      xSmall: string
-      small: string
-      base: string
-      large: string
-      h2: string
-      h1: string
+      xSmall: RemString
+      small: RemString
+      base: RemString
+      large: RemString
+      h2: RemString
+      h1: RemString
     }
     fontWeight: {
       regular: number
@@ -67,35 +78,48 @@ export type ThemeType = {
     }
   }
 
+  spacing: {
+    none: RemString
+    xSmall: RemString
+    small: RemString
+    medium: RemString
+    large: RemString
+    xLarge: RemString
+  }
+  iconSize: {
+    small: RemString
+    large: RemString
+  }
+
   button: {
     sizes: {
       small: {
-        fontSize: string
-        padding: string
-        height: string
-        radius: string
-        minWidth: string
+        fontSize: RemString
+        padding: Padding
+        height: RemString
+        radius: RemString
+        minWidth: RemString
       }
       medium: {
-        fontSize: string
-        padding: string
-        height: string
-        radius: string
-        minWidth: string
+        fontSize: RemString
+        padding: Padding
+        height: RemString
+        radius: RemString
+        minWidth: RemString
       }
       large: {
-        fontSize: string
-        padding: string
-        height: string
-        radius: string
-        minWidth: string
+        fontSize: RemString
+        padding: Padding
+        height: RemString
+        radius: RemString
+        minWidth: RemString
       }
       xlarge: {
-        fontSize: string
-        padding: string
-        height: string
-        radius: string
-        minWidth: string
+        fontSize: RemString
+        padding: Padding
+        height: RemString
+        radius: RemString
+        minWidth: RemString
       }
     }
   }

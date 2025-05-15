@@ -1,3 +1,4 @@
+import { AlertIcon } from '../assets/icons/AlertIcon'
 import { DeleteIcon } from '../assets/icons/DeleteIcon'
 import { Button } from '../components/atoms/button/Button'
 import { Icon } from '../components/atoms/icon/Icon'
@@ -8,7 +9,9 @@ export const Dashboard = () => {
       <Button variant="primary" size="medium" label="Click me" />
       <Button variant="success" size="large" label="Button" />
 
-      <Icon pallete="primary" color="hue200" icon={DeleteIcon} iconSize={40} />
+      <Icon pallete="primary" color="hue200" icon={DeleteIcon} iconSize="small" />
+
+      <Icon pallete="danger" color="hue200" icon={AlertIcon} iconSize="large" />
     </div>
   )
 }

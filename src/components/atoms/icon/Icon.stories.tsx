@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { SearchIcon } from '../../../assets/icons/SearchIcon'
+import { SuccessIcon } from '../../../assets/icons/SuccessIcon'
 
 import { Icon } from './Icon'
 
@@ -8,13 +8,16 @@ const meta: Meta<typeof Icon> = {
   title: 'Components/Icon',
   component: Icon,
   args: {
-    icon: SearchIcon,
-    iconSize: 24,
+    icon: SuccessIcon,
+    iconSize: 'small',
     pallete: 'neutral',
     color: 'hue200',
   },
   argTypes: {
-    iconSize: { control: 'number' },
+    iconSize: {
+      control: 'select',
+      options: ['small', 'large'],
+    },
     pallete: {
       control: 'select',
       options: ['primary', 'neutral', 'success', 'warning', 'danger'],
@@ -33,14 +36,15 @@ const meta: Meta<typeof Icon> = {
   },
   tags: ['autodocs'],
 }
+
 export default meta
 
 type Story = StoryObj<typeof Icon>
 
 export const SearchNeutral: Story = {
   args: {
-    icon: SearchIcon,
-    iconSize: 24,
+    icon: SuccessIcon,
+    iconSize: 'small',
     pallete: 'neutral',
     color: 'hue200',
   },
@@ -48,8 +52,8 @@ export const SearchNeutral: Story = {
 
 export const SearchSuccess: Story = {
   args: {
-    icon: SearchIcon,
-    iconSize: 24,
+    icon: SuccessIcon,
+    iconSize: 'large',
     pallete: 'success',
     color: 'hue200',
   },

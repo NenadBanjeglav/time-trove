@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components'
+
 import { EclipseIcon } from '../../assets/icons/EclipseIcon'
 
 const rotate = keyframes`

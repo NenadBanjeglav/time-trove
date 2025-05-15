@@ -1,9 +1,9 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
-import type { Color, Pallete } from '../../../styles/theme.types'
+import type { Color, Pallete, RemString } from '../../../styles/theme.types'
 
 type StyledIconProps<T extends Pallete = Pallete> = {
-  $size: number | string
+  $size: RemString
   $pallete: T
   $color: Color<T>
 }
@@ -16,10 +16,8 @@ export function createStyledIcon<T extends Pallete>() {
     align-items: center;
     justify-content: center;
 
-    ${({ $size }) => css`
-      width: ${typeof $size === 'number' ? `${$size}px` : $size};
-      height: ${typeof $size === 'number' ? `${$size}px` : $size};
-    `}
+    width: ${({ $size }) => $size};
+    height: ${({ $size }) => $size};
 
     ${({ theme, $pallete, $color }) => `color: ${theme.colors[$pallete][$color]};`}
   `
