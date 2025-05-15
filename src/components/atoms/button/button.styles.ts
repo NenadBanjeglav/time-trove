@@ -1,29 +1,47 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-import type { ButtonSize, Pallete } from '../../../styles/theme.types'
+import type { ButtonSize, Color, Pallete } from '../../../styles/theme.types'
 
+import type { ButtonShape } from './Button'
 import { getVariantStyle } from './helpers'
 
-export const StyledButton = styled.button<{ $variant: Pallete; $size: ButtonSize }>`
-  font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
-  line-height: ${({ theme }) => theme.typography.lineHeight.base};
-  cursor: pointer;
-  transition: background-color 0.15s ease-in-out;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: ${({ theme }) => theme.spacing.xSmall};
+export function createStyledButton<T extends Pallete>() {
+  return styled.button.withConfig({
+    shouldForwardProp: prop =>
+      !['$variant', '$color', '$size', '$isIconButton', '$shape', '$fullWidth'].includes(prop),
+  })<{
+    $variant: T
+    $color?: Color<T>
+    $size: ButtonSize
+    $isIconButton: boolean
+    $shape: ButtonShape
+    $fullWidth: boolean
+  }>`
+    ${({ theme, $size, $isIconButton, $shape, $fullWidth }) => {
+      const sizeConfig = theme.button.sizes[$size]
+      const radius = $isIconButton
+        ? $shape === 'circle'
+          ? '50%'
+          : sizeConfig.radius
+        : sizeConfig.radius
 
-  ${({ theme, $size }) => {
-    const { fontSize, padding, height, radius, minWidth } = theme.button.sizes[$size]
-    return `
-      font-size: ${fontSize};
-      padding: ${padding};
-      height: ${height};
-      border-radius: ${radius};
-      min-width: ${minWidth};
-    `
-  }}
+      return css`
+        font-size: ${sizeConfig.fontSize};
+        padding: ${$isIconButton ? '0' : sizeConfig.padding};
+        height: ${sizeConfig.height};
+        min-width: ${$isIconButton ? sizeConfig.height : sizeConfig.minWidth};
+        width: ${$fullWidth ? '100%' : $isIconButton ? sizeConfig.height : 'auto'};
+        border-radius: ${radius};
+        font-weight: ${theme.typography.fontWeight.medium};
+        line-height: ${theme.typography.lineHeight.base};
+        cursor: pointer;
+        transition: background-color 0.15s ease-in-out;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      `
+    }}
 
-  ${props => getVariantStyle(props.$variant)}
-`
+    ${({ theme, $variant, $color }) => getVariantStyle(theme, $variant, $color)}
+  `
+}
