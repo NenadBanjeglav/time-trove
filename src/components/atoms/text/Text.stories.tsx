@@ -1,13 +1,22 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { theme } from '../../../styles/theme'
-import type { FontSizeType, LineHeightType, FontWeightType } from '../../../styles/theme.types'
+import type {
+  FontSizeType,
+  LineHeightType,
+  FontWeightType,
+  ThemeType,
+} from '../../../styles/theme.types'
+
 import { Text } from './Text'
 
-// Extract options from theme
 const fontSizes = Object.keys(theme.typography.fontSize) as FontSizeType[]
 const lineHeights = Object.keys(theme.typography.lineHeight) as LineHeightType[]
 const fontWeights = Object.keys(theme.typography.fontWeight) as FontWeightType[]
+const neutralColors = Object.keys(theme.colors.neutral) as (keyof typeof theme.colors.neutral)[]
+const palletes = Object.keys(theme.colors) as (keyof ThemeType['colors'])[]
+
+const primaryColors = Object.keys(theme.colors.primary) as (keyof typeof theme.colors.primary)[]
 
 const meta: Meta<typeof Text> = {
   title: 'Components/Text',
@@ -30,28 +39,52 @@ const meta: Meta<typeof Text> = {
       control: 'radio',
       options: ['span', 'p'],
     },
+    pallete: {
+      control: 'select',
+      options: palletes,
+    },
+  },
+  args: {
+    pallete: 'neutral',
+    color: 'hue500',
   },
 }
 
 export default meta
 type Story = StoryObj<typeof Text>
 
-export const DefaultText: Story = {
+export const NeutralText: Story = {
   args: {
-    children: 'This is default text',
+    children: 'Neutral color text',
     fontSize: 'base',
     lineHeight: 'base',
     fontWeight: 'regular',
     as: 'span',
+    pallete: 'neutral',
+    color: 'hue500',
+  },
+  argTypes: {
+    color: {
+      control: 'select',
+      options: neutralColors,
+    },
   },
 }
 
-export const ParagraphBoldLarge: Story = {
+export const PrimaryText: Story = {
   args: {
-    children: 'This is bold paragraph text',
-    fontSize: 'large',
-    lineHeight: 'large',
-    fontWeight: 'bold',
-    as: 'p',
+    children: 'Primary color text',
+    fontSize: 'base',
+    lineHeight: 'base',
+    fontWeight: 'regular',
+    as: 'span',
+    pallete: 'primary',
+    color: 'hue100',
+  },
+  argTypes: {
+    color: {
+      control: 'select',
+      options: primaryColors,
+    },
   },
 }

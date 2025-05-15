@@ -6,9 +6,13 @@ export const Dashboard = () => {
     <div>
       <Button variant="primary" size="medium" label="Click me" />
       <Button variant="success" size="large" label="Button" />
-      <Text as="p" fontSize="large" fontWeight="bold" lineHeight="small">
-        Random Text
+      <Text pallete="primary" color="hue200">
+        Random text
       </Text>
+      <Text pallete="success" color="hue100">
+        Success
+      </Text>
+      <Text>Default</Text>
     </div>
   )
 }
