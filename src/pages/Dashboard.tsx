@@ -25,7 +25,9 @@ export const Dashboard = () => {
       <Text>DEFAULT</Text>
 
       <Button variant="warning">
-        Alert
+        <Text as="span" pallete="neutral" color="hue0">
+          Random btn text
+        </Text>
         <Icon icon={AlertIcon} pallete="danger" color="hue0" iconSize="small" />
       </Button>
     </div>
