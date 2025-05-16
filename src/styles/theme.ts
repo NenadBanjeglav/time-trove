@@ -95,7 +95,7 @@ export const theme: ThemeType = {
         padding: '0.5rem 1rem', // 8px 16px
         height: '3rem', // 48px
         radius: '0.75rem', // 12px
-        minWidth: '4.8125rem', // 77px
+        minWidth: '6.8125rem', // 109px
       },
       xlarge: {
         fontSize: '1.25rem', // 20px
