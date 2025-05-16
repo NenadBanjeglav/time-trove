@@ -4,6 +4,7 @@ import { EditIcon } from '../assets/icons/EditIcon'
 import { LogoutIcon } from '../assets/icons/LogoutIcon'
 import { Button } from '../components/atoms/button/Button'
 import { Icon } from '../components/atoms/icon/Icon'
+import { Input } from '../components/atoms/input/Input'
 import { Text } from '../components/atoms/text/Text'
 
 export const Dashboard = () => {
@@ -42,6 +43,14 @@ export const Dashboard = () => {
       </Button>
 
       <Button variant="neutral" />
+
+      <div style={{ maxWidth: '400px' }}>
+        <Input name="assignee" placeholder="Text" label="Email" />
+        <Input name="assignee" placeholder="Text" error="Error text" />
+        <Input name="assignee" placeholder="Text" />
+        <Input name="assignee" placeholder="Text" />
+        <Input name="assignee" placeholder="Text" />
+      </div>
     </div>
   )
 }
