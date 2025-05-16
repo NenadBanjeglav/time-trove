@@ -1,18 +1,32 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { theme } from '../../../styles/theme'
-import type { FontSizeType, FontWeightType, LineHeightType } from '../../../styles/theme.types'
+import type {
+  FontSizeType,
+  FontWeightType,
+  LineHeightType,
+  ThemeType,
+} from '../../../styles/theme.types'
+
 import { Heading } from './Heading'
 
 const fontSizes = Object.keys(theme.typography.fontSize) as FontSizeType[]
 const lineHeights = Object.keys(theme.typography.lineHeight) as LineHeightType[]
 const fontWeights = Object.keys(theme.typography.fontWeight) as FontWeightType[]
+const palletes = Object.keys(theme.colors) as (keyof ThemeType['colors'])[]
+
+const neutralColors = Object.keys(theme.colors.neutral) as (keyof typeof theme.colors.neutral)[]
+const primaryColors = Object.keys(theme.colors.primary) as (keyof typeof theme.colors.primary)[]
 
 const meta: Meta<typeof Heading> = {
   title: 'Components/Heading',
   component: Heading,
   tags: ['autodocs'],
   argTypes: {
+    as: {
+      control: 'radio',
+      options: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+    },
     fontSize: {
       control: 'select',
       options: fontSizes,
@@ -25,32 +39,47 @@ const meta: Meta<typeof Heading> = {
       control: 'radio',
       options: fontWeights,
     },
-    as: {
-      control: 'radio',
-      options: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+    pallete: {
+      control: 'select',
+      options: palletes,
     },
+  },
+  args: {
+    children: 'Heading Example',
+    as: 'h2',
+    fontSize: 'h2',
+    lineHeight: 'h2',
+    fontWeight: 'bold',
+    pallete: 'neutral',
+    color: 'hue200',
   },
 }
 
 export default meta
 type Story = StoryObj<typeof Heading>
 
-export const DefaultHeading: Story = {
+export const NeutralHeading: Story = {
   args: {
-    children: 'This is a heading',
-    fontSize: 'h2',
-    lineHeight: 'h2',
-    fontWeight: 'bold',
-    as: 'h2',
+    pallete: 'neutral',
+    color: 'hue200',
+  },
+  argTypes: {
+    color: {
+      control: 'select',
+      options: neutralColors,
+    },
   },
 }
 
-export const H1BoldLarge: Story = {
+export const PrimaryHeading: Story = {
   args: {
-    children: 'This is an H1 heading',
-    fontSize: 'h1',
-    lineHeight: 'h1',
-    fontWeight: 'bold',
-    as: 'h1',
+    pallete: 'primary',
+    color: 'hue100',
+  },
+  argTypes: {
+    color: {
+      control: 'select',
+      options: primaryColors,
+    },
   },
 }
