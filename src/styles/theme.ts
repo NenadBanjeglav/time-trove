@@ -3,20 +3,20 @@ import type { ThemeType } from './theme.types'
 export const theme: ThemeType = {
   typography: {
     fontSize: {
-      xSmall: '12px',
-      small: '14px',
-      base: '16px',
-      large: '20px',
-      h2: '24px',
-      h1: '32px',
+      xSmall: '0.75rem', // 12px
+      small: '0.875rem', // 14px
+      base: '1rem', // 16px
+      large: '1.25rem', // 20px
+      h2: '1.5rem', // 24px
+      h1: '2rem', // 32px
     },
     lineHeight: {
-      xSmall: '16px',
-      small: '20px',
-      base: '24px',
-      large: '28px',
-      h2: '32px',
-      h1: '40px',
+      xSmall: '1rem', // 16px
+      small: '1.25rem', // 20px
+      base: '1.5rem', // 24px
+      large: '1.75rem', // 28px
+      h2: '2rem', // 32px
+      h1: '2.5rem', // 40px
     },
     fontWeight: {
       regular: 400,
@@ -61,36 +61,48 @@ export const theme: ThemeType = {
       hue200: '#D9363E',
     },
   },
+  spacing: {
+    none: '0rem',
+    xSmall: '0.25rem', // 4px
+    small: '0.5rem', // 8px
+    medium: '1rem', // 16px
+    large: '1.5rem', // 24px
+    xLarge: '2rem', // 32px
+  },
+  iconSize: {
+    small: '1.5rem', // 24px
+    large: '2.4rem', // 38.4px
+  },
 
   button: {
     sizes: {
       small: {
-        fontSize: '12px',
-        padding: '8px 8px',
-        height: '32px',
-        radius: '8px',
-        minWidth: '72px',
+        fontSize: '0.75rem', // 12px
+        padding: '0.5rem 0.5rem', // 8px 8px
+        height: '2rem', // 32px
+        radius: '0.5rem', // 8px
+        minWidth: '4.5rem', // 72px
       },
       medium: {
-        fontSize: '14px',
-        padding: '8px 14px',
-        height: '40px',
-        radius: '12px',
-        minWidth: '91px',
+        fontSize: '0.875rem', // 14px
+        padding: '0.5rem 0.875rem', // 8px 14px
+        height: '2.5rem', // 40px
+        radius: '0.75rem', // 12px
+        minWidth: '5.6875rem', // 91px
       },
       large: {
-        fontSize: '16px',
-        padding: '8px 16px',
-        height: '48px',
-        radius: '12px',
-        minWidth: '77px',
+        fontSize: '1rem', // 16px
+        padding: '0.5rem 1rem', // 8px 16px
+        height: '3rem', // 48px
+        radius: '0.75rem', // 12px
+        minWidth: '6.8125rem', // 109px
       },
       xlarge: {
-        fontSize: '20px',
-        padding: '8px 24px',
-        height: '56px',
-        radius: '12px',
-        minWidth: '125px',
+        fontSize: '1.25rem', // 20px
+        padding: '0.5rem 1.5rem', // 8px 24px
+        height: '3.5rem', // 56px
+        radius: '0.75rem', // 12px
+        minWidth: '7.8125rem', // 125px
       },
     },
   },

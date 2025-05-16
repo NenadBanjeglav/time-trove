@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import { Spinner } from '../components/atoms/Spinner'
+
+import { Spinner } from '../components/atoms/icon/Spinner'
 
 const FullPage = styled.div`
   height: 100vh;

@@ -1,11 +1,13 @@
 import { css } from 'styled-components'
 
-import type { ButtonSize } from '../../../styles/theme.types'
-import type { ButtonVariant } from './Button'
-import { theme } from '../../../styles/theme'
+import type { Pallete, ThemeType, Color } from '../../../styles/theme.types'
 
-export const getVariantStyle = (variant: ButtonVariant) => {
-  const color = theme.colors[variant]
+export const getVariantStyle = <T extends Pallete>(
+  theme: ThemeType,
+  variant: T,
+  color?: Color<T>
+) => {
+  const palette = theme.colors[variant]
   const neutral = theme.colors.neutral
 
   if (variant === 'neutral') {
@@ -31,17 +33,21 @@ export const getVariantStyle = (variant: ButtonVariant) => {
     `
   }
 
+  const bg = palette[color ?? 'hue100']
+  const hover = palette.hue50
+  const active = palette.hue200
+
   return css`
-    background-color: ${color.hue100};
+    background-color: ${bg as string};
     color: white;
     border: none;
 
     &:hover {
-      background-color: ${color.hue50};
+      background-color: ${hover};
     }
 
     &:active {
-      background-color: ${color.hue200};
+      background-color: ${active};
     }
 
     &:disabled {
@@ -49,43 +55,5 @@ export const getVariantStyle = (variant: ButtonVariant) => {
       color: ${neutral.hue200};
       cursor: not-allowed;
     }
-  `
-}
-
-export const getSizeStyle = (size: ButtonSize) => {
-  const sizeMap = {
-    small: {
-      fontSize: theme.typography.fontSize.xSmall,
-      padding: '8px 8px',
-      height: '32px',
-      radius: '8px',
-    },
-    medium: {
-      fontSize: theme.typography.fontSize.small,
-      padding: '8px 14px',
-      height: '40px',
-      radius: '12px',
-    },
-    large: {
-      fontSize: theme.typography.fontSize.base,
-      padding: '8px 16px',
-      height: '48px',
-      radius: '12px',
-    },
-    xlarge: {
-      fontSize: theme.typography.fontSize.large,
-      padding: '8px 24px',
-      height: '56px',
-      radius: '12px',
-    },
-  }
-
-  const { fontSize, padding, height, radius } = sizeMap[size]
-
-  return css`
-    font-size: ${fontSize};
-    padding: ${padding};
-    height: ${height};
-    border-radius: ${radius};
   `
 }

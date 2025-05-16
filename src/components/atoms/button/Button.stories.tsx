@@ -1,12 +1,21 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { DeleteIcon } from '../../../assets/icons/DeleteIcon'
 import { theme } from '../../../styles/theme'
-import type { ButtonSize } from '../../../styles/theme.types'
-import { Button, buttonVariants } from './Button'
-import { Spinner } from '../Spinner'
+import type { Pallete, ButtonSize } from '../../../styles/theme.types'
 
-const variants = buttonVariants
+import { Button } from './Button'
+
 const sizes = Object.keys(theme.button.sizes) as ButtonSize[]
+const variants = Object.keys(theme.colors) as Pallete[]
+
+const colorMap: Record<Pallete, string[]> = {
+  primary: Object.keys(theme.colors.primary),
+  neutral: Object.keys(theme.colors.neutral),
+  success: Object.keys(theme.colors.success),
+  warning: Object.keys(theme.colors.warning),
+  danger: Object.keys(theme.colors.danger),
+}
 
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
@@ -17,31 +26,72 @@ const meta: Meta<typeof Button> = {
       control: 'select',
       options: variants,
     },
+    color: {
+      control: 'select',
+      options: colorMap['primary'], // default to primary
+    },
     size: {
-      control: 'radio',
+      control: 'select',
       options: sizes,
     },
+    isIconButton: {
+      control: 'boolean',
+    },
+    shape: {
+      control: 'select',
+      options: ['regular', 'circle', 'square'],
+      if: { arg: 'isIconButton', truthy: true },
+    },
+    loading: {
+      control: 'boolean',
+    },
+    fullWidth: {
+      control: 'boolean',
+    },
+    children: {
+      control: 'text',
+    },
+  },
+  args: {
+    variant: 'primary',
+    color: 'hue100',
+    size: 'medium',
+    children: 'Click Me',
+    loading: false,
+    isIconButton: false,
+    shape: 'regular',
+    fullWidth: false,
   },
 }
 
 export default meta
 type Story = StoryObj<typeof Button>
 
-export const DefaultButton: Story = {
+export const Default: Story = {}
+
+export const WithIconButton: Story = {
   args: {
-    label: 'Button',
-    variant: variants[0],
-    size: sizes[0],
-    disabled: false,
+    isIconButton: true,
+    shape: 'circle',
+    children: <DeleteIcon />,
   },
 }
 
-export const LoadingButton: Story = {
+export const Loading: Story = {
   args: {
-    label: '',
-    variant: variants[0],
-    size: sizes[0],
-    children: <Spinner />,
-    disabled: false,
+    loading: true,
+  },
+}
+
+export const FullWidth: Story = {
+  args: {
+    fullWidth: true,
+  },
+}
+
+export const NeutralVariant: Story = {
+  args: {
+    variant: 'neutral',
+    color: 'hue200',
   },
 }
