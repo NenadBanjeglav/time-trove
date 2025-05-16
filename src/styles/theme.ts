@@ -65,9 +65,18 @@ export const theme: ThemeType = {
     none: '0rem',
     xSmall: '0.25rem', // 4px
     small: '0.5rem', // 8px
+    smallPlus: '0.75rem', // 12px
     medium: '1rem', // 16px
     large: '1.5rem', // 24px
     xLarge: '2rem', // 32px
+  },
+  borderRadius: {
+    none: '0px',
+    small: '0.25rem', // 4px
+    medium: '0.5rem', // 8px
+    large: '0.75rem', // 12px
+    xLarge: '1rem', // 16px
+    full: '9999px', // full pill
   },
   iconSize: {
     small: '1.5rem', // 24px

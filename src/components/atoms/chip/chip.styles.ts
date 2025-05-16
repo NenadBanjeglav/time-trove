@@ -36,14 +36,14 @@ const variantStyles: Record<ChipVariant, ReturnType<typeof css>> = {
 
 const sizeStyles: Record<ChipSize, ReturnType<typeof css>> = {
   small: css`
-    border-radius: 8px;
+    border-radius: ${({ theme }) => `${theme.borderRadius.medium}`};
     padding: ${({ theme }) => `${theme.spacing.xSmall} ${theme.spacing.small}`};
     font-size: ${({ theme }) => theme.typography.fontSize.xSmall};
     line-height: ${({ theme }) => theme.typography.lineHeight.xSmall};
     font-weight: ${({ theme }) => theme.typography.fontWeight.semiBold};
   `,
   large: css`
-    border-radius: 12px;
+    border-radius: ${({ theme }) => `${theme.borderRadius.large}`};
     padding: ${({ theme }) => `${theme.spacing.small} ${theme.spacing.medium}`};
     font-size: ${({ theme }) => theme.typography.fontSize.base};
     line-height: ${({ theme }) => theme.typography.lineHeight.base};
@@ -57,6 +57,7 @@ export const StyledChip = styled.div<{
 }>`
   display: inline-flex;
   align-items: center;
+  justify-content: center;
 
   ${({ $variant }) => variantStyles[$variant]}
   ${({ $size }) => sizeStyles[$size]}
