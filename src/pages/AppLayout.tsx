@@ -6,8 +6,8 @@ export const AppLayout = () => {
   return (
     <div>
       <nav>
-        <Logo />
-        <Logo variant="small" />
+        <Logo variant="compact" />
+        <Logo variant="full" />
       </nav>
       <Outlet />
     </div>

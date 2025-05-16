@@ -9,31 +9,34 @@ const meta: Meta<typeof Logo> = {
   argTypes: {
     variant: {
       control: 'radio',
-      options: ['full', 'icon'],
+      options: ['compact', 'full'],
     },
-    width: {
-      control: { type: 'number' },
-    },
-    height: {
-      control: { type: 'number' },
+  },
+  args: {
+    variant: 'compact',
+  },
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'Logo component that renders either a compact or full TimeTrove logo with preserved aspect ratio.',
+      },
     },
   },
 }
+
 export default meta
+
 type Story = StoryObj<typeof Logo>
 
-export const FullLogo: Story = {
+export const Compact: Story = {
   args: {
-    variant: 'full',
-    width: 164,
-    height: 56,
+    variant: 'compact',
   },
 }
 
-export const IconLogo: Story = {
+export const Full: Story = {
   args: {
-    variant: 'small',
-    width: 56,
-    height: 56,
+    variant: 'full',
   },
 }

@@ -1,16 +1,20 @@
-import { StyledCompactLogo, StyledFullLogo } from './logo.styles'
+import type { HTMLAttributes } from 'react'
+import { StyledLogoWrapper } from './logo.styles'
+
+export type LogoVariant = 'compact' | 'full'
 
 type LogoProps = {
-  variant?: 'full' | 'small'
-  width?: number
-  height?: number
-  alt?: string
-}
+  variant?: LogoVariant
+} & HTMLAttributes<HTMLDivElement>
 
-export const Logo: React.FC<LogoProps> = ({ variant = 'full', width, height }) => {
-  if (variant === 'small') {
-    return <StyledCompactLogo width={width} height={height} alt="TimeTrove small logo" />
-  }
+export const Logo = ({ variant = 'compact', ...rest }: LogoProps) => {
+  const logoSrc = variant === 'full' ? '/images/fullLogo.png' : '/images/logo.png'
 
-  return <StyledFullLogo width={width} height={height} alt="TimeTrove Logo" />
+  const altText = `TimeTrove ${variant} logo`
+
+  return (
+    <StyledLogoWrapper $variant={variant} {...rest}>
+      <img src={logoSrc} alt={altText} />
+    </StyledLogoWrapper>
+  )
 }

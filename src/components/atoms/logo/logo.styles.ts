@@ -1,18 +1,18 @@
 import styled from 'styled-components'
+import type { LogoVariant } from './Logo'
 
-import FullLogo from '../../../assets/images/fullLogo.png'
-import Logo from '../../../assets/images/logo.png'
+export const StyledLogoWrapper = styled.div<{ $variant: LogoVariant }>`
+  display: inline-block;
+  position: relative;
 
-export const StyledFullLogo = styled.img.attrs(() => ({
-  src: FullLogo,
-}))`
-  width: ${({ width }) => width || '164px'};
-  height: ${({ height }) => height || '56px'};
-`
+  width: ${({ $variant }) => ($variant === 'full' ? '164px' : '56px')};
+  height: ${({ $variant }) => ($variant === 'full' ? '56px' : '56px')};
 
-export const StyledCompactLogo = styled.img.attrs(() => ({
-  src: Logo,
-}))`
-  width: ${({ width }) => width || '56px'};
-  height: ${({ height }) => height || '56px'};
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+  }
 `
