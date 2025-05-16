@@ -1,32 +1,46 @@
-import React from 'react'
+import type { Pallete, ButtonSize, Color } from '../../../styles/theme.types'
+import { Spinner } from '../icon/Spinner'
 
-import type { ButtonSize } from '../../../styles/theme.types'
+import { createStyledButton } from './button.styles'
 
-import { StyledButton } from './button.styles'
+export type ButtonShape = 'circle' | 'square' | 'regular'
 
-export const buttonVariants = ['primary', 'success', 'warning', 'danger', 'neutral'] as const
-export type ButtonVariant = (typeof buttonVariants)[number]
-
-type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  label: string
-  variant?: ButtonVariant
-  size: ButtonSize
-  icon?: React.ReactNode
-  children?: React.ReactNode
+type ButtonProps<T extends Pallete = Pallete> = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  variant?: T
+  color?: Color<T>
+  size?: ButtonSize
   loading?: boolean
+  isIconButton?: boolean
+  shape?: ButtonShape
+  fullWidth?: boolean
+  children?: React.ReactNode
 }
 
-export const Button: React.FC<ButtonProps> = ({
-  label,
-  variant = 'primary',
+export const Button = <T extends Pallete = 'primary'>({
+  variant = 'primary' as T,
+  color,
   size = 'medium',
-  children,
+  loading = false,
+  isIconButton = false,
+  shape = 'regular',
+  fullWidth = false,
+  children = 'Button',
   ...rest
-}) => {
+}: ButtonProps<T>) => {
+  const StyledButton = createStyledButton<T>()
   return (
-    <StyledButton $variant={variant} $size={size} {...rest}>
-      {label}
-      {children}
+    <StyledButton
+      $variant={variant}
+      $color={color}
+      $size={size}
+      $isIconButton={isIconButton}
+      $shape={shape}
+      $fullWidth={fullWidth}
+      disabled={loading}
+      {...rest}
+      $loading
+    >
+      {loading ? <Spinner size="small" pallete={variant} /> : children}
     </StyledButton>
   )
 }

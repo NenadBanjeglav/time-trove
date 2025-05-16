@@ -1,10 +1,13 @@
 import { css } from 'styled-components'
 
-import type { ButtonVariant } from './Button'
-import { theme } from '../../../styles/theme'
+import type { Pallete, ThemeType, Color } from '../../../styles/theme.types'
 
-export const getVariantStyle = (variant: ButtonVariant) => {
-  const color = theme.colors[variant]
+export const getVariantStyle = <T extends Pallete>(
+  theme: ThemeType,
+  variant: T,
+  color?: Color<T>
+) => {
+  const palette = theme.colors[variant]
   const neutral = theme.colors.neutral
 
   if (variant === 'neutral') {
@@ -30,17 +33,21 @@ export const getVariantStyle = (variant: ButtonVariant) => {
     `
   }
 
+  const bg = palette[color ?? 'hue100']
+  const hover = palette.hue50
+  const active = palette.hue200
+
   return css`
-    background-color: ${color.hue100};
+    background-color: ${bg as string};
     color: white;
     border: none;
 
     &:hover {
-      background-color: ${color.hue50};
+      background-color: ${hover};
     }
 
     &:active {
-      background-color: ${color.hue200};
+      background-color: ${active};
     }
 
     &:disabled {

@@ -8,7 +8,7 @@ import { createStyledIcon } from './icon.styles'
 type IconProps<T extends Pallete = Pallete> = {
   iconSize?: IconSize
   pallete: T
-  color: Color<T>
+  color?: Color<T>
   icon: FC<SVGProps<SVGSVGElement>>
 } & HTMLAttributes<HTMLSpanElement>
 
@@ -22,10 +22,12 @@ export const Icon = <T extends Pallete>({
   const theme = useTheme()
   const resolvedSize = theme.iconSize[iconSize]
 
+  const resolvedColor = (color ?? 'hue200') as Color<T>
+
   const StyledIcon = createStyledIcon<T>()
 
   return (
-    <StyledIcon $size={resolvedSize} $pallete={pallete} $color={color} {...rest}>
+    <StyledIcon $size={resolvedSize} $pallete={pallete} $color={resolvedColor} {...rest}>
       <IconComponent width="100%" height="100%" />
     </StyledIcon>
   )
