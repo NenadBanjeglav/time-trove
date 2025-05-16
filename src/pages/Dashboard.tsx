@@ -11,7 +11,7 @@ export const Dashboard = () => {
     <div>
       <Button variant="primary" size="xlarge" color="hue50" />
       <Button variant="success" size="large" />
-      <Button loading />
+      <Button />
       <Text pallete="primary" color="hue200" fontSize="xSmall" fontWeight="medium" as="span">
         Random text
       </Text>
@@ -22,7 +22,7 @@ export const Dashboard = () => {
       <Icon pallete="primary" color="hue200" icon={DeleteIcon} iconSize="small" />
       <Icon pallete="danger" color="hue200" icon={AlertIcon} iconSize="large" />
       <Text>DEFAULT</Text>
-      <Button variant="warning">
+      <Button variant="warning" loading>
         <Text as="span" pallete="neutral" color="hue0">
           Random btn text
         </Text>

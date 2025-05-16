@@ -38,8 +38,9 @@ export const Button = <T extends Pallete = 'primary'>({
       $fullWidth={fullWidth}
       disabled={loading}
       {...rest}
+      $loading
     >
-      {loading ? <Spinner size="small" /> : children}
+      {loading ? <Spinner size="small" pallete={variant} /> : children}
     </StyledButton>
   )
 }

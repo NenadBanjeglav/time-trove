@@ -16,6 +16,7 @@ export function createStyledButton<T extends Pallete>() {
     $isIconButton: boolean
     $shape: ButtonShape
     $fullWidth: boolean
+    $loading: boolean
   }>`
     ${({ theme, $size, $isIconButton, $shape, $fullWidth }) => {
       const sizeConfig = theme.button.sizes[$size]
@@ -36,7 +37,7 @@ export function createStyledButton<T extends Pallete>() {
         line-height: ${theme.typography.lineHeight.base};
         cursor: pointer;
         transition: background-color 0.15s ease-in-out;
-        display: inline-flex;
+        display: flex;
         align-items: center;
         justify-content: center;
       `

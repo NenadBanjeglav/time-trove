@@ -13,6 +13,8 @@ const spin = keyframes`
 
 const SpinnerWrapper = styled.span`
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
   animation: ${spin} 1s linear infinite;
 `
 
@@ -27,7 +29,7 @@ export const Spinner = <T extends Pallete = 'primary'>({
 }: SpinnerProps<T>) => {
   return (
     <SpinnerWrapper>
-      <Icon icon={EclipseIcon} iconSize={size} pallete={pallete} />
+      <Icon icon={EclipseIcon} pallete={pallete} iconSize={size} />
     </SpinnerWrapper>
   )
 }
