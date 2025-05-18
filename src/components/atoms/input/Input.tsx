@@ -1,36 +1,22 @@
-import { forwardRef, useId, type InputHTMLAttributes } from 'react'
-import { InputWrapper, StyledInput, StyledLabel } from './input.styles'
-import { Text } from '../text/Text'
+import type { InputHTMLAttributes } from 'react'
+
+import { StyledLabel, StyledInput, ErrorText, StyledFormRow } from './input.styles'
 
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
-  label?: string
+  name: string
+  label: string
   error?: string
 }
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ label, error, id, placeholder, ...rest }, ref) => {
-    const generatedId = useId()
-    const inputId = id ?? generatedId
-    return (
-      <InputWrapper>
-        {label && (
-          <StyledLabel htmlFor={inputId} $hasError={!!error}>
-            {label}
-          </StyledLabel>
-        )}
-        <StyledInput
-          id={inputId}
-          ref={ref}
-          $hasError={!!error}
-          placeholder={placeholder}
-          {...rest}
-        />
-        {error && (
-          <Text pallete="danger" color="hue200" fontSize="xSmall" lineHeight="xSmall">
-            {error}
-          </Text>
-        )}
-      </InputWrapper>
-    )
-  }
-)
+export const InputField = ({ name, label, error, ...props }: InputProps) => {
+  return (
+    <StyledFormRow>
+      <StyledLabel htmlFor={name} $error={!!error}>
+        {label}
+      </StyledLabel>
+
+      <StyledInput id={name} name={name} $error={!!error} {...props} />
+      <ErrorText $visible={!!error}>{error || '‎'}</ErrorText>
+    </StyledFormRow>
+  )
+}

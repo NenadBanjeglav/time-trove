@@ -1,71 +1,67 @@
 import styled, { css } from 'styled-components'
 
-export const InputWrapper = styled.div`
+export const StyledFormRow = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.xSmall};
+  gap: 4px;
 `
 
-const baseStyle = css`
-  width: 100%;
-  padding: 10px 20px;
+export const StyledLabel = styled.label<{
+  $error?: boolean
+
+  $disabled?: boolean
+}>`
+  font-weight: ${({ theme }) => theme.typography.fontWeight.regular};
+  font-size: ${({ theme }) => theme.typography.fontSize.xSmall};
+  line-height: ${({ theme }) => theme.typography.lineHeight.xSmall};
+  letter-spacing: 0;
+
+  color: ${({ theme, $error, $disabled }) =>
+    $disabled
+      ? theme.colors.neutral.hue300
+      : $error
+        ? theme.colors.danger.hue200
+        : theme.colors.neutral.hue500};
+`
+export const StyledInput = styled.input<{
+  $error?: boolean
+}>`
+  padding: 10px 16px;
   border-radius: 12px;
+
+  font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
   font-size: ${({ theme }) => theme.typography.fontSize.base};
   line-height: ${({ theme }) => theme.typography.lineHeight.base};
-  outline: none;
-  transition: all 0.2s ease;
+  letter-spacing: 0;
+
   background-color: ${({ theme }) => theme.colors.neutral.hue0};
-
-  &::placeholder {
-    color: ${({ theme }) => theme.colors.neutral.hue300};
-    font-weight: ${({ theme }) => theme.typography.fontWeight.regular};
-    font-size: ${({ theme }) => theme.typography.fontSize.small};
-  }
-`
-
-export const StyledLabel = styled.label<{ $hasError: boolean }>`
-  position: absolute;
-  top: -20px;
-  left: 20px;
-  font-size: ${({ theme }) => theme.typography.fontSize.small};
-  line-height: ${({ theme }) => theme.typography.lineHeight.small};
-  font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
-  transition: color 0.2s ease;
-
-  color: ${({ theme, $hasError }) =>
-    $hasError ? theme.colors.danger.hue200 : theme.colors.neutral.hue400};
-
-  input:focus + & {
-    color: ${({ theme }) => theme.colors.primary.hue200};
-  }
-
-  input:not(:placeholder-shown):not(:focus) + & {
-    color: ${({ theme }) => theme.colors.primary.hue200};
-  }
-`
-
-export const StyledInput = styled.input<{ $hasError: boolean }>`
-  ${baseStyle}
   border: 1px solid ${({ theme }) => theme.colors.neutral.hue200};
 
-  &:focus,
-  &:active {
-    border: 1px solid ${({ theme }) => theme.colors.primary.hue200};
-  }
+  ${({ $error, theme }) =>
+    $error &&
+    css`
+      border-color: ${theme.colors.danger.hue200};
+    `}
 
-  &:not(:placeholder-shown):not(:focus) {
-    border: 1px solid ${({ theme }) => theme.colors.neutral.hue300};
+  &:focus {
+    border-color: ${({ theme }) => theme.colors.primary.hue200};
+    outline: none;
   }
 
   &:disabled {
-    background-color: ${({ theme }) => theme.colors.neutral.hue100};
+    background-color: ${({ theme }) => theme.colors.neutral.hue50};
     color: ${({ theme }) => theme.colors.neutral.hue300};
     cursor: not-allowed;
   }
+`
 
-  ${({ $hasError, theme }) =>
-    $hasError &&
-    css`
-      border: 1px solid ${theme.colors.danger.hue100};
-    `}
+export const ErrorText = styled.span<{ $visible: boolean }>`
+  font-weight: ${({ theme }) => theme.typography.fontWeight.regular};
+  font-size: ${({ theme }) => theme.typography.fontSize.xSmall};
+  line-height: ${({ theme }) => theme.typography.lineHeight.xSmall};
+  letter-spacing: 0;
+
+  min-height: 1em;
+  color: ${({ theme }) => theme.colors.danger.hue200};
+  visibility: ${({ $visible }) => ($visible ? 'visible' : 'hidden')};
 `

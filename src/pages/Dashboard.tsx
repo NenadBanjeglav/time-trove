@@ -1,56 +1,79 @@
-import { AlertIcon } from '../assets/icons/AlertIcon'
-import { DeleteIcon } from '../assets/icons/DeleteIcon'
-import { EditIcon } from '../assets/icons/EditIcon'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+
 import { LogoutIcon } from '../assets/icons/LogoutIcon'
 import { Button } from '../components/atoms/button/Button'
 import { Icon } from '../components/atoms/icon/Icon'
-import { Input } from '../components/atoms/input/Input'
-import { Text } from '../components/atoms/text/Text'
+import { InputField } from '../components/atoms/input/Input'
+
+const schema = z.object({
+  email: z.string().email('Enter a valid email'),
+  password: z.string().min(6, 'Password must be at least 6 characters'),
+})
+
+type FormValues = z.infer<typeof schema>
 
 export const Dashboard = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<FormValues>({
+    resolver: zodResolver(schema),
+  })
+
+  const onSubmit = (data: FormValues) => {
+    console.log('Logging in with:', data)
+    // TODO: login
+  }
+
   return (
     <div>
-      <Button variant="primary" size="xlarge" color="hue50" />
-      <Button variant="success" size="large" />
-      <Button />
-      <Text pallete="primary" color="hue200" fontSize="xSmall" fontWeight="medium" as="span">
-        Random text
-      </Text>
-      <Text pallete="neutral" color="hue500" as="span">
-        Success
-      </Text>
-      <Text>Default</Text>
-      <Icon pallete="primary" color="hue200" icon={DeleteIcon} iconSize="small" />
-      <Icon pallete="danger" color="hue200" icon={AlertIcon} iconSize="large" />
-      <Text>DEFAULT</Text>
-      <Button variant="warning" loading>
-        <Text as="span" pallete="neutral" color="hue0">
-          Random btn text
-        </Text>
-        <Icon icon={AlertIcon} pallete="danger" color="hue0" iconSize="small" />
-      </Button>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        style={{
+          maxWidth: 400,
+          margin: '0 auto',
+          padding: 32,
+          borderRadius: 16,
+          backgroundColor: '#fff',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 24,
+          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.05)',
+        }}
+      >
+        <div style={{ textAlign: 'center' }}>
+          <Icon icon={LogoutIcon} pallete="neutral" iconSize="large" />
+          <h2 style={{ margin: 0 }}>Log in</h2>
+          <p style={{ fontSize: 14, color: '#888' }}>
+            Use your email to log in to your TimeTrove Dashboard.
+          </p>
+        </div>
 
-      <Button isIconButton shape="circle">
-        <LogoutIcon />
-      </Button>
+        <InputField
+          label="Email"
+          placeholder="Email"
+          type="email"
+          {...register('email')}
+          name="email"
+          error={errors.email?.message}
+        />
 
-      <Button shape="square" variant="primary" color="hue50" isIconButton>
-        <EditIcon />
-      </Button>
+        <InputField
+          label="Password"
+          placeholder="Password"
+          type="password"
+          {...register('password')}
+          name="password"
+          error={errors.password?.message}
+        />
 
-      <Button fullWidth variant="danger">
-        Log out
-      </Button>
-
-      <Button variant="neutral" />
-
-      <div style={{ maxWidth: '400px' }}>
-        <Input name="assignee" placeholder="Text" label="Email" />
-        <Input name="assignee" placeholder="Text" error="Error text" />
-        <Input name="assignee" placeholder="Text" />
-        <Input name="assignee" placeholder="Text" />
-        <Input name="assignee" placeholder="Text" />
-      </div>
+        <Button type="submit" size="large" disabled={isSubmitting} fullWidth>
+          Log in
+        </Button>
+      </form>
     </div>
   )
 }
