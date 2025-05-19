@@ -6,26 +6,16 @@ const meta: Meta<typeof InputField> = {
   title: 'Components/Input',
   component: InputField,
   tags: ['autodocs'],
-  argTypes: {
-    type: {
-      control: 'select',
-      options: ['text', 'email', 'password', 'number'],
-    },
-    disabled: {
-      control: 'boolean',
-    },
-    error: {
-      control: 'text',
-    },
-    placeholder: {
-      control: 'text',
-    },
-  },
   args: {
-    name: 'example',
-    label: 'Example Label',
-    placeholder: 'Type something...',
+    name: 'email',
+    label: 'Email',
     type: 'text',
+    value: '',
+    onChange: () => {},
+  },
+  argTypes: {
+    error: { control: 'text' },
+    disabled: { control: 'boolean' },
   },
 }
 
@@ -34,22 +24,21 @@ type Story = StoryObj<typeof InputField>
 
 export const Default: Story = {}
 
+export const WithText: Story = {
+  args: {
+    value: 'hello@example.com',
+  },
+}
+
 export const WithError: Story = {
   args: {
-    error: 'This field is required.',
+    error: 'This field is required',
   },
 }
 
 export const Disabled: Story = {
   args: {
     disabled: true,
-    placeholder: 'Disabled input',
-  },
-}
-
-export const PasswordType: Story = {
-  args: {
-    type: 'password',
-    placeholder: 'Enter your password',
+    value: 'Disabled value',
   },
 }

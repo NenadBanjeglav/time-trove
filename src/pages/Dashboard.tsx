@@ -54,7 +54,6 @@ export const Dashboard = () => {
 
         <InputField
           label="Email"
-          placeholder="Email"
           type="email"
           {...register('email')}
           name="email"
@@ -63,7 +62,6 @@ export const Dashboard = () => {
 
         <InputField
           label="Password"
-          placeholder="Password"
           type="password"
           {...register('password')}
           name="password"
