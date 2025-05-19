@@ -1,27 +1,28 @@
 import type { HTMLAttributes } from 'react'
 
-import { StyledChip } from './chip.styles'
+import type { Pallete } from '../../../styles/theme.types'
 
-export type ChipVariant = 'low' | 'medium' | 'high' | 'inProgress' | 'done'
+import { createStyledChip } from './chip.styles'
+
 export type ChipSize = 'small' | 'large'
 
-type ChipProps = HTMLAttributes<HTMLDivElement> & {
-  variant: ChipVariant
+type ChipProps<T extends Pallete = 'neutral'> = HTMLAttributes<HTMLDivElement> & {
   size: ChipSize
+  label: string
+  pallete?: T
 }
 
-const variantLabelMap: Record<ChipVariant, string> = {
-  low: 'Low',
-  medium: 'Medium',
-  high: 'High',
-  inProgress: 'In Progress',
-  done: 'Done',
-}
+export const Chip = <T extends Pallete = 'neutral'>({
+  size,
+  label,
+  pallete = 'neutral' as T,
+  ...rest
+}: ChipProps<T>) => {
+  const StyledChip = createStyledChip<T>()
 
-export const Chip = ({ variant, size, ...rest }: ChipProps) => {
   return (
-    <StyledChip $variant={variant} $size={size} {...rest}>
-      {variantLabelMap[variant]}
+    <StyledChip $pallete={pallete} $size={size} {...rest}>
+      {label}
     </StyledChip>
   )
 }

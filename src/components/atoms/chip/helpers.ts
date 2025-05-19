@@ -1,32 +1,6 @@
 import { css } from 'styled-components'
 
-import type { ChipSize, ChipVariant } from './Chip'
-
-export const getVariantStyle = (variant: ChipVariant) => {
-  switch (variant) {
-    case 'low':
-      return css`
-        background-color: ${({ theme }) => theme.colors.success.hue0};
-        color: ${({ theme }) => theme.colors.success.hue100};
-      `
-    case 'medium':
-    case 'inProgress':
-      return css`
-        background-color: ${({ theme }) => theme.colors.warning.hue0};
-        color: ${({ theme }) => theme.colors.warning.hue100};
-      `
-    case 'high':
-      return css`
-        background-color: ${({ theme }) => theme.colors.danger.hue0};
-        color: ${({ theme }) => theme.colors.danger.hue100};
-      `
-    case 'done':
-      return css`
-        background-color: ${({ theme }) => theme.colors.success.hue0};
-        color: ${({ theme }) => theme.colors.success.hue100};
-      `
-  }
-}
+import type { ChipSize } from './Chip'
 
 export const getSizeStyle = (size: ChipSize) => {
   switch (size) {
