@@ -1,4 +1,5 @@
 import type { HTMLAttributes } from 'react'
+
 import { StyledChip } from './chip.styles'
 
 export type ChipVariant = 'low' | 'medium' | 'high' | 'inProgress' | 'done'
