@@ -15,6 +15,7 @@ export const StyledLabel = styled.label<{
   font-size: ${({ theme }) => theme.typography.fontSize.xSmall};
   line-height: ${({ theme }) => theme.typography.lineHeight.xSmall};
   letter-spacing: 0;
+  margin-left: 8px;
 
   color: ${({ theme, $error, $disabled }) =>
     $disabled
@@ -64,4 +65,5 @@ export const ErrorText = styled.span<{ $visible: boolean }>`
   min-height: 1em;
   color: ${({ theme }) => theme.colors.danger.hue200};
   visibility: ${({ $visible }) => ($visible ? 'visible' : 'hidden')};
+  margin-left: 8px;
 `
