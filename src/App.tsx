@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
+import { ROUTES } from './constants/routes'
 import { AppLayout } from './pages/AppLayout'
 import { Dashboard } from './pages/Dashboard'
 import { Login } from './pages/Login'
@@ -7,7 +8,6 @@ import { NotFound } from './pages/NotFound'
 import { ProtectedRoute } from './pages/ProtectedRoute'
 import { PublicLayout } from './pages/PublicLayout'
 import { Register } from './pages/Register'
-import { ROUTES } from './routes'
 
 const App = () => {
   return (

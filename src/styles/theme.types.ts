@@ -87,6 +87,7 @@ export type ThemeType = {
     xLarge: RemSizeType
   }
   iconSize: {
+    xSmall: RemSizeType
     small: RemSizeType
     large: RemSizeType
   }
