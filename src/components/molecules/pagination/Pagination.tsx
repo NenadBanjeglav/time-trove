@@ -1,9 +1,9 @@
 import { useSearchParams } from 'react-router-dom'
 
-import { getPaginationRange } from './helpers'
-import { StyledPagination, PageInfo, Buttons, PaginationButton } from './pagination.styles'
+import { PAGE_SIZE } from '../../../constants/constants'
 
-export const PAGE_SIZE = 8
+import { getPaginationRange } from './helpers'
+import { StyledPagination, PaginationButton, ButtonsWrapper } from './pagination.styles'
 
 type PaginationProps = {
   count: number
@@ -22,16 +22,9 @@ export const Pagination = ({ count }: PaginationProps) => {
 
   if (pageCount <= 1) return null
 
-  const start = (currentPage - 1) * PAGE_SIZE + 1
-  const end = currentPage === pageCount ? count : currentPage * PAGE_SIZE
-
   return (
     <StyledPagination>
-      <PageInfo>
-        Showing <span>{start}</span> to <span>{end}</span> of <span>{count}</span> results
-      </PageInfo>
-
-      <Buttons>
+      <ButtonsWrapper>
         {getPaginationRange(currentPage, pageCount).map((page, index) => {
           if (page === '...') {
             return (
@@ -51,7 +44,7 @@ export const Pagination = ({ count }: PaginationProps) => {
             </PaginationButton>
           )
         })}
-      </Buttons>
+      </ButtonsWrapper>
     </StyledPagination>
   )
 }

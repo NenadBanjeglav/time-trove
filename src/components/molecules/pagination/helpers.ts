@@ -3,21 +3,21 @@ export const getPaginationRange = (currentPage: number, totalPages: number): (nu
     return Array.from({ length: totalPages }, (_, i) => i + 1)
   }
 
-  const showEarlyRange = currentPage < 5
+  const pagination: (number | '...')[] = [1]
 
-  const middlePages = showEarlyRange
-    ? Array.from({ length: Math.min(totalPages - 2, currentPage + 1 - 2 + 1) }, (_, i) => i + 2)
-    : [currentPage - 1, currentPage, currentPage + 1].filter(p => p > 1 && p < totalPages)
+  const isNearStart = currentPage < 5
+  const isNearEnd = currentPage > totalPages - 4
 
-  const pages: (number | '...')[] = [1]
+  if (isNearStart) {
+    const middle = Array.from({ length: 4 }, (_, i) => i + 2) // pages 2–5
+    pagination.push(...middle, '...', totalPages)
+  } else if (isNearEnd) {
+    const middle = Array.from({ length: 4 }, (_, i) => totalPages - 5 + i) // pages totalPages-5 to totalPages-2
+    pagination.push('...', ...middle, totalPages)
+  } else {
+    const middle = [currentPage - 1, currentPage, currentPage + 1]
+    pagination.push('...', ...middle, '...', totalPages)
+  }
 
-  const hasLeftGap = !showEarlyRange
-  const hasRightGap = middlePages[middlePages.length - 1] < totalPages - 1
-
-  if (hasLeftGap) pages.push('...')
-  pages.push(...middlePages)
-  if (hasRightGap) pages.push('...')
-  pages.push(totalPages)
-
-  return pages
+  return pagination
 }
