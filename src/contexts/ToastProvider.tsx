@@ -1,4 +1,5 @@
 import { type ReactNode, useState, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 
 import { Toast } from '../components/atoms/toast/Toast'
 import type { ToastProps, ToastInput } from '../components/atoms/toast/toast.types'
@@ -15,7 +16,7 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
 
   const addToast = useCallback(
     ({ type, title, message, duration = 2000 }: ToastInput) => {
-      const id = Date.now().toString()
+      const id = crypto.randomUUID()
 
       const onClose = () => removeToast(id)
 
@@ -40,11 +41,14 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
   return (
     <ToastContext.Provider value={{ addToast }}>
       {children}
-      <ToastContainer>
-        {toasts.map(toast => (
-          <Toast key={toast.id} {...toast} />
-        ))}
-      </ToastContainer>
+      {createPortal(
+        <ToastContainer>
+          {toasts.map(toast => (
+            <Toast key={toast.id} {...toast} />
+          ))}
+        </ToastContainer>,
+        document.body
+      )}
     </ToastContext.Provider>
   )
 }
