@@ -10,14 +10,24 @@ const meta: Meta<typeof Dropdown> = {
   component: Dropdown,
   tags: ['autodocs'],
   argTypes: {
-    languages: { control: false }, // not interactive, custom data
+    size: {
+      control: 'radio',
+      options: ['small', 'large'],
+    },
+    value: {
+      control: 'select',
+      options: ['en', 'rs', 'kz'],
+    },
+  },
+  args: {
+    size: 'small',
   },
 }
 
 export default meta
 type Story = StoryObj<typeof Dropdown>
 
-const languageOptions = [
+const options = [
   {
     label: 'EN',
     value: 'en',
@@ -32,6 +42,18 @@ const languageOptions = [
 
 export const Default: Story = {
   args: {
-    languages: languageOptions,
+    options,
+    value: 'en',
+    onChange: value => {
+      console.log('Selected:', value)
+    },
+  },
+}
+
+export const LargeSize: Story = {
+  args: {
+    ...Default.args,
+    size: 'large',
+    value: 'rs',
   },
 }
