@@ -2,14 +2,14 @@ import {
   cloneElement,
   createContext,
   useContext,
-  useEffect,
-  useRef,
   useState,
   type MouseEventHandler,
   type ReactElement,
   type ReactNode,
 } from 'react'
 import { createPortal } from 'react-dom'
+
+import { useOutsideClick } from '../../../hooks/useOutsideClick'
 
 import { Overlay, StyledModal } from './modal.styles'
 
@@ -55,18 +55,8 @@ const Window = ({
   name: string
 }) => {
   const { openName, close } = useModalContext()
-  const ref = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        close()
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [close])
+  const ref = useOutsideClick<HTMLDivElement>(close)
 
   if (name !== openName) return null
 
