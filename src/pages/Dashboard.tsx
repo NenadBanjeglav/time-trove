@@ -1,4 +1,4 @@
-import { Pagination } from '../components/molecules/pagination/Pagination'
+import { Pagination } from '../components/atoms/pagination/Pagination'
 
 const allItems = Array.from({ length: 120 }, (_, i) => ({
   id: i + 1,
