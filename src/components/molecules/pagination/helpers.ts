@@ -3,21 +3,28 @@ export const getPaginationRange = (currentPage: number, totalPages: number): (nu
     return Array.from({ length: totalPages }, (_, i) => i + 1)
   }
 
-  const pagination: (number | '...')[] = [1]
+  const pages: (number | '...')[] = [1]
 
-  const isNearStart = currentPage < 5
-  const isNearEnd = currentPage > totalPages - 4
-
-  if (isNearStart) {
-    const middle = Array.from({ length: 4 }, (_, i) => i + 2) // pages 2–5
-    pagination.push(...middle, '...', totalPages)
-  } else if (isNearEnd) {
-    const middle = Array.from({ length: 4 }, (_, i) => totalPages - 5 + i) // pages totalPages-5 to totalPages-2
-    pagination.push('...', ...middle, totalPages)
+  if (currentPage <= 4) {
+    const maxVisible = Math.min(totalPages - 1, currentPage === 1 ? 3 : currentPage + 1)
+    for (let i = 2; i <= maxVisible; i++) {
+      pages.push(i)
+    }
+    if (totalPages > maxVisible + 1) {
+      pages.push('...')
+    }
+  } else if (currentPage > 4 && currentPage < totalPages - 3) {
+    pages.push('...')
+    pages.push(currentPage - 1, currentPage, currentPage + 1)
+    pages.push('...')
   } else {
-    const middle = [currentPage - 1, currentPage, currentPage + 1]
-    pagination.push('...', ...middle, '...', totalPages)
+    const minVisible = Math.max(2, currentPage === totalPages ? totalPages - 2 : currentPage - 1)
+    pages.push('...')
+    for (let i = minVisible; i < totalPages; i++) {
+      pages.push(i)
+    }
   }
 
-  return pagination
+  pages.push(totalPages)
+  return pages
 }
