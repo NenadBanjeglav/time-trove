@@ -1,5 +1,5 @@
 export const getPaginationRange = (currentPage: number, totalPages: number): (number | '...')[] => {
-  if (totalPages <= 7) {
+  if (totalPages <= 4) {
     return Array.from({ length: totalPages }, (_, i) => i + 1)
   }
 
