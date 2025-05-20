@@ -28,7 +28,7 @@ export const Pagination = ({ count }: PaginationProps) => {
         {getPaginationRange(currentPage, pageCount).map((page, index) => {
           if (page === '...') {
             return (
-              <PaginationButton key={`ellipsis-${index}`} disabled>
+              <PaginationButton key={`...-${index}`} disabled>
                 ...
               </PaginationButton>
             )

@@ -19,14 +19,13 @@ export const PaginationButton = styled.button<{ $active?: boolean }>`
   border-radius: 8px;
   background-color: ${({ theme, $active }) =>
     $active ? theme.colors.primary.hue200 : theme.colors.neutral.hue50};
-  color: ${({ theme, $active }) =>
-    $active ? theme.colors.primary.hue0 : theme.colors.neutral.hue500};
   font-size: ${({ theme }) => theme.typography.fontSize.base};
-  font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
+  font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
   padding: 0.6rem 1rem;
   min-width: 2.8rem;
   height: 2.8rem;
-
+  color: ${({ theme, $active }) =>
+    $active ? theme.colors.primary.hue0 : theme.colors.neutral.hue500};
   display: flex;
   align-items: center;
   justify-content: center;
