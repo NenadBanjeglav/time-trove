@@ -1,8 +1,8 @@
 import { css } from 'styled-components'
+import { ChipStatus, type ChipSizeEnum } from './chip.types'
+import type { Pallete } from '../../../styles/theme.types'
 
-import type { ChipSize } from './Chip'
-
-export const getSizeStyle = (size: ChipSize) => {
+export const getSizeStyle = (size: ChipSizeEnum) => {
   switch (size) {
     case 'small':
       return css`
@@ -20,5 +20,18 @@ export const getSizeStyle = (size: ChipSize) => {
         line-height: ${({ theme }) => theme.typography.lineHeight.base};
         font-weight: ${({ theme }) => theme.typography.fontWeight.semiBold};
       `
+  }
+}
+
+export const getChipPallete = (status?: ChipStatus): Pallete => {
+  switch (status) {
+    case ChipStatus.SUCCESS:
+      return 'success'
+    case ChipStatus.WARNING:
+      return 'warning'
+    case ChipStatus.DANGER:
+      return 'danger'
+    default:
+      return 'primary'
   }
 }
