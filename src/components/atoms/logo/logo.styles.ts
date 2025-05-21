@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 import type { LogoVariant } from './Logo'
 
 export const StyledLogoWrapper = styled.div<{ $variant: LogoVariant }>`
