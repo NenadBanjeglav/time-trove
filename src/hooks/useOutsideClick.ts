@@ -14,6 +14,7 @@ export const useOutsideClick = <T extends HTMLElement>(
     }
 
     document.addEventListener('mousedown', handleClick, listenCapturing)
+
     return () => {
       document.removeEventListener('mousedown', handleClick, listenCapturing)
     }
