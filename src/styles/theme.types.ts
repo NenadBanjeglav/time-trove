@@ -82,11 +82,21 @@ export type ThemeType = {
     none: RemSizeType
     xSmall: RemSizeType
     small: RemSizeType
+    smallPlus: RemSizeType
     medium: RemSizeType
     large: RemSizeType
     xLarge: RemSizeType
   }
+  borderRadius: {
+    none: string
+    small: string
+    medium: string
+    large: string
+    xLarge: string
+    full: string
+  }
   iconSize: {
+    xSmall: RemSizeType
     small: RemSizeType
     large: RemSizeType
   }
