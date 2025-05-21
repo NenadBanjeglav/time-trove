@@ -79,6 +79,7 @@ export const theme: ThemeType = {
     full: '9999px', // full pill
   },
   iconSize: {
+    xSmall: '0.625rem',
     small: '1.5rem', // 24px
     large: '2.4rem', // 38.4px
   },

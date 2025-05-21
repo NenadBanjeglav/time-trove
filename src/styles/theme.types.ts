@@ -96,6 +96,7 @@ export type ThemeType = {
     full: string
   }
   iconSize: {
+    xSmall: RemSizeType
     small: RemSizeType
     large: RemSizeType
   }
