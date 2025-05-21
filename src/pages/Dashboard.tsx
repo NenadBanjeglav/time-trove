@@ -10,21 +10,18 @@ export const Dashboard = () => {
   const [locale, setLocale] = useState(languages[0].value)
   const [companyType, setCompanyType] = useState(companyTypeOptions[0].value)
   return (
-    <div>
-      <Chip label="High" pallete="danger" size={ChipSizeEnum.Large} />
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', padding: '20px' }}>
-        <div>
-          <Dropdown options={languages} value={locale} onChange={setLocale} />
-        </div>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', padding: '20px' }}>
+      <div>
+        <Dropdown options={languages} value={locale} onChange={setLocale} />
+      </div>
 
-        <div>
-          <Dropdown
-            options={companyTypeOptions}
-            value={companyType}
-            size="large"
-            onChange={setCompanyType}
-          />
-        </div>
+      <div>
+        <Dropdown
+          options={companyTypeOptions}
+          value={companyType}
+          size="large"
+          onChange={setCompanyType}
+        />
       </div>
     </div>
   )
