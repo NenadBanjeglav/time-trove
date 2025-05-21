@@ -7,7 +7,7 @@ import { createStyledIcon } from './icon.styles'
 
 type IconProps<T extends Pallete = Pallete> = {
   iconSize?: IconSize
-  pallete: T
+  pallete?: T
   color?: Color<T>
   icon: FC<SVGProps<SVGSVGElement>>
 } & HTMLAttributes<HTMLSpanElement>
@@ -15,7 +15,7 @@ type IconProps<T extends Pallete = Pallete> = {
 export const Icon = <T extends Pallete>({
   icon: IconComponent,
   iconSize = 'small',
-  pallete,
+  pallete = 'primary' as T,
   color,
   ...rest
 }: IconProps<T>) => {
