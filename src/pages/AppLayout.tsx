@@ -6,13 +6,14 @@ import { Logo } from '../components/atoms/logo/Logo'
 export const AppLayout = () => {
   return (
     <div>
-      <nav>
+      <nav style={{ display: 'flex' }}>
         <Logo variant="full" />
         <Logo variant="compact" />
         <Heading as="h2" pallete="neutral" color="hue400">
           Dashboard
         </Heading>
       </nav>
+
       <Outlet />
     </div>
   )

@@ -1,4 +1,5 @@
 import type { HTMLAttributes } from 'react'
+
 import { StyledLogoWrapper } from './logo.styles'
 
 export type LogoVariant = 'compact' | 'full'
