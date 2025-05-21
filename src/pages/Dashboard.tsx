@@ -1,3 +1,5 @@
+import { Chip } from '../components/atoms/chip/Chip'
+import { ChipSizeEnum } from '../components/atoms/chip/chip.types'
 import { useState } from 'react'
 
 import { Dropdown } from '../components/atoms/dropdown/Dropdown'
