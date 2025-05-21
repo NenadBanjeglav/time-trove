@@ -19,6 +19,7 @@ export function createStyledIcon<T extends Pallete>() {
     width: ${({ $size }) => $size};
     height: ${({ $size }) => $size};
 
-    ${({ theme, $pallete, $color }) => `color: ${theme.colors[$pallete][$color]};`}
+    ${({ theme, $pallete, $color }) =>
+      $pallete && $color ? `color: ${theme.colors[$pallete][$color]};` : ''}
   `
 }
