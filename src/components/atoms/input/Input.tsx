@@ -14,7 +14,7 @@ export const InputField = ({ name, label, error, ...props }: InputProps) => {
       <StyledLabel htmlFor={name} $error={!!error}>
         {label}
       </StyledLabel>
-      <ErrorText $visible={!!error}>{error || '‎'}</ErrorText>
+      <ErrorText>{error || '‎'}</ErrorText>
     </InputWrapper>
   )
 }

@@ -6,6 +6,7 @@ export const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.xSmall};
+  height: calc(56px + 1em);
 `
 
 export const StyledInput = styled.input<{ $error?: boolean }>`
@@ -73,14 +74,12 @@ export const StyledLabel = styled.label<{ $error?: boolean }>`
   }
 `
 
-export const ErrorText = styled.span<{ $visible: boolean }>`
+export const ErrorText = styled.span`
   font-weight: ${({ theme }) => theme.typography.fontWeight.regular};
   font-size: ${({ theme }) => theme.typography.fontSize.xSmall};
   line-height: ${({ theme }) => theme.typography.lineHeight.xSmall};
   letter-spacing: 0;
-
   min-height: 1em;
   color: ${({ theme }) => theme.colors.danger.hue200};
-  visibility: ${({ $visible }) => ($visible ? 'visible' : 'hidden')};
   margin-left: 8px;
 `
