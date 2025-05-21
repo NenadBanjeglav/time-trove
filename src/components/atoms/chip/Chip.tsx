@@ -1,15 +1,15 @@
 import type { HTMLAttributes } from 'react'
 
-import { ChipStatus, type ChipSizeEnum } from './chip.types'
 import { createStyledChip } from './chip.styles'
+import { StatusEnum, type SizeEnum } from './chip.types'
 
 type ChipProps = HTMLAttributes<HTMLDivElement> & {
-  size: ChipSizeEnum
+  size: SizeEnum
   label: string
-  status?: ChipStatus
+  status?: StatusEnum
 }
 
-export const Chip = ({ size, label, status = ChipStatus.SUCCESS, ...rest }: ChipProps) => {
+export const Chip = ({ size, label, status = StatusEnum.SUCCESS, ...rest }: ChipProps) => {
   const StyledChip = createStyledChip()
 
   return (
