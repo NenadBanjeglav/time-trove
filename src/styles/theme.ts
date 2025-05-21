@@ -70,6 +70,7 @@ export const theme: ThemeType = {
     xLarge: '2rem', // 32px
   },
   iconSize: {
+    xSmall: '0.625rem',
     small: '1.5rem', // 24px
     large: '2.4rem', // 38.4px
   },
