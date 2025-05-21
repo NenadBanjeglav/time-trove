@@ -1,67 +1,57 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Chip } from './Chip'
-import { ChipSizeEnum, ChipStatus } from './chip.types'
+import { SizeEnum, StatusEnum } from './chip.types'
+
+const sizes = Object.values(SizeEnum)
+const statuses = Object.values(StatusEnum)
 
 const meta: Meta<typeof Chip> = {
   title: 'Components/Chip',
   component: Chip,
+  tags: ['autodocs'],
   argTypes: {
     size: {
-      control: 'radio',
-      options: Object.values(ChipSizeEnum),
+      control: 'select',
+      options: sizes,
     },
     status: {
       control: 'select',
-      options: Object.values(ChipStatus),
+      options: statuses,
     },
     label: {
       control: 'text',
     },
   },
   args: {
-    size: ChipSizeEnum.Small,
-    status: ChipStatus.SUCCESS,
+    size: SizeEnum.Small,
+    status: StatusEnum.SUCCESS,
     label: 'Chip Label',
   },
-  tags: ['autodocs'],
 }
 
 export default meta
 type Story = StoryObj<typeof Chip>
 
-export const Primary: Story = {
-  args: {
-    status: ChipStatus.WARNING,
-    label: 'Primary',
-  },
-}
+export const Default: Story = {}
 
 export const Success: Story = {
   args: {
-    status: ChipStatus.SUCCESS,
+    status: StatusEnum.SUCCESS,
     label: 'Success',
   },
 }
 
 export const Warning: Story = {
   args: {
-    status: ChipStatus.WARNING,
+    status: StatusEnum.WARNING,
     label: 'Warning',
   },
 }
 
 export const Danger: Story = {
   args: {
-    status: ChipStatus.DANGER,
+    status: StatusEnum.DANGER,
     label: 'Danger',
-  },
-}
-
-export const LargeSize: Story = {
-  args: {
-    status: ChipStatus.SUCCESS,
-    size: ChipSizeEnum.Large,
-    label: 'Large Success',
   },
 }
