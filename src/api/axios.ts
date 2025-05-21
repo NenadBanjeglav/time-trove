@@ -6,13 +6,32 @@ export const axiosInstance = axios.create({
   withCredentials: false,
 })
 
-let accessToken: string | null = null
+let accessToken: string | null = localStorage.getItem('accessToken')
+let refreshToken: string | null = localStorage.getItem('refreshToken')
+
+export const setRefreshToken = (token: string) => {
+  refreshToken = token
+  localStorage.setItem('refreshToken', token)
+}
+
+export const getRefreshToken = () => refreshToken
 
 export const setAccessToken = (token: string) => {
   accessToken = token
+  localStorage.setItem('accessToken', token)
 }
 
 export const getAccessToken = () => accessToken
+
+export const clearAccessToken = () => {
+  accessToken = null
+  localStorage.removeItem('accessToken')
+}
+
+export const clearRefreshToken = () => {
+  refreshToken = null
+  localStorage.removeItem('refreshToken')
+}
 
 axiosInstance.interceptors.request.use(config => {
   if (accessToken && config.headers) {
@@ -30,11 +49,21 @@ axiosInstance.interceptors.response.use(
       originalRequest._retry = true
 
       try {
-        const refreshRes = await axiosInstance.post('/auth/refresh')
-        accessToken = refreshRes.data.accessToken
-        originalRequest.headers.Authorization = `Bearer ${accessToken}`
+        const refreshRes = await axiosInstance.post('/auth/refresh', {
+          refreshToken: getRefreshToken(),
+        })
+
+        const newAccessToken = refreshRes.data.accessToken
+        const newRefreshToken = refreshRes.data.refreshToken
+
+        setAccessToken(newAccessToken)
+        if (newRefreshToken) setRefreshToken(newRefreshToken)
+
+        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`
         return axiosInstance(originalRequest)
       } catch (refreshError) {
+        clearAccessToken()
+        clearRefreshToken()
         return Promise.reject(refreshError)
       }
     }
