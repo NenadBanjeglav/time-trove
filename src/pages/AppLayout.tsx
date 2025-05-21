@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom'
 
 import { Logo } from '../components/atoms/logo/Logo'
 import { Heading } from '../components/atoms/heading/Heading'
+import { Search } from '../components/atoms/search/Search'
 
 export const AppLayout = () => {
   return (
@@ -12,6 +13,8 @@ export const AppLayout = () => {
         <Heading as="h2" pallete="neutral" color="hue400">
           Dashboard
         </Heading>
+
+        <Search />
       </nav>
       <Outlet />
     </div>
