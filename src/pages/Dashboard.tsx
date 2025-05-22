@@ -13,7 +13,7 @@ export const Dashboard = () => {
     <Container
       variant={maintance ? 'maintance' : 'default'}
       isLoading={false}
-      error={'Something'}
+      error={false}
       dynamicHeightOffset={navHeight}
     >
       <Heading>Welcome to dashboard</Heading>

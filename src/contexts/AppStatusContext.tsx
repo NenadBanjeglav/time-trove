@@ -7,7 +7,7 @@ type AppStatus = {
 const AppStatusContext = createContext<AppStatus>({ maintance: false })
 
 export const AppStatusProvider = ({ children }: { children: ReactNode }) => {
-  const maintance = true
+  const maintance = false
 
   return <AppStatusContext.Provider value={{ maintance }}>{children}</AppStatusContext.Provider>
 }
