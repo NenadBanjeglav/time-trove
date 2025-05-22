@@ -1,13 +1,11 @@
-import styled from 'styled-components'
-
 import type { Pallete } from '../../../styles/theme.types'
 import { Button } from '../../atoms/button/Button'
 import { Heading } from '../../atoms/heading/Heading'
 import { Text } from '../../atoms/text/Text'
 
-import { CenteredState } from './container.styles'
+import { StateLayout, Wrapper, Illustration, ButtonWrapper } from './feedbackState.styles'
 
-type EmptyStateProps = {
+type FeedbackStateProps = {
   imageSrc: string
   title: string
   description: string
@@ -17,26 +15,7 @@ type EmptyStateProps = {
   imageMaxWidth?: string
 }
 
-const Wrapper = styled.div`
-  max-width: 716px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: ${({ theme }) => theme.spacing.large};
-`
-
-const Illustration = styled.img<{ $maxWidth?: string }>`
-  width: 100%;
-  max-width: ${({ $maxWidth }) => $maxWidth ?? '372px'};
-  height: auto;
-`
-
-const ButtonWrapper = styled.div`
-  width: 320px;
-`
-
-export const EmptyState = ({
+export const FeedbackState = ({
   imageSrc,
   title,
   description,
@@ -44,9 +23,9 @@ export const EmptyState = ({
   onClick,
   buttonVariant,
   imageMaxWidth = '392px',
-}: EmptyStateProps) => {
+}: FeedbackStateProps) => {
   return (
-    <CenteredState>
+    <StateLayout>
       <Wrapper>
         <Illustration src={imageSrc} alt="empty-state-illustration" $maxWidth={imageMaxWidth} />
         <Heading
@@ -77,6 +56,6 @@ export const EmptyState = ({
           </ButtonWrapper>
         )}
       </Wrapper>
-    </CenteredState>
+    </StateLayout>
   )
 }

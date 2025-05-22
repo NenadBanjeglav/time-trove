@@ -1,15 +1,15 @@
 import { createContext, useContext, type ReactNode } from 'react'
 
 type AppStatus = {
-  maintance: boolean
+  maintenance: boolean
 }
 
-const AppStatusContext = createContext<AppStatus>({ maintance: false })
+const AppStatusContext = createContext<AppStatus>({ maintenance: false })
 
 export const AppStatusProvider = ({ children }: { children: ReactNode }) => {
-  const maintance = false
+  const maintenance = false
 
-  return <AppStatusContext.Provider value={{ maintance }}>{children}</AppStatusContext.Provider>
+  return <AppStatusContext.Provider value={{ maintenance }}>{children}</AppStatusContext.Provider>
 }
 
 export const useAppStatus = () => useContext(AppStatusContext)

@@ -1,19 +1,16 @@
 import styled from 'styled-components'
 
-export const StyledContainer = styled.div<{ $heightOffset?: number }>`
+export const StyledPageWrapper = styled.div<{ $heightOffset?: number }>`
   padding: 0 16px;
   margin: 0 auto;
   width: 100%;
-
   min-height: ${({ $heightOffset }) =>
     $heightOffset !== undefined ? `calc(100vh - ${$heightOffset}px)` : '100vh'};
-
   background-color: ${({ theme }) => theme.colors.neutral.hue50};
   display: flex;
   flex-direction: column;
 `
-
-export const CenteredState = styled.div`
+export const FullCenteredLayout = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;

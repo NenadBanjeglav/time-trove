@@ -6,7 +6,7 @@ import { Logo } from '../components/atoms/logo/Logo'
 import { useAppStatus } from '../contexts/AppStatusContext'
 
 export const AppLayout = () => {
-  const { maintance } = useAppStatus()
+  const { maintenance } = useAppStatus()
   const ref = useRef<HTMLElement>(null)
   const [navHeight, setNavHeight] = useState(56)
 
@@ -22,19 +22,17 @@ export const AppLayout = () => {
     return () => observer.disconnect()
   }, [])
 
-  const effectiveHeight = maintance ? 0 : navHeight
+  const effectiveHeight = maintenance ? 0 : navHeight
 
   return (
     <>
-      {!maintance && (
-        <nav ref={ref} style={{ display: 'flex', height: '56px' }}>
-          <Logo variant="full" />
-          <Logo variant="compact" />
-          <Heading as="h2" pallete="neutral" color="hue400">
-            Dashboard
-          </Heading>
-        </nav>
-      )}
+      <nav ref={ref} style={{ display: 'flex', height: '56px' }}>
+        <Logo variant="full" />
+        <Logo variant="compact" />
+        <Heading as="h2" pallete="neutral" color="hue400">
+          Dashboard
+        </Heading>
+      </nav>
 
       <Outlet context={{ navHeight: effectiveHeight }} />
     </>

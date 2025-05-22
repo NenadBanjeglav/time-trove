@@ -5,6 +5,7 @@ import { AppStatusProvider } from './contexts/AppStatusContext'
 import { AppLayout } from './pages/AppLayout'
 import { Dashboard } from './pages/Dashboard'
 import { Login } from './pages/Login'
+import { Maintenance } from './pages/Maintenance'
 import { NotFound } from './pages/NotFound'
 import { ProtectedRoute } from './pages/ProtectedRoute'
 import { PublicLayout } from './pages/PublicLayout'
@@ -29,6 +30,7 @@ const App = () => {
             <Route path={ROUTES.login} element={<Login />} />
             <Route path={ROUTES.register} element={<Register />} />
             <Route path={ROUTES.notFound} element={<NotFound />} />
+            <Route path="/maintenance" element={<Maintenance />} />
           </Route>
         </Routes>
       </AppStatusProvider>
