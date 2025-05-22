@@ -22,6 +22,16 @@ export const Dashboard = () => {
           onChange={setCompanyType}
         />
       </div>
+      <form
+        onSubmit={() => {}}
+        style={{
+          display: 'grid',
+          gap: '16px',
+          maxWidth: '628px',
+          marginTop: '40px',
+          padding: '16px',
+        }}
+      ></form>
     </div>
   )
 }
