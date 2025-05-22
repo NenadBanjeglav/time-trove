@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import { ROUTES } from './constants/routes'
+import { AppStatusProvider } from './contexts/AppStatusContext'
 import { AppLayout } from './pages/AppLayout'
 import { Dashboard } from './pages/Dashboard'
 import { Login } from './pages/Login'
@@ -12,23 +13,25 @@ import { Register } from './pages/Register'
 const App = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route
-          element={
-            <ProtectedRoute>
-              <AppLayout />
-            </ProtectedRoute>
-          }
-        >
-          <Route index element={<Dashboard />} />
-        </Route>
+      <AppStatusProvider>
+        <Routes>
+          <Route
+            element={
+              <ProtectedRoute>
+                <AppLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<Dashboard />} />
+          </Route>
 
-        <Route element={<PublicLayout />}>
-          <Route path={ROUTES.login} element={<Login />} />
-          <Route path={ROUTES.register} element={<Register />} />
-          <Route path={ROUTES.notFound} element={<NotFound />} />
-        </Route>
-      </Routes>
+          <Route element={<PublicLayout />}>
+            <Route path={ROUTES.login} element={<Login />} />
+            <Route path={ROUTES.register} element={<Register />} />
+            <Route path={ROUTES.notFound} element={<NotFound />} />
+          </Route>
+        </Routes>
+      </AppStatusProvider>
     </BrowserRouter>
   )
 }

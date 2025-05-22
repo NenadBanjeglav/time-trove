@@ -1,3 +1,5 @@
+import { Container } from '../components/molecules/page-container/Container'
+
 export const NotFound = () => {
-  return <div>NotFound</div>
+  return <Container variant="notFound" />
 }

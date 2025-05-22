@@ -1,16 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import styled from 'styled-components'
 
-import { Spinner } from '../components/atoms/icon/Spinner'
-
-const FullPage = styled.div`
-  height: 100vh;
-  background-color: ${({ theme }) => theme.colors.neutral.hue100};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
+import { Container } from '../components/molecules/page-container/Container'
 
 export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const navigate = useNavigate()
@@ -31,12 +22,7 @@ export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
     if (!isLoading && !isAuthenticated) navigate('/login')
   }, [isLoading, isAuthenticated, navigate])
 
-  if (isLoading)
-    return (
-      <FullPage>
-        <Spinner />
-      </FullPage>
-    )
+  if (isLoading) return <Container isLoading />
 
   if (isAuthenticated) return children
 

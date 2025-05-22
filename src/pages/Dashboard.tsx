@@ -1,28 +1,22 @@
-import { Chip } from '../components/atoms/chip/Chip'
-import { ChipSizeEnum } from '../components/atoms/chip/chip.types'
-import { useState } from 'react'
+import { useOutletContext } from 'react-router-dom'
 
-import { Dropdown } from '../components/atoms/dropdown/Dropdown'
-import { companyTypeOptions } from '../constants/companyType'
-import { languages } from '../constants/languages'
+import { Heading } from '../components/atoms/heading/Heading'
+import { Container } from '../components/molecules/page-container/Container'
+import { useAppStatus } from '../contexts/AppStatusContext'
+
+type LayoutContext = { navHeight: number }
 
 export const Dashboard = () => {
-  const [locale, setLocale] = useState(languages[0].value)
-  const [companyType, setCompanyType] = useState(companyTypeOptions[0].value)
+  const { navHeight } = useOutletContext<LayoutContext>()
+  const { maintance } = useAppStatus()
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', padding: '20px' }}>
-      <div>
-        <Dropdown options={languages} value={locale} onChange={setLocale} />
-      </div>
-
-      <div>
-        <Dropdown
-          options={companyTypeOptions}
-          value={companyType}
-          size="large"
-          onChange={setCompanyType}
-        />
-      </div>
-    </div>
+    <Container
+      variant={maintance ? 'maintance' : 'default'}
+      isLoading={false}
+      error={'Something'}
+      dynamicHeightOffset={navHeight}
+    >
+      <Heading>Welcome to dashboard</Heading>
+    </Container>
   )
 }
