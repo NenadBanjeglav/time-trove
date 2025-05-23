@@ -22,6 +22,11 @@ export const Dashboard = () => {
           onChange={setCompanyType}
         />
       </Card>
+
+      <Card borderColor="primary" maxWidth="600px" maxHeight="600px">
+        <h2>Reusable Card</h2>
+        <p>This is a customizable card component.</p>
+      </Card>
     </div>
   )
 }
