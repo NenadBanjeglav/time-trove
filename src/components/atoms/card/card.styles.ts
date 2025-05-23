@@ -6,6 +6,10 @@ type StyledCardProps = {
   $borderRadius?: string
   $maxWidth?: string
   $maxHeight?: string
+  $minWidth?: string
+  $minHeight?: string
+  $width?: string
+  $height?: string
   $padding?: string
   $backgroundColor?: Pallete
 }
@@ -17,8 +21,10 @@ export const StyledCard = styled.div<StyledCardProps>`
   padding: ${({ theme, $padding }) => $padding || theme.spacing.medium};
   display: flex;
   flex-direction: column;
-  width: fit-content;
-  height: auto;
+  align-items: center;
+  justify-content: center;
+  width: ${({ $width }) => $width || 'fit-content'};
+  height: ${({ $height }) => $height || 'auto'};
 
   border: 1px solid
     ${({ theme, $borderColor }) =>
@@ -28,4 +34,7 @@ export const StyledCard = styled.div<StyledCardProps>`
 
   max-width: ${({ $maxWidth }) => $maxWidth || 'none'};
   max-height: ${({ $maxHeight }) => $maxHeight || 'none'};
+
+  min-width: ${({ $minWidth }) => $minWidth || 'initial'};
+  min-height: ${({ $minHeight }) => $minHeight || 'initial'};
 `

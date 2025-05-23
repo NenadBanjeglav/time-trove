@@ -6,6 +6,7 @@ import type {
   LineHeightType,
   Pallete,
 } from '../../../styles/theme.types'
+import type { HeadingAlignType } from './Heading'
 
 type StyledProps<T extends Pallete = Pallete> = {
   $fontSize: FontSizeType
@@ -13,6 +14,7 @@ type StyledProps<T extends Pallete = Pallete> = {
   $lineHeight: LineHeightType
   $pallete: T
   $color: Color<T>
+  $textAlign: HeadingAlignType
 }
 
 export function createStyledHeading<T extends Pallete>() {
@@ -25,5 +27,6 @@ export function createStyledHeading<T extends Pallete>() {
     line-height: ${({ theme, $lineHeight }) => theme.typography.lineHeight[$lineHeight]};
     color: ${({ theme, $pallete, $color }) => theme.colors[$pallete][$color] as string};
     margin: 0;
+    text-align: ${({ $textAlign }) => $textAlign};
   `
 }

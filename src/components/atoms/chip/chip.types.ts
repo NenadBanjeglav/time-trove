@@ -3,7 +3,7 @@ export enum SizeEnum {
   Large = 'large',
 }
 
-export enum StatusEnum {
+export enum ChipStatus {
   SUCCESS = 'success',
   WARNING = 'warning',
   DANGER = 'danger',
