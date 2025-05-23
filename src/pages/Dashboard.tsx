@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Dropdown } from '../components/atoms/dropdown/Dropdown'
 import { companyTypeOptions } from '../constants/companyType'
 import { languages } from '../constants/languages'
+import { Card } from '../components/atoms/card/Card'
 
 export const Dashboard = () => {
   const [locale, setLocale] = useState(languages[0].value)
@@ -10,18 +11,23 @@ export const Dashboard = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', padding: '20px' }}>
-      <div>
+      <Card>
         <Dropdown options={languages} value={locale} onChange={setLocale} />
-      </div>
+      </Card>
 
-      <div>
+      <Card>
         <Dropdown
           options={companyTypeOptions}
           value={companyType}
           size="large"
           onChange={setCompanyType}
         />
-      </div>
+      </Card>
+
+      <Card borderColor="primary" maxWidth="600px" maxHeight="600px">
+        <h2>Reusable Card</h2>
+        <p>This is a customizable card component.</p>
+      </Card>
     </div>
   )
 }
