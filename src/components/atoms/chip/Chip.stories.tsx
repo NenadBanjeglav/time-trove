@@ -1,9 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Chip } from './Chip'
+import { SizeEnum, StatusEnum } from './chip.types'
 
-const sizes = ['small', 'large'] as const
-const palletes = ['primary', 'neutral', 'success', 'warning', 'danger'] as const
+const sizes = Object.values(SizeEnum)
+const statuses = Object.values(StatusEnum)
 
 const meta: Meta<typeof Chip> = {
   title: 'Components/Chip',
@@ -11,44 +12,46 @@ const meta: Meta<typeof Chip> = {
   tags: ['autodocs'],
   argTypes: {
     size: {
-      control: 'radio',
+      control: 'select',
       options: sizes,
     },
-    pallete: {
+    status: {
       control: 'select',
-      options: palletes,
+      options: statuses,
     },
     label: {
       control: 'text',
     },
   },
   args: {
-    size: 'small',
-    pallete: 'success',
-    label: 'Low',
+    size: SizeEnum.Small,
+    status: StatusEnum.SUCCESS,
+    label: 'Chip Label',
   },
 }
 
 export default meta
 type Story = StoryObj<typeof Chip>
 
-export const Playground: Story = {}
+export const Default: Story = {}
 
-export const AllVariants: Story = {
-  render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-        <Chip size="large" label="In progress" pallete="warning" />
-        <Chip size="large" label="Done" pallete="success" />
-        <Chip size="large" label="Low" pallete="success" />
-        <Chip size="large" label="Medium" pallete="warning" />
-        <Chip size="large" label="High" pallete="danger" />
-      </div>
-      <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-        <Chip size="small" label="Low" pallete="success" />
-        <Chip size="small" label="Medium" pallete="warning" />
-        <Chip size="small" label="High" pallete="danger" />
-      </div>
-    </div>
-  ),
+export const Success: Story = {
+  args: {
+    status: StatusEnum.SUCCESS,
+    label: 'Success',
+  },
+}
+
+export const Warning: Story = {
+  args: {
+    status: StatusEnum.WARNING,
+    label: 'Warning',
+  },
+}
+
+export const Danger: Story = {
+  args: {
+    status: StatusEnum.DANGER,
+    label: 'Danger',
+  },
 }
