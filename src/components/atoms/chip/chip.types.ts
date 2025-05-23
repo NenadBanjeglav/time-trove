@@ -1,9 +1,9 @@
-export enum SizeEnum {
+export enum ChipSize {
   Small = 'small',
   Large = 'large',
 }
 
-export enum StatusEnum {
+export enum ChipStatus {
   SUCCESS = 'success',
   WARNING = 'warning',
   DANGER = 'danger',
