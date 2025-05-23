@@ -8,6 +8,8 @@ type CardProps = HTMLAttributes<HTMLDivElement> & {
   borderRadius?: string
   maxWidth?: string
   maxHeight?: string
+  padding?: string
+  backgroundColor?: Pallete
 }
 
 export const Card = ({
@@ -16,6 +18,9 @@ export const Card = ({
   borderRadius,
   maxWidth,
   maxHeight,
+  padding,
+  backgroundColor,
+
   ...rest
 }: CardProps) => {
   return (
@@ -24,6 +29,8 @@ export const Card = ({
       $borderRadius={borderRadius}
       $maxWidth={maxWidth}
       $maxHeight={maxHeight}
+      $padding={padding}
+      $backgroundColor={backgroundColor}
       {...rest}
     >
       {children}

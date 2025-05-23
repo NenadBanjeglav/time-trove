@@ -6,11 +6,15 @@ type StyledCardProps = {
   $borderRadius?: string
   $maxWidth?: string
   $maxHeight?: string
+  $padding?: string
+  $backgroundColor?: Pallete
 }
 
 export const StyledCard = styled.div<StyledCardProps>`
-  background-color: ${({ theme }) => theme.colors.neutral.hue0};
-  padding: ${({ theme }) => theme.spacing.medium};
+  background-color: ${({ theme, $backgroundColor }) =>
+    $backgroundColor ? theme.colors[$backgroundColor].hue50 : theme.colors.neutral.hue0};
+
+  padding: ${({ theme, $padding }) => $padding || theme.spacing.medium};
   display: flex;
   flex-direction: column;
   width: fit-content;
@@ -20,8 +24,7 @@ export const StyledCard = styled.div<StyledCardProps>`
     ${({ theme, $borderColor }) =>
       $borderColor ? theme.colors[$borderColor].hue200 : theme.colors.neutral.hue100};
 
-  border-radius: ${({ theme, $borderRadius }) =>
-    $borderRadius ? $borderRadius : theme.borderRadius.large};
+  border-radius: ${({ theme, $borderRadius }) => $borderRadius || theme.borderRadius.large};
 
   max-width: ${({ $maxWidth }) => $maxWidth || 'none'};
   max-height: ${({ $maxHeight }) => $maxHeight || 'none'};
