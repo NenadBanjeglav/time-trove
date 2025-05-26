@@ -11,7 +11,7 @@ export const Dashboard = () => {
 
   const isLoading = false
   const data: number[] = []
-  const error = true
+  const error = false
 
   const handleClick = () => {
     if (error) {
