@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
+
 import { RemoveIcon } from '../../../assets/icons/RemoveIcon'
 import { SearchIcon } from '../../../assets/icons/SearchIcon'
 import { Icon } from '../icon/Icon'
+
 import { ClearButton, IconWrapper, SearchWrapper, StyledInput } from './search.styles'
-import { useSearchParams } from 'react-router-dom'
 
 type SearchProps = {
   placeholder?: string

@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Chip } from './Chip'
-import { SizeEnum, StatusEnum } from './chip.types'
+import { ChipSize, ChipStatus } from './chip.types'
 
-const sizes = Object.values(SizeEnum)
-const statuses = Object.values(StatusEnum)
+const sizes = Object.values(ChipSize)
+const statuses = Object.values(ChipStatus)
 
 const meta: Meta<typeof Chip> = {
   title: 'Components/Chip',
@@ -24,8 +24,8 @@ const meta: Meta<typeof Chip> = {
     },
   },
   args: {
-    size: SizeEnum.Small,
-    status: StatusEnum.SUCCESS,
+    size: ChipSize.Small,
+    status: ChipStatus.SUCCESS,
     label: 'Chip Label',
   },
 }
@@ -37,21 +37,21 @@ export const Default: Story = {}
 
 export const Success: Story = {
   args: {
-    status: StatusEnum.SUCCESS,
+    status: ChipStatus.SUCCESS,
     label: 'Success',
   },
 }
 
 export const Warning: Story = {
   args: {
-    status: StatusEnum.WARNING,
+    status: ChipStatus.WARNING,
     label: 'Warning',
   },
 }
 
 export const Danger: Story = {
   args: {
-    status: StatusEnum.DANGER,
+    status: ChipStatus.DANGER,
     label: 'Danger',
   },
 }
