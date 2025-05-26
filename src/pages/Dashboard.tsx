@@ -1,9 +1,9 @@
 import { useState } from 'react'
 
+import { Card } from '../components/atoms/card/Card'
 import { Dropdown } from '../components/atoms/dropdown/Dropdown'
 import { companyTypeOptions } from '../constants/companyType'
 import { languages } from '../constants/languages'
-import { Card } from '../components/atoms/card/Card'
 
 export const Dashboard = () => {
   const [locale, setLocale] = useState(languages[0].value)
