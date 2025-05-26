@@ -1,9 +1,9 @@
 import { css } from 'styled-components'
 
 import type { Pallete } from '../../../styles/theme.types'
-import { StatusEnum, type SizeEnum } from './chip.types'
+import { ChipSize, ChipStatus } from './chip.types'
 
-export const getSizeStyle = (size: SizeEnum) => {
+export const getSizeStyle = (size: ChipSize) => {
   switch (size) {
     case 'small':
       return css`
@@ -24,13 +24,13 @@ export const getSizeStyle = (size: SizeEnum) => {
   }
 }
 
-export const getChipPallete = (status?: StatusEnum): Pallete => {
+export const getChipPallete = (status?: ChipStatus): Pallete => {
   switch (status) {
-    case StatusEnum.SUCCESS:
+    case ChipStatus.SUCCESS:
       return 'success'
-    case StatusEnum.WARNING:
+    case ChipStatus.WARNING:
       return 'warning'
-    case StatusEnum.DANGER:
+    case ChipStatus.DANGER:
       return 'danger'
     default:
       return 'success'

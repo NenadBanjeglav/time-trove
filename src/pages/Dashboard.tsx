@@ -1,56 +1,33 @@
 import { useState } from 'react'
-import { useSignMutation } from '../api/apiAuth'
+
+import { Card } from '../components/atoms/card/Card'
+import { Dropdown } from '../components/atoms/dropdown/Dropdown'
+import { companyTypeOptions } from '../constants/companyType'
+import { languages } from '../constants/languages'
 
 export const Dashboard = () => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-
-  const { signUpMutation, isSigningUp } = useSignMutation()
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    signUpMutation(
-      { username, password },
-      {
-        onSuccess: () => console.log('Success', username, password),
-        onError: error => console.error('Signup failed:', error),
-      }
-    )
-  }
+  const [locale, setLocale] = useState(languages[0].value)
+  const [companyType, setCompanyType] = useState(companyTypeOptions[0].value)
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '10px',
-        padding: '20px',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <form onSubmit={handleSubmit} style={{ maxWidth: 400, margin: '2rem auto' }}>
-        <h2>Sign Up</h2>
-        <input
-          type="email"
-          placeholder="Email"
-          value={username}
-          onChange={e => setUsername(e.target.value)}
-          required
-          style={{ width: '100%', padding: '8px', marginBottom: '1rem' }}
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', padding: '20px' }}>
+      <Card>
+        <Dropdown options={languages} value={locale} onChange={setLocale} />
+      </Card>
+
+      <Card>
+        <Dropdown
+          options={companyTypeOptions}
+          value={companyType}
+          size="large"
+          onChange={setCompanyType}
         />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          required
-          style={{ width: '100%', padding: '8px', marginBottom: '1rem' }}
-        />
-        <button type="submit" disabled={isSigningUp}>
-          {isSigningUp ? 'Signing up...' : 'Sign Up'}
-        </button>
-      </form>
+      </Card>
+
+      <Card borderColor="primary" maxWidth="600px" maxHeight="600px">
+        <h2>Reusable Card</h2>
+        <p>This is a customizable card component.</p>
+      </Card>
     </div>
   )
 }
