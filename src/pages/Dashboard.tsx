@@ -8,7 +8,6 @@ import { languages } from '../constants/languages'
 export const Dashboard = () => {
   const [locale, setLocale] = useState(languages[0].value)
   const [companyType, setCompanyType] = useState(companyTypeOptions[0].value)
-  const [selected, setSelected] = useState('low')
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', padding: '20px' }}>
