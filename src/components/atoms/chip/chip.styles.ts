@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components'
 
 import { getChipPallete, getSizeStyle } from './helpers'
-import type { SizeEnum, StatusEnum } from './chip.types'
+import type { ChipSize, ChipStatus } from './chip.types'
 
 export const createStyledChip = () => styled.div<{
-  $status: StatusEnum
-  $size: SizeEnum
+  $status: ChipStatus
+  $size: ChipSize
 }>`
   display: inline-flex;
   align-items: center;
