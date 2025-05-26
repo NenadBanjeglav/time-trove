@@ -18,22 +18,22 @@ const loginSchema = z.object({
   password: z.string().min(5),
 })
 
-const handleLogin = (data: LoginFormValues) => {
+const handleSignup = (data: LoginFormValues) => {
   console.log(data)
 }
 
 type LoginFormValues = z.infer<typeof loginSchema>
 
-export const Login = () => {
+export const Signup = () => {
   return (
     <PageWrapper>
       <AuthForm
         schema={loginSchema}
-        onSubmit={handleLogin}
+        onSubmit={handleSignup}
         icon={LogoutIcon}
-        title="Log in"
-        subtitle="Use your email to log in."
-        buttonLabel="Log in"
+        title="Sign up"
+        subtitle="Create an account for your TimeTrove Dashboard."
+        buttonLabel="Sign up"
       />
     </PageWrapper>
   )
