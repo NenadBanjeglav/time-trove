@@ -1,11 +1,11 @@
 import { useState } from 'react'
 
+import { Card } from '../components/atoms/card/Card'
+import { ChipStatus } from '../components/atoms/chip/chip.types'
 import { Dropdown } from '../components/atoms/dropdown/Dropdown'
+import { ConfirmDialog } from '../components/molecules/confirm-dialog/ConfirmDialog'
 import { companyTypeOptions } from '../constants/companyType'
 import { languages } from '../constants/languages'
-import { Card } from '../components/atoms/card/Card'
-import { ConfirmDialog } from '../components/molecules/confirmDialog/ConfirmDialog'
-import { ChipStatus } from '../components/atoms/chip/chip.types'
 
 export const Dashboard = () => {
   const [locale, setLocale] = useState(languages[0].value)
@@ -26,7 +26,7 @@ export const Dashboard = () => {
         />
       </Card>
 
-      <Card borderColor="primary" maxWidth="600px" maxHeight="600px">
+      <Card borderColor="primary" maxWidth="37.5rem" maxHeight="37.5rem">
         <h2>Reusable Card</h2>
         <p>This is a customizable card component.</p>
       </Card>
@@ -35,10 +35,10 @@ export const Dashboard = () => {
         status={ChipStatus.SUCCESS}
         title="Are you sure?"
         description="This action makes you 100$."
-        confirmLabel="Confirm"
-        cancelLabel="Cancel"
-        onConfirm={() => console.log('confirmed')}
-        onCancel={() => console.log('canceled')}
+        primaryActionLabel="Confirm"
+        secondaryActionLabel="Cancel"
+        onPrimaryAction={() => console.log('confirmed')}
+        onSecondaryAction={() => console.log('canceled')}
         loading={false}
       />
 
@@ -46,10 +46,10 @@ export const Dashboard = () => {
         status={ChipStatus.DANGER}
         title="Delete this task?"
         description="This action is permanent and cannot be undone."
-        confirmLabel="Delete"
-        cancelLabel="Cancel"
-        onConfirm={() => console.log('confirmed')}
-        onCancel={() => console.log('canceled')}
+        primaryActionLabel="Delete"
+        secondaryActionLabel="Cancel"
+        onPrimaryAction={() => console.log('confirmed')}
+        onSecondaryAction={() => console.log('canceled')}
         loading={false}
       />
 
@@ -57,10 +57,10 @@ export const Dashboard = () => {
         status={ChipStatus.DANGER}
         title="Delete this task?"
         description="This action is permanent and cannot be undone."
-        confirmLabel="Delete"
-        cancelLabel="Cancel"
-        onConfirm={() => console.log('confirmed')}
-        onCancel={() => console.log('canceled')}
+        primaryActionLabel="Delete"
+        secondaryActionLabel="Cancel"
+        onPrimaryAction={() => console.log('confirmed')}
+        onSecondaryAction={() => console.log('canceled')}
         loading={false}
       />
     </div>

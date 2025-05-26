@@ -1,20 +1,24 @@
 import styled from 'styled-components'
-import type { Pallete } from '../../../styles/theme.types'
 
-export const DialogBox = styled.div`
-  background: ${({ theme }) => theme.colors.neutral.hue0};
-  border-radius: ${({ theme }) => theme.borderRadius.xLarge};
-  padding: ${({ theme }) => theme.spacing.xLarge};
+import type { Pallete } from '../../../styles/theme.types'
+import { Card } from '../../atoms/card/Card'
+
+export const ResponsiveCardWrapper = styled(Card)`
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.medium};
+  max-width: 32.5rem;
+  height: auto;
+  padding: ${({ theme }) => theme.spacing.xLarge};
+
+  @media (min-width: 640px) {
+    height: 19.25rem;
+  }
 `
 
 export const IconWrapper = styled.div<{ $pallete: Pallete }>`
   margin-bottom: ${({ theme }) => theme.spacing.small};
   width: 96px;
   height: 96px;
+  flex-shrink: 0;
   border-radius: 9999px;
   display: flex;
   justify-content: center;
@@ -34,7 +38,12 @@ export const HeadingTextWrapper = styled.div`
 `
 export const ButtonRow = styled.div`
   display: flex;
-  justify-content: center;
-  width: 100%;
+  flex-direction: column;
   gap: ${({ theme }) => theme.spacing.small};
+  width: 100%;
+
+  @media (min-width: 640px) {
+    flex-direction: row;
+    justify-content: center;
+  }
 `

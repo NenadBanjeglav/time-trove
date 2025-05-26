@@ -1,16 +1,17 @@
 import styled from 'styled-components'
-import type { Pallete } from '../../../styles/theme.types'
+
+import type { Padding, Pallete, RemSizeType } from '../../../styles/theme.types'
 
 type StyledCardProps = {
   $borderColor?: Pallete
-  $borderRadius?: string
-  $maxWidth?: string
-  $maxHeight?: string
-  $minWidth?: string
-  $minHeight?: string
-  $width?: string
-  $height?: string
-  $padding?: string
+  $borderRadius?: RemSizeType
+  $maxWidth?: RemSizeType
+  $maxHeight?: RemSizeType
+  $minWidth?: RemSizeType
+  $minHeight?: RemSizeType
+  $width?: RemSizeType
+  $height?: RemSizeType
+  $padding?: Padding
   $backgroundColor?: Pallete
 }
 

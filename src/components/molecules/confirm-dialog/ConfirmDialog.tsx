@@ -1,23 +1,26 @@
+import { Button } from '../../atoms/button/Button'
 import { ChipStatus } from '../../atoms/chip/chip.types'
 import { getChipPallete } from '../../atoms/chip/helpers'
-import { ButtonRow, HeadingTextWrapper, IconWrapper } from './confirmDialog.styles'
-import { Icon } from '../../atoms/icon/Icon'
-
 import { Heading } from '../../atoms/heading/Heading'
+import { Icon } from '../../atoms/icon/Icon'
 import { Text } from '../../atoms/text/Text'
-import { Button } from '../../atoms/button/Button'
 
-import { Card } from '../../atoms/card/Card'
+import {
+  ButtonRow,
+  HeadingTextWrapper,
+  IconWrapper,
+  ResponsiveCardWrapper,
+} from './confirmDialog.styles'
 import { getDialogIcon } from './helpers'
 
 type ConfirmDialogProps = {
   status?: ChipStatus
   title: string
   description: string
-  confirmLabel?: string
-  cancelLabel?: string
-  onConfirm?: () => void
-  onCancel?: () => void
+  primaryActionLabel?: string
+  secondaryActionLabel?: string
+  onPrimaryAction?: () => void
+  onSecondaryAction?: () => void
   loading?: boolean
 }
 
@@ -25,17 +28,17 @@ export const ConfirmDialog = ({
   status = ChipStatus.SUCCESS,
   title,
   description,
-  confirmLabel = 'Confirm',
-  cancelLabel = 'Cancel',
-  onConfirm,
-  onCancel,
+  primaryActionLabel = 'Confirm',
+  secondaryActionLabel = 'Cancel',
+  onPrimaryAction,
+  onSecondaryAction,
   loading = false,
 }: ConfirmDialogProps) => {
   const pallete = getChipPallete(status)
   const icon = getDialogIcon(status)
 
   return (
-    <Card width="520px" height="308px">
+    <ResponsiveCardWrapper>
       <IconWrapper $pallete={pallete}>
         <Icon icon={icon} iconSize="large" pallete="neutral" color="hue0" />
       </IconWrapper>
@@ -49,17 +52,17 @@ export const ConfirmDialog = ({
         </Text>
       </HeadingTextWrapper>
       <ButtonRow>
-        {onCancel && (
-          <Button variant="neutral" onClick={onCancel} fullWidth>
-            {cancelLabel}
+        {secondaryActionLabel && (
+          <Button variant="neutral" onClick={onSecondaryAction} fullWidth>
+            {secondaryActionLabel}
           </Button>
         )}
-        {onConfirm && (
-          <Button variant={pallete} onClick={onConfirm} loading={loading} fullWidth>
-            {confirmLabel}
+        {primaryActionLabel && (
+          <Button variant={pallete} onClick={onPrimaryAction} loading={loading} fullWidth>
+            {primaryActionLabel}
           </Button>
         )}
       </ButtonRow>
-    </Card>
+    </ResponsiveCardWrapper>
   )
 }
