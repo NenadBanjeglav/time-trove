@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
+import { Card } from '../components/atoms/card/Card'
 import { Dropdown } from '../components/atoms/dropdown/Dropdown'
-import { RadioButton } from '../components/atoms/radio-button/RadioButton'
 import { companyTypeOptions } from '../constants/companyType'
 import { languages } from '../constants/languages'
 
@@ -13,32 +13,23 @@ export const Dashboard = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', padding: '20px' }}>
-      <div>
+      <Card>
         <Dropdown options={languages} value={locale} onChange={setLocale} />
-      </div>
+      </Card>
 
-      <div>
+      <Card>
         <Dropdown
           options={companyTypeOptions}
           value={companyType}
           size="large"
           onChange={setCompanyType}
         />
-      </div>
+      </Card>
 
-      <div style={{ display: 'flex', gap: '1rem' }}>
-        <RadioButton checked={selected === 'low'} onChange={() => setSelected('low')} />
-        <RadioButton checked={selected === 'medium'} onChange={() => setSelected('medium')} />
-        <RadioButton checked={selected === 'high'} onChange={() => setSelected('high')} />
-      </div>
-      <div style={{ display: 'flex', gap: '1rem' }}>
-        <RadioButton error checked={selected === 'low'} onChange={() => setSelected('low')} />
-        <RadioButton
-          disabled
-          checked={selected === 'medium'}
-          onChange={() => setSelected('medium')}
-        />
-      </div>
+      <Card borderColor="primary" maxWidth="600px" maxHeight="600px">
+        <h2>Reusable Card</h2>
+        <p>This is a customizable card component.</p>
+      </Card>
     </div>
   )
 }
