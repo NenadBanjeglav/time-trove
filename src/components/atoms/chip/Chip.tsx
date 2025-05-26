@@ -1,26 +1,19 @@
 import type { HTMLAttributes } from 'react'
 
-import type { Pallete } from '../../../styles/theme.types'
-
 import { createStyledChip } from './chip.styles'
-import type { ChipSizeEnum } from './chip.types'
+import { ChipStatus, type ChipSize } from './chip.types'
 
-type ChipProps<T extends Pallete = 'neutral'> = HTMLAttributes<HTMLDivElement> & {
-  size: ChipSizeEnum
+type ChipProps = HTMLAttributes<HTMLDivElement> & {
+  size: ChipSize
   label: string
-  pallete?: T
+  status?: ChipStatus
 }
 
-export const Chip = <T extends Pallete = 'neutral'>({
-  size,
-  label,
-  pallete = 'neutral' as T,
-  ...rest
-}: ChipProps<T>) => {
-  const StyledChip = createStyledChip<T>()
+export const Chip = ({ size, label, status = ChipStatus.SUCCESS, ...rest }: ChipProps) => {
+  const StyledChip = createStyledChip()
 
   return (
-    <StyledChip $pallete={pallete} $size={size} {...rest}>
+    <StyledChip $status={status} $size={size} {...rest}>
       {label}
     </StyledChip>
   )

@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import { ROUTES } from './constants/routes'
@@ -11,30 +12,40 @@ import { ProtectedRoute } from './pages/ProtectedRoute'
 import { PublicLayout } from './pages/PublicLayout'
 import { Register } from './pages/Register'
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 0,
+    },
+  },
+})
+
 const App = () => {
   return (
-    <BrowserRouter>
-      <AppStatusProvider>
-        <Routes>
-          <Route
-            element={
-              <ProtectedRoute>
-                <AppLayout />
-              </ProtectedRoute>
-            }
-          >
-            <Route index element={<Dashboard />} />
-          </Route>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <AppStatusProvider>
+          <Routes>
+            <Route
+              element={
+                <ProtectedRoute>
+                  <AppLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route index element={<Dashboard />} />
+            </Route>
 
-          <Route element={<PublicLayout />}>
-            <Route path={ROUTES.login} element={<Login />} />
-            <Route path={ROUTES.register} element={<Register />} />
-            <Route path={ROUTES.notFound} element={<NotFound />} />
-            <Route path="/maintenance" element={<Maintenance />} />
-          </Route>
-        </Routes>
-      </AppStatusProvider>
-    </BrowserRouter>
+            <Route element={<PublicLayout />}>
+              <Route path={ROUTES.login} element={<Login />} />
+              <Route path={ROUTES.register} element={<Register />} />
+              <Route path={ROUTES.notFound} element={<NotFound />} />
+              <Route path="/maintenance" element={<Maintenance />} />
+            </Route>
+          </Routes>
+        </AppStatusProvider>
+      </BrowserRouter>
+    </QueryClientProvider>
   )
 }
 
