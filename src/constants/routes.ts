@@ -3,6 +3,5 @@ export const ROUTES = {
   dashboard: '',
   login: 'login',
   signup: 'signup',
-  register: 'register',
   notFound: '*',
 }

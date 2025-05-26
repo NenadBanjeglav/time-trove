@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { type ReactNode } from 'react'
+import { Navigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { Spinner } from '../components/atoms/icon/Spinner'
+import { useAuth } from '../hooks/useAuth'
 
 const FullPage = styled.div`
   height: 100vh;
@@ -12,24 +13,8 @@ const FullPage = styled.div`
   align-items: center;
 `
 
-export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const navigate = useNavigate()
-
-  const [isLoading, setIsLoading] = useState(true)
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsAuthenticated(true)
-      setIsLoading(false)
-    }, 1500)
-
-    return () => clearTimeout(timer)
-  }, [])
-
-  useEffect(() => {
-    if (!isLoading && !isAuthenticated) navigate('/login')
-  }, [isLoading, isAuthenticated, navigate])
+export const ProtectedRoute = ({ children }: { children: ReactNode }) => {
+  const { isAuthenticated, isLoading } = useAuth()
 
   if (isLoading)
     return (
@@ -38,7 +23,7 @@ export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
       </FullPage>
     )
 
-  if (isAuthenticated) return children
+  if (!isAuthenticated) return <Navigate to="/login" replace />
 
-  return null
+  return <>{children}</>
 }

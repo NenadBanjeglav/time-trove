@@ -59,7 +59,6 @@ export const AuthForm = <FormValues extends FieldValues>({
       <InputField
         {...register('username' as Path<FormValues>)}
         error={(errors.username as { message?: string })?.message ?? ''}
-        name="username"
         label="Email"
         type="email"
         autoComplete="username"
@@ -68,7 +67,6 @@ export const AuthForm = <FormValues extends FieldValues>({
       <InputField
         {...register('password' as Path<FormValues>)}
         error={(errors.password as { message?: string })?.message ?? ''}
-        name="password"
         label="Password"
         type="password"
         autoComplete="current-password"

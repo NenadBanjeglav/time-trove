@@ -3,6 +3,8 @@ import { z } from 'zod'
 
 import { LogoutIcon } from '../assets/icons/LogoutIcon'
 import { AuthForm } from '../components/molecules/authform/AuthForm'
+import { useAuth } from '../hooks/useAuth'
+import { useLoginMutation } from '../hooks/useLoginMutation'
 
 const PageWrapper = styled.div`
   display: flex;
@@ -18,13 +20,20 @@ const loginSchema = z.object({
   password: z.string().min(5),
 })
 
-const handleLogin = (data: LoginFormValues) => {
-  console.log(data)
-}
-
 type LoginFormValues = z.infer<typeof loginSchema>
 
 export const Login = () => {
+  const { loginMutation, isLoggingIn } = useLoginMutation()
+  const { setUser } = useAuth()
+
+  const handleLogin = async (data: LoginFormValues) => {
+    loginMutation(data, {
+      onSuccess: user => {
+        setUser(user)
+      },
+    })
+  }
+
   return (
     <PageWrapper>
       <AuthForm
@@ -33,7 +42,7 @@ export const Login = () => {
         icon={LogoutIcon}
         title="Log in"
         subtitle="Use your email to log in."
-        buttonLabel="Log in"
+        buttonLabel={isLoggingIn ? 'Logging in...' : 'Log in'}
       />
     </PageWrapper>
   )
