@@ -1,9 +1,8 @@
 import { Navigate, useOutletContext } from 'react-router-dom'
 
 import { Heading } from '../components/atoms/heading/Heading'
-
+import { PageStateContainer } from '../components/organisms/page-state-container/PageStateContainer'
 import { useAppStatus } from '../contexts/AppStatusContext'
-import { PageStateContainer } from '../components/organisms/pageStateContainer/PageStateContainer'
 
 type LayoutContext = { navHeight: number }
 
@@ -13,7 +12,17 @@ export const Dashboard = () => {
 
   const isLoading = false
   const data: number[] = []
-  const error = false
+  const error = true
+
+  const isEmpty = !data.length
+
+  const handleClick = () => {
+    if (error) {
+      console.log('Retrying fetch...')
+    } else if (!data.length) {
+      console.log('Opening add task modal...')
+    }
+  }
 
   if (maintenance) return <Navigate to="/maintenance" replace />
 
@@ -22,8 +31,9 @@ export const Dashboard = () => {
       navHeight={navHeight}
       isLoading={isLoading}
       error={error}
+      isEmpty={isEmpty}
       data={data}
-      onClick={() => {}}
+      onClick={handleClick}
     >
       <Heading>Welcome to dashboard</Heading>
     </PageStateContainer>

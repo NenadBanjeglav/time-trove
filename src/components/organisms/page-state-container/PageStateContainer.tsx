@@ -1,13 +1,15 @@
 import type { ReactNode } from 'react'
+
+import { Spinner } from '../../atoms/icon/Spinner'
 import { PageWrapper } from '../../atoms/page-wrapper/PageWrapper'
 import { FullCenteredLayout } from '../../atoms/page-wrapper/pageWrapper.styles'
-import { Spinner } from '../../atoms/icon/Spinner'
 import { FeedbackState } from '../../molecules/feedback-state/FeedbackState'
 
 type PageStateContainerProps<T> = {
   navHeight: number
   isLoading: boolean
   error?: boolean
+  isEmpty: boolean
   data: T[]
   children: ReactNode
   onClick?: () => void
@@ -17,6 +19,7 @@ export const PageStateContainer = <T,>({
   navHeight,
   isLoading,
   error,
+  isEmpty,
   data,
   children,
   onClick = () => {},
@@ -41,7 +44,7 @@ export const PageStateContainer = <T,>({
         />
       )}
 
-      {!isLoading && !error && data.length === 0 && (
+      {!isLoading && !error && isEmpty && (
         <FeedbackState
           imageSrc="/images/empty.png"
           title="Nothing here yet!"
