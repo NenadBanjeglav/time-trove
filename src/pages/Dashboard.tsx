@@ -1,10 +1,10 @@
 import { useState } from 'react'
 
+import { ChipSize, ChipStatus } from '../components/atoms/chip/chip.types'
 import { Dropdown } from '../components/atoms/dropdown/Dropdown'
+import { RadioGroup } from '../components/molecules/radioGroup/RadioGroup'
 import { companyTypeOptions } from '../constants/companyType'
 import { languages } from '../constants/languages'
-import { RadioGroup } from '../components/molecules/radioGroup/RadioGroup'
-import { ChipSize, ChipStatus } from '../components/atoms/chip/chip.types'
 
 export const Dashboard = () => {
   const [locale, setLocale] = useState(languages[0].value)
