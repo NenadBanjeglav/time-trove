@@ -1,8 +1,7 @@
 import { useState } from 'react'
 
-import { ChipSize, ChipStatus } from '../components/atoms/chip/chip.types'
+import { Card } from '../components/atoms/card/Card'
 import { Dropdown } from '../components/atoms/dropdown/Dropdown'
-import { RadioGroup } from '../components/molecules/radio-group/RadioGroup'
 import { companyTypeOptions } from '../constants/companyType'
 import { languages } from '../constants/languages'
 
@@ -13,31 +12,23 @@ export const Dashboard = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', padding: '20px' }}>
-      <div>
+      <Card>
         <Dropdown options={languages} value={locale} onChange={setLocale} />
-      </div>
+      </Card>
 
-      <div>
+      <Card>
         <Dropdown
           options={companyTypeOptions}
           value={companyType}
           size="large"
           onChange={setCompanyType}
         />
-      </div>
-      <div>
-        <RadioGroup
-          name="priority"
-          value={selected}
-          onChange={setSelected}
-          options={[
-            { label: 'Low', value: 'low', status: ChipStatus.SUCCESS },
-            { label: 'Medium', value: 'medium', status: ChipStatus.WARNING },
-            { label: 'High', value: 'high', status: ChipStatus.DANGER },
-          ]}
-          size={ChipSize.Large}
-        />
-      </div>
+      </Card>
+
+      <Card borderColor="primary" maxWidth="600px" maxHeight="600px">
+        <h2>Reusable Card</h2>
+        <p>This is a customizable card component.</p>
+      </Card>
     </div>
   )
 }

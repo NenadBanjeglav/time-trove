@@ -24,12 +24,14 @@ export const StyledRadio = styled.span<{
   position: relative;
   transition: all 0.2s ease-in-out;
   box-sizing: border-box;
+
   ${({ theme, $checked, $disabled, $error }) => {
     const borderColor = $error
       ? theme.colors.danger.hue100
       : $disabled
         ? theme.colors.neutral.hue50
         : theme.colors.neutral.hue100
+
     const bgColor = $disabled
       ? theme.colors.neutral.hue50
       : $checked
@@ -37,10 +39,13 @@ export const StyledRadio = styled.span<{
           ? theme.colors.danger.hue200
           : theme.colors.primary.hue200
         : 'transparent'
+
     const dotColor = $disabled ? theme.colors.neutral.hue100 : theme.colors.neutral.hue0
+
     return css`
       border: 1px solid ${borderColor};
       background-color: ${bgColor};
+
       &::after {
         content: '';
         display: ${$disabled || $checked ? 'block' : 'none'};
@@ -53,6 +58,7 @@ export const StyledRadio = styled.span<{
         left: 50%;
         transform: translate(-50%, -50%);
       }
+
       opacity: ${$disabled ? 0.6 : 1};
     `
   }}
