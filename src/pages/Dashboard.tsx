@@ -1,6 +1,5 @@
 import { Navigate, useOutletContext } from 'react-router-dom'
 
-import { Heading } from '../components/atoms/heading/Heading'
 import { PageStateContainer } from '../components/organisms/page-state-container/PageStateContainer'
 import { useAppStatus } from '../contexts/AppStatusContext'
 
@@ -13,8 +12,6 @@ export const Dashboard = () => {
   const isLoading = false
   const data: number[] = []
   const error = true
-
-  const isEmpty = !data.length
 
   const handleClick = () => {
     if (error) {
@@ -31,11 +28,12 @@ export const Dashboard = () => {
       navHeight={navHeight}
       isLoading={isLoading}
       error={error}
-      isEmpty={isEmpty}
-      data={data}
+      isEmpty={!data.length}
       onClick={handleClick}
     >
-      <Heading>Welcome to dashboard</Heading>
+      {
+        //children
+      }
     </PageStateContainer>
   )
 }

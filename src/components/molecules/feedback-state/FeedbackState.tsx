@@ -1,4 +1,4 @@
-import type { Pallete } from '../../../styles/theme.types'
+import type { Pallete, RemSizeType } from '../../../styles/theme.types'
 import { Button } from '../../atoms/button/Button'
 import { Heading } from '../../atoms/heading/Heading'
 import { Text } from '../../atoms/text/Text'
@@ -12,7 +12,7 @@ type FeedbackStateProps = {
   buttonLabel?: string
   onClick?: () => void
   buttonVariant?: Pallete
-  imageMaxWidth?: string
+  imageMaxWidth?: RemSizeType
 }
 
 export const FeedbackState = ({
@@ -22,7 +22,7 @@ export const FeedbackState = ({
   buttonLabel,
   onClick,
   buttonVariant,
-  imageMaxWidth = '392px',
+  imageMaxWidth = '24.5rem',
 }: FeedbackStateProps) => {
   return (
     <StateLayout>

@@ -1,29 +1,29 @@
 import type { ReactNode } from 'react'
+import { data } from 'react-router-dom'
 
 import { Spinner } from '../../atoms/icon/Spinner'
 import { PageWrapper } from '../../atoms/page-wrapper/PageWrapper'
 import { FullCenteredLayout } from '../../atoms/page-wrapper/pageWrapper.styles'
 import { FeedbackState } from '../../molecules/feedback-state/FeedbackState'
 
-type PageStateContainerProps<T> = {
+type PageStateContainerProps = {
   navHeight: number
   isLoading: boolean
   error?: boolean
   isEmpty: boolean
-  data: T[]
-  children: ReactNode
+  children?: ReactNode
   onClick?: () => void
 }
 
-export const PageStateContainer = <T,>({
+export const PageStateContainer = ({
   navHeight,
   isLoading,
   error,
   isEmpty,
-  data,
+
   children,
   onClick = () => {},
-}: PageStateContainerProps<T>) => {
+}: PageStateContainerProps) => {
   return (
     <PageWrapper dynamicHeightOffset={navHeight}>
       {isLoading && (
@@ -40,7 +40,7 @@ export const PageStateContainer = <T,>({
           buttonLabel="Try again"
           buttonVariant="neutral"
           onClick={onClick}
-          imageMaxWidth="244px"
+          imageMaxWidth="15.25rem"
         />
       )}
 
@@ -51,7 +51,7 @@ export const PageStateContainer = <T,>({
           description="There are no tasks created"
           buttonLabel="Create task"
           onClick={onClick}
-          imageMaxWidth="180px"
+          imageMaxWidth="11.25rem"
         />
       )}
 
