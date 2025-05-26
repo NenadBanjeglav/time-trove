@@ -1,6 +1,4 @@
 import { Button } from '../../atoms/button/Button'
-import { ChipStatus } from '../../atoms/chip/chip.types'
-import { getChipPallete } from '../../atoms/chip/helpers'
 import { Heading } from '../../atoms/heading/Heading'
 import { Icon } from '../../atoms/icon/Icon'
 import { Text } from '../../atoms/text/Text'
@@ -11,10 +9,11 @@ import {
   IconWrapper,
   ResponsiveCardWrapper,
 } from './confirmDialog.styles'
-import { getDialogIcon } from './helpers'
+import { DialogVariant } from './confirmDialog.types'
+import { getDialogIcon, getDialogVariant } from './helpers'
 
 type ConfirmDialogProps = {
-  status?: ChipStatus
+  variant?: DialogVariant
   title: string
   description: string
   primaryActionLabel?: string
@@ -25,17 +24,17 @@ type ConfirmDialogProps = {
 }
 
 export const ConfirmDialog = ({
-  status = ChipStatus.SUCCESS,
+  variant = DialogVariant.SUCCESS,
   title,
   description,
-  primaryActionLabel = 'Confirm',
-  secondaryActionLabel = 'Cancel',
+  primaryActionLabel,
+  secondaryActionLabel,
   onPrimaryAction,
   onSecondaryAction,
   loading = false,
 }: ConfirmDialogProps) => {
-  const pallete = getChipPallete(status)
-  const icon = getDialogIcon(status)
+  const pallete = getDialogVariant(variant)
+  const icon = getDialogIcon(variant)
 
   return (
     <ResponsiveCardWrapper>
@@ -53,12 +52,18 @@ export const ConfirmDialog = ({
       </HeadingTextWrapper>
       <ButtonRow>
         {secondaryActionLabel && (
-          <Button variant="neutral" onClick={onSecondaryAction} fullWidth>
+          <Button variant="neutral" onClick={onSecondaryAction} size="xlarge" fullWidth>
             {secondaryActionLabel}
           </Button>
         )}
         {primaryActionLabel && (
-          <Button variant={pallete} onClick={onPrimaryAction} loading={loading} fullWidth>
+          <Button
+            variant={pallete}
+            onClick={onPrimaryAction}
+            loading={loading}
+            fullWidth
+            size="xlarge"
+          >
             {primaryActionLabel}
           </Button>
         )}

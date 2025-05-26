@@ -1,6 +1,6 @@
 export enum ChipSize {
-  Small = 'small',
-  Large = 'large',
+  SMALL = 'small',
+  LARGE = 'large',
 }
 
 export enum ChipStatus {

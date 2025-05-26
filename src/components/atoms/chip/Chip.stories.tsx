@@ -24,7 +24,7 @@ const meta: Meta<typeof Chip> = {
     },
   },
   args: {
-    size: ChipSize.Small,
+    size: ChipSize.SMALL,
     status: ChipStatus.SUCCESS,
     label: 'Chip Label',
   },

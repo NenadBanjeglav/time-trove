@@ -1,9 +1,9 @@
 import { useState } from 'react'
 
 import { Card } from '../components/atoms/card/Card'
-import { ChipStatus } from '../components/atoms/chip/chip.types'
 import { Dropdown } from '../components/atoms/dropdown/Dropdown'
 import { ConfirmDialog } from '../components/molecules/confirm-dialog/ConfirmDialog'
+import { DialogVariant } from '../components/molecules/confirm-dialog/confirmDialog.types'
 import { companyTypeOptions } from '../constants/companyType'
 import { languages } from '../constants/languages'
 
@@ -32,18 +32,16 @@ export const Dashboard = () => {
       </Card>
 
       <ConfirmDialog
-        status={ChipStatus.SUCCESS}
+        variant={DialogVariant.SUCCESS}
         title="Are you sure?"
         description="This action makes you 100$."
         primaryActionLabel="Confirm"
-        secondaryActionLabel="Cancel"
         onPrimaryAction={() => console.log('confirmed')}
-        onSecondaryAction={() => console.log('canceled')}
         loading={false}
       />
 
       <ConfirmDialog
-        status={ChipStatus.DANGER}
+        variant={DialogVariant.DANGER}
         title="Delete this task?"
         description="This action is permanent and cannot be undone."
         primaryActionLabel="Delete"
@@ -54,7 +52,7 @@ export const Dashboard = () => {
       />
 
       <ConfirmDialog
-        status={ChipStatus.DANGER}
+        variant={DialogVariant.DANGER}
         title="Delete this task?"
         description="This action is permanent and cannot be undone."
         primaryActionLabel="Delete"
