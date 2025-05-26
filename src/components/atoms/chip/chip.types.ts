@@ -1,4 +1,4 @@
-export enum SizeEnum {
+export enum ChipSize {
   Small = 'small',
   Large = 'large',
 }

@@ -1,11 +1,11 @@
 import { useState } from 'react'
 
 import { Card } from '../components/atoms/card/Card'
-import { ChipStatus } from '../components/atoms/chip/chip.types'
 import { Dropdown } from '../components/atoms/dropdown/Dropdown'
 import { ConfirmDialog } from '../components/molecules/confirm-dialog/ConfirmDialog'
 import { companyTypeOptions } from '../constants/companyType'
 import { languages } from '../constants/languages'
+import type { ChipStatus } from '../components/atoms/chip/chip.types'
 
 export const Dashboard = () => {
   const [locale, setLocale] = useState(languages[0].value)

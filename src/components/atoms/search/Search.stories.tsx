@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { MemoryRouter, Routes, Route } from 'react-router-dom'
+
 import { Search } from './Search'
 
 const meta: Meta<typeof Search> = {

@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 import type {
   Color,
   FontSizeType,

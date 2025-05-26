@@ -1,9 +1,10 @@
 import { css } from 'styled-components'
 
 import type { Pallete } from '../../../styles/theme.types'
-import { ChipStatus, type SizeEnum } from './chip.types'
 
-export const getSizeStyle = (size: SizeEnum) => {
+import { ChipSize, ChipStatus } from './chip.types'
+
+export const getSizeStyle = (size: ChipSize) => {
   switch (size) {
     case 'small':
       return css`
