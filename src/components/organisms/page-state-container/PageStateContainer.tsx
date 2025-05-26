@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react'
-import { data } from 'react-router-dom'
 
 import { Spinner } from '../../atoms/icon/Spinner'
 import { PageWrapper } from '../../atoms/page-wrapper/PageWrapper'
@@ -20,7 +19,6 @@ export const PageStateContainer = ({
   isLoading,
   error,
   isEmpty,
-
   children,
   onClick = () => {},
 }: PageStateContainerProps) => {
@@ -55,7 +53,7 @@ export const PageStateContainer = ({
         />
       )}
 
-      {!isLoading && !error && data.length > 0 && children}
+      {!isLoading && !error && isEmpty && children}
     </PageWrapper>
   )
 }
