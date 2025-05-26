@@ -1,7 +1,6 @@
 import { useState } from 'react'
 
 import { Card } from '../components/atoms/card/Card'
-import { Card } from '../components/atoms/card/Card'
 import { Dropdown } from '../components/atoms/dropdown/Dropdown'
 import { companyTypeOptions } from '../constants/companyType'
 import { languages } from '../constants/languages'
