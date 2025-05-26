@@ -1,9 +1,10 @@
 import type { ChangeEvent } from 'react'
 
-import { RadioGroupWrapper, RadioOptionLabel, RadioOptionWrapper } from './radioGroup.styles'
 import { Chip } from '../../atoms/chip/Chip'
-import { RadioButton } from '../../atoms/radioButton/RadioButton'
 import type { ChipSize, ChipStatus } from '../../atoms/chip/chip.types'
+import { RadioButton } from '../../atoms/radio-button/RadioButton'
+
+import { RadioGroupWrapper, RadioOptionLabel, RadioOptionWrapper } from './radioGroup.styles'
 
 type RadioOption = {
   label: string

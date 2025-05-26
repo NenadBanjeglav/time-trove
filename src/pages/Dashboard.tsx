@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { ChipSize, ChipStatus } from '../components/atoms/chip/chip.types'
 import { Dropdown } from '../components/atoms/dropdown/Dropdown'
-import { RadioGroup } from '../components/molecules/radioGroup/RadioGroup'
+import { RadioGroup } from '../components/molecules/radio-group/RadioGroup'
 import { companyTypeOptions } from '../constants/companyType'
 import { languages } from '../constants/languages'
 
