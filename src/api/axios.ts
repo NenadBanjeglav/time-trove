@@ -1,7 +1,9 @@
 import axios from 'axios'
+
 import { SWAGGER_BASE_URL } from '../constants/swaggerBaseUrl'
 
 export const axiosInstance = axios.create({
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   baseURL: SWAGGER_BASE_URL,
   withCredentials: false,
 })
