@@ -1,14 +1,20 @@
 import type { HTMLAttributes, ReactNode } from 'react'
+
+import type { Padding, Pallete, RemSizeType } from '../../../styles/theme.types'
+
 import { StyledCard } from './card.styles'
-import type { Pallete } from '../../../styles/theme.types'
 
 type CardProps = HTMLAttributes<HTMLDivElement> & {
   children: ReactNode
   borderColor?: Pallete
-  borderRadius?: string
-  maxWidth?: string
-  maxHeight?: string
-  padding?: string
+  borderRadius?: RemSizeType
+  maxWidth?: RemSizeType
+  maxHeight?: RemSizeType
+  minWidth?: RemSizeType
+  minHeight?: RemSizeType
+  width?: RemSizeType
+  height?: RemSizeType
+  padding?: Padding
   backgroundColor?: Pallete
 }
 
@@ -18,9 +24,12 @@ export const Card = ({
   borderRadius,
   maxWidth,
   maxHeight,
+  minWidth,
+  minHeight,
   padding,
   backgroundColor,
-
+  width,
+  height,
   ...rest
 }: CardProps) => {
   return (
@@ -29,8 +38,12 @@ export const Card = ({
       $borderRadius={borderRadius}
       $maxWidth={maxWidth}
       $maxHeight={maxHeight}
+      $minWidth={minWidth}
+      $minHeight={minHeight}
       $padding={padding}
       $backgroundColor={backgroundColor}
+      $width={width}
+      $height={height}
       {...rest}
     >
       {children}

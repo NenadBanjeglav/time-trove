@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
-import { getChipPallete, getSizeStyle } from './helpers'
 import type { ChipSize, ChipStatus } from './chip.types'
+import { getChipPallete, getSizeStyle } from './helpers'
 
 export const createStyledChip = () => styled.div<{
   $status: ChipStatus

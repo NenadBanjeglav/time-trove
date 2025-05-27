@@ -1,8 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { Card } from './Card'
-import { Text } from '../../atoms/text/Text'
+
+import type { Pallete, RemSizeType } from '../../../styles/theme.types'
 import { Heading } from '../../atoms/heading/Heading'
-import type { Pallete } from '../../../styles/theme.types'
+import { Text } from '../../atoms/text/Text'
+
+import { Card } from './Card'
+
+const borderOptions: Pallete[] = ['neutral', 'primary', 'success', 'warning', 'danger']
+const remSizes: RemSizeType[] = ['16rem', '24rem', '32rem', '40rem'] // example values
+const radii: RemSizeType[] = ['1rem', '2rem', '3rem']
 
 const meta: Meta<typeof Card> = {
   title: 'Components/Card',
@@ -11,23 +17,34 @@ const meta: Meta<typeof Card> = {
   argTypes: {
     borderColor: {
       control: 'select',
-      options: ['neutral', 'primary', 'success', 'warning', 'error'],
+      options: borderOptions,
     },
     borderRadius: {
-      control: 'text',
+      control: 'select',
+      options: radii,
     },
     maxWidth: {
-      control: 'text',
+      control: 'select',
+      options: remSizes,
     },
     maxHeight: {
-      control: 'text',
+      control: 'select',
+      options: remSizes,
+    },
+    width: {
+      control: 'select',
+      options: remSizes,
+    },
+    height: {
+      control: 'select',
+      options: remSizes,
     },
   },
   args: {
-    borderColor: 'neutral' as Pallete,
-    borderRadius: '16px',
-    maxWidth: '400px',
-    maxHeight: 'none',
+    borderColor: 'neutral',
+    borderRadius: '1rem',
+    maxWidth: '24rem',
+
     children: (
       <>
         <Heading fontSize="h1" fontWeight="bold" as="h2">
@@ -54,13 +71,13 @@ export const WithSuccessBorder: Story = {
 
 export const RoundedAndWide: Story = {
   args: {
-    borderRadius: '32px',
-    maxWidth: '600px',
+    borderRadius: '2rem',
+    maxWidth: '40rem',
   },
 }
 
 export const TallCard: Story = {
   args: {
-    maxHeight: '600px',
+    maxHeight: '40rem',
   },
 }

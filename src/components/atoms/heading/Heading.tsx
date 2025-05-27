@@ -8,6 +8,8 @@ import type {
 
 import { createStyledHeading } from './heading.styles'
 
+export type HeadingAlignType = 'start' | 'end' | 'center' | 'justify'
+
 type HeadingLevel = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 
 type HeadingProps<T extends Pallete = 'neutral'> = {
@@ -19,6 +21,7 @@ type HeadingProps<T extends Pallete = 'neutral'> = {
   color?: Color<T>
   children: React.ReactNode
   className?: string
+  textAlign?: HeadingAlignType
 }
 
 export const Heading = <T extends Pallete = 'neutral'>({
@@ -29,6 +32,7 @@ export const Heading = <T extends Pallete = 'neutral'>({
   pallete = 'neutral' as T,
   color = 'hue500' as Color<T>,
   children = 'Random Heading',
+  textAlign = 'center',
 }: HeadingProps<T>) => {
   const StyledHeading = createStyledHeading<T>()
   return (
@@ -39,6 +43,7 @@ export const Heading = <T extends Pallete = 'neutral'>({
       $fontWeight={fontWeight}
       $pallete={pallete}
       $color={color}
+      $textAlign={textAlign}
     >
       {children}
     </StyledHeading>
