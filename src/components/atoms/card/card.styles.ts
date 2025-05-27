@@ -1,12 +1,17 @@
 import styled from 'styled-components'
-import type { Pallete } from '../../../styles/theme.types'
+
+import type { Padding, Pallete, RemSizeType } from '../../../styles/theme.types'
 
 type StyledCardProps = {
   $borderColor?: Pallete
-  $borderRadius?: string
-  $maxWidth?: string
-  $maxHeight?: string
-  $padding?: string
+  $borderRadius?: RemSizeType
+  $maxWidth?: RemSizeType
+  $maxHeight?: RemSizeType
+  $minWidth?: RemSizeType
+  $minHeight?: RemSizeType
+  $width?: RemSizeType
+  $height?: RemSizeType
+  $padding?: Padding
   $backgroundColor?: Pallete
 }
 
@@ -17,8 +22,10 @@ export const StyledCard = styled.div<StyledCardProps>`
   padding: ${({ theme, $padding }) => $padding || theme.spacing.medium};
   display: flex;
   flex-direction: column;
-  width: fit-content;
-  height: auto;
+  align-items: center;
+  justify-content: center;
+  width: ${({ $width }) => $width || 'fit-content'};
+  height: ${({ $height }) => $height || 'auto'};
 
   border: 1px solid
     ${({ theme, $borderColor }) =>
@@ -28,4 +35,7 @@ export const StyledCard = styled.div<StyledCardProps>`
 
   max-width: ${({ $maxWidth }) => $maxWidth || 'none'};
   max-height: ${({ $maxHeight }) => $maxHeight || 'none'};
+
+  min-width: ${({ $minWidth }) => $minWidth || 'initial'};
+  min-height: ${({ $minHeight }) => $minHeight || 'initial'};
 `

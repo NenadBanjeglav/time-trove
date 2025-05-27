@@ -2,6 +2,8 @@ import { useState } from 'react'
 
 import { Card } from '../components/atoms/card/Card'
 import { Dropdown } from '../components/atoms/dropdown/Dropdown'
+import { ConfirmDialog } from '../components/molecules/confirm-dialog/ConfirmDialog'
+import { DialogVariant } from '../components/molecules/confirm-dialog/confirmDialog.types'
 import { companyTypeOptions } from '../constants/companyType'
 import { languages } from '../constants/languages'
 
@@ -24,10 +26,41 @@ export const Dashboard = () => {
         />
       </Card>
 
-      <Card borderColor="primary" maxWidth="600px" maxHeight="600px">
+      <Card borderColor="primary" maxWidth="37.5rem" maxHeight="37.5rem">
         <h2>Reusable Card</h2>
         <p>This is a customizable card component.</p>
       </Card>
+
+      <ConfirmDialog
+        variant={DialogVariant.SUCCESS}
+        title="Are you sure?"
+        description="This action makes you 100$."
+        primaryActionLabel="Confirm"
+        onPrimaryAction={() => console.log('confirmed')}
+        loading={false}
+      />
+
+      <ConfirmDialog
+        variant={DialogVariant.DANGER}
+        title="Delete this task?"
+        description="This action is permanent and cannot be undone."
+        primaryActionLabel="Delete"
+        secondaryActionLabel="Cancel"
+        onPrimaryAction={() => console.log('confirmed')}
+        onSecondaryAction={() => console.log('canceled')}
+        loading={false}
+      />
+
+      <ConfirmDialog
+        variant={DialogVariant.DANGER}
+        title="Delete this task?"
+        description="This action is permanent and cannot be undone."
+        primaryActionLabel="Delete"
+        secondaryActionLabel="Cancel"
+        onPrimaryAction={() => console.log('confirmed')}
+        onSecondaryAction={() => console.log('canceled')}
+        loading={false}
+      />
     </div>
   )
 }
