@@ -24,7 +24,7 @@ const meta: Meta<typeof FeedbackState> = {
     description: 'There are no items to show at the moment.',
     buttonLabel: 'Create',
     buttonVariant: 'primary',
-    imageMaxWidth: '392px',
+    imageMaxWidth: '24.5rem',
   },
 }
 

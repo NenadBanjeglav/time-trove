@@ -1,21 +1,26 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { ChipStatus } from '../../atoms/chip/chip.types'
 import { ConfirmDialog } from './ConfirmDialog'
+import { DialogVariant } from './confirmDialog.types'
 
 const meta: Meta<typeof ConfirmDialog> = {
-  title: 'Components/Dialog/ConfirmDialog',
+  title: 'Components/Dialogs/ConfirmDialog',
   component: ConfirmDialog,
-  tags: ['autodocs'],
   argTypes: {
-    status: {
+    variant: {
       control: 'select',
-      options: Object.values(ChipStatus),
+      options: Object.values(DialogVariant),
     },
-    confirmLabel: {
+    title: {
       control: 'text',
     },
-    cancelLabel: {
+    description: {
+      control: 'text',
+    },
+    primaryActionLabel: {
+      control: 'text',
+    },
+    secondaryActionLabel: {
       control: 'text',
     },
     loading: {
@@ -23,51 +28,50 @@ const meta: Meta<typeof ConfirmDialog> = {
     },
   },
   args: {
-    title: 'Are you sure?',
-    description: 'This action cannot be undone.',
-    confirmLabel: 'Yes, Confirm',
-    cancelLabel: 'Cancel',
+    variant: DialogVariant.SUCCESS,
+    title: 'Delete item',
+    description: 'Are you sure you want to delete this item? This action cannot be undone.',
+    primaryActionLabel: 'Delete',
+    secondaryActionLabel: 'Cancel',
+    loading: false,
+  },
+  parameters: {
+    layout: 'centered',
   },
 }
 
 export default meta
 type Story = StoryObj<typeof ConfirmDialog>
 
-export const Success: Story = {
+export const Default: Story = {
   args: {
-    status: ChipStatus.SUCCESS,
-  },
-}
-
-export const Warning: Story = {
-  args: {
-    status: ChipStatus.WARNING,
-  },
-}
-
-export const Danger: Story = {
-  args: {
-    status: ChipStatus.DANGER,
+    onPrimaryAction: () => alert('Primary action'),
+    onSecondaryAction: () => alert('Secondary action'),
   },
 }
 
 export const LoadingState: Story = {
   args: {
-    status: ChipStatus.DANGER,
     loading: true,
+    onPrimaryAction: () => alert('Submitting...'),
+    onSecondaryAction: () => alert('Cancel'),
   },
 }
 
-export const CancelOnly: Story = {
+export const DangerVariant: Story = {
   args: {
-    status: ChipStatus.WARNING,
-    onConfirm: undefined,
+    variant: DialogVariant.DANGER,
+    title: 'Critical action',
+    primaryActionLabel: 'Proceed',
+    description: 'This operation is irreversible. Are you absolutely sure?',
+    onPrimaryAction: () => alert('Proceeding...'),
+    onSecondaryAction: () => alert('Abort'),
   },
 }
 
-export const ConfirmOnly: Story = {
+export const WithoutSecondaryButton: Story = {
   args: {
-    status: ChipStatus.SUCCESS,
-    onCancel: undefined,
+    secondaryActionLabel: undefined,
+    onPrimaryAction: () => alert('Confirmed!'),
   },
 }
