@@ -3,16 +3,16 @@ import { useQuery } from '@tanstack/react-query'
 import { fetchUser, type User } from '../api/apiAuth'
 
 export const useAuth = () => {
+  const token = localStorage.getItem('accessToken')
+
   const {
     data: user,
     isLoading,
     isError,
-    refetch,
   } = useQuery<User, Error>({
     queryKey: ['user'],
     queryFn: fetchUser,
-    retry: false,
-    refetchOnWindowFocus: false,
+    enabled: !!token,
   })
 
   return {
@@ -20,6 +20,5 @@ export const useAuth = () => {
     isAuthenticated: !!user,
     isLoading,
     isError,
-    refetchUser: refetch,
   }
 }
