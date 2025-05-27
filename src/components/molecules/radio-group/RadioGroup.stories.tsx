@@ -47,7 +47,7 @@ export const Default: Story = {
   render: Template,
   args: {
     name: 'priority',
-    size: ChipSize.Large,
+    size: ChipSize.LARGE,
   },
 }
 
@@ -55,7 +55,7 @@ export const Disabled: Story = {
   render: Template,
   args: {
     name: 'priority',
-    size: ChipSize.Small,
+    size: ChipSize.SMALL,
     disabled: true,
   },
 }
@@ -64,7 +64,7 @@ export const ErrorState: Story = {
   render: Template,
   args: {
     name: 'priority',
-    size: ChipSize.Large,
+    size: ChipSize.SMALL,
     error: true,
   },
 }
@@ -73,6 +73,6 @@ export const LargeSize: Story = {
   render: Template,
   args: {
     name: 'priority',
-    size: ChipSize.Large,
+    size: ChipSize.LARGE,
   },
 }

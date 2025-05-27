@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const StyledPageWrapper = styled.div<{ $heightOffset?: number }>`
-  padding: 0 16px;
+  padding: 16px 16px;
   margin: 0 auto;
   width: 100%;
   min-height: ${({ $heightOffset }) =>

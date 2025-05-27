@@ -2,44 +2,38 @@ import styled, { css } from 'styled-components'
 
 import type { ButtonSize, Color, Pallete } from '../../../styles/theme.types'
 
-import type { ButtonShape } from './Button'
 import { getVariantStyle } from './helpers'
 
 export function createStyledButton<T extends Pallete>() {
   return styled.button.withConfig({
     shouldForwardProp: prop =>
-      !['$variant', '$color', '$size', '$isIconButton', '$shape', '$fullWidth'].includes(prop),
+      !['$variant', '$color', '$size', '$fullWidth', '$loading'].includes(prop),
   })<{
     $variant: T
     $color?: Color<T>
     $size: ButtonSize
-    $isIconButton: boolean
-    $shape: ButtonShape
     $fullWidth: boolean
     $loading: boolean
   }>`
-    ${({ theme, $size, $isIconButton, $shape, $fullWidth }) => {
+    ${({ theme, $size, $fullWidth, $loading }) => {
       const sizeConfig = theme.button.sizes[$size]
-      const radius = $isIconButton
-        ? $shape === 'circle'
-          ? '50%'
-          : sizeConfig.radius
-        : sizeConfig.radius
 
       return css`
         font-size: ${sizeConfig.fontSize};
-        padding: ${$isIconButton ? '0' : sizeConfig.padding};
+        padding: ${sizeConfig.padding};
         height: ${sizeConfig.height};
-        min-width: ${$isIconButton ? sizeConfig.height : sizeConfig.minWidth};
-        width: ${$fullWidth ? '100%' : $isIconButton ? sizeConfig.height : 'auto'};
-        border-radius: ${radius};
+        min-width: ${sizeConfig.minWidth};
+        width: ${$fullWidth ? '100%' : 'auto'};
+        border-radius: ${sizeConfig.radius};
         font-weight: ${theme.typography.fontWeight.medium};
         line-height: ${theme.typography.lineHeight.base};
-        cursor: pointer;
+        cursor: ${$loading ? 'not-allowed' : 'pointer'};
+        opacity: ${$loading ? 0.75 : 1};
         transition: background-color 0.15s ease-in-out;
-        display: flex;
+        display: inline-flex;
         align-items: center;
         justify-content: center;
+        pointer-events: ${$loading ? 'none' : 'auto'};
       `
     }}
 
