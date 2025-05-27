@@ -1,21 +1,22 @@
 import { Outlet } from 'react-router-dom'
 
+import { LogoutIcon } from '../assets/icons/LogoutIcon'
+import { Button } from '../components/atoms/button/Button'
 import { Heading } from '../components/atoms/heading/Heading'
-import { Logo } from '../components/atoms/logo/Logo'
-import { Text } from '../components/atoms/text/Text'
-import { useAuth } from '../hooks/useAuth'
+import { Icon } from '../components/atoms/icon/Icon'
+import { useLogout } from '../hooks/useLogout'
 
 export const AppLayout = () => {
-  const { user } = useAuth()
+  const { logout } = useLogout()
   return (
     <div>
       <nav style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <Logo variant="full" />
-        <Logo variant="compact" />
+        <Button isIconButton shape="circle" variant="danger" color="hue0" onClick={logout}>
+          <Icon icon={LogoutIcon} pallete="danger" color="hue200" />
+        </Button>
         <Heading as="h2" pallete="neutral" color="hue400">
           Dashboard
         </Heading>
-        <Text>Welcome back, {user?.username}</Text>
       </nav>
 
       <Outlet />

@@ -1,4 +1,10 @@
-import { axiosInstance, setAccessToken, setRefreshToken } from './axios'
+import {
+  axiosInstance,
+  clearAccessToken,
+  clearRefreshToken,
+  setAccessToken,
+  setRefreshToken,
+} from './axios'
 
 export type LoginPayload = {
   username: string
@@ -37,4 +43,19 @@ export const signup = async ({ username, password }: SignUpPayload): Promise<Use
   })
 
   return data
+}
+
+export type User = {
+  id: string
+  username: string
+}
+
+export const fetchUser = async (): Promise<User> => {
+  const { data } = await axiosInstance.get<User>('/me')
+  return data
+}
+
+export const logout = () => {
+  clearAccessToken()
+  clearRefreshToken()
 }

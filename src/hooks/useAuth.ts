@@ -1,11 +1,25 @@
-import { useContext } from 'react'
+import { useQuery } from '@tanstack/react-query'
 
-import { AuthContext } from '../contexts/AuthContext'
+import { fetchUser, type User } from '../api/apiAuth'
 
 export const useAuth = () => {
-  const context = useContext(AuthContext)
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider')
+  const {
+    data: user,
+    isLoading,
+    isError,
+    refetch,
+  } = useQuery<User, Error>({
+    queryKey: ['user'],
+    queryFn: fetchUser,
+    retry: false,
+    refetchOnWindowFocus: false,
+  })
+
+  return {
+    user,
+    isAuthenticated: !!user,
+    isLoading,
+    isError,
+    refetchUser: refetch,
   }
-  return context
 }

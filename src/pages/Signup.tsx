@@ -3,6 +3,7 @@ import { z } from 'zod'
 
 import { LogoutIcon } from '../assets/icons/LogoutIcon'
 import { AuthForm } from '../components/molecules/authform/AuthForm'
+import { useAuth } from '../hooks/useAuth'
 import { useSignupMutation } from '../hooks/useSignupMutation'
 
 const PageWrapper = styled.div`
@@ -23,10 +24,14 @@ type SignupFormValues = z.infer<typeof signupSchema>
 
 export const Signup = () => {
   const { signupMutation, isSigningUp } = useSignupMutation()
+  const { refetchUser } = useAuth()
 
   const handleSignup = (data: SignupFormValues) => {
-    console.log('Signup RESPONSE: ', data)
-    signupMutation(data)
+    signupMutation(data, {
+      onSuccess: async () => {
+        await refetchUser()
+      },
+    })
   }
   return (
     <PageWrapper>

@@ -24,12 +24,12 @@ type LoginFormValues = z.infer<typeof loginSchema>
 
 export const Login = () => {
   const { loginMutation, isLoggingIn } = useLoginMutation()
-  const { setUser } = useAuth()
+  const { refetchUser } = useAuth()
 
   const handleLogin = async (data: LoginFormValues) => {
     loginMutation(data, {
-      onSuccess: user => {
-        setUser(user)
+      onSuccess: async () => {
+        await refetchUser()
       },
     })
   }
