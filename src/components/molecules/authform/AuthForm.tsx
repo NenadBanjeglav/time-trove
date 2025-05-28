@@ -18,6 +18,7 @@ type AuthFormProps<FormValues> = {
   title: string
   subtitle: string
   buttonLabel: string
+  isLoading: boolean
 }
 
 export const AuthForm = <FormValues extends FieldValues>({
@@ -27,11 +28,12 @@ export const AuthForm = <FormValues extends FieldValues>({
   title,
   subtitle,
   buttonLabel,
+  isLoading,
 }: AuthFormProps<FormValues>) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
   })
@@ -72,7 +74,7 @@ export const AuthForm = <FormValues extends FieldValues>({
         autoComplete="current-password"
       />
 
-      <Button type="submit" loading={isSubmitting} size="xlarge" fullWidth>
+      <Button type="submit" loading={isLoading} size="xlarge" fullWidth>
         {buttonLabel}
       </Button>
     </Wrapper>

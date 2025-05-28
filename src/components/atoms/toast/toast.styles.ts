@@ -15,8 +15,8 @@ export const ToastWrapper = styled.div<{ $type: ToastType }>`
   padding: 16px;
   border-radius: 12px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  max-width: 420px;
-  max-height: 80px;
+  min-width: 420px;
+  min-height: 80px;
 `
 
 export const ToastHeader = styled.div`
