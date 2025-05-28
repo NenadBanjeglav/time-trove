@@ -44,7 +44,13 @@ type OpenProps = {
 
 const Open = ({ children, opens }: OpenProps) => {
   const { open } = useModalContext()
-  return cloneElement(children, { onClick: () => open(opens) })
+  return cloneElement(children, {
+    onClick: e => {
+      e.stopPropagation()
+      children.props.onClick?.(e)
+      open(opens)
+    },
+  })
 }
 
 const Window = ({

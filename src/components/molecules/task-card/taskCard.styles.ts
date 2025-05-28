@@ -9,6 +9,7 @@ export const FullWidthCard = styled(Card)`
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  cursor: pointer;
 `
 
 export const TaskHeader = styled.div`
