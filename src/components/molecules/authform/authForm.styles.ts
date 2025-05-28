@@ -5,11 +5,11 @@ export const Wrapper = styled.form`
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.large};
   width: 100%;
-  max-width: 470px;
   margin: 0 auto;
   padding: ${({ theme }) => theme.spacing.xLarge};
   background-color: ${({ theme }) => theme.colors.neutral.hue0};
   border-radius: ${({ theme }) => theme.borderRadius.large};
+  max-width: 29.375rem;
 `
 
 export const IconWrapper = styled.div`

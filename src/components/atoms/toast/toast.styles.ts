@@ -35,6 +35,7 @@ export const Message = styled.div`
   font-size: ${({ theme }) => theme.typography.fontSize.small};
   font-weight: ${({ theme }) => theme.typography.fontWeight.regular};
   color: ${({ theme }) => theme.colors.neutral.hue200};
+  text-align: center;
 `
 
 export const CloseButton = styled.button`

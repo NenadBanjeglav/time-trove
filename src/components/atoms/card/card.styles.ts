@@ -24,7 +24,7 @@ export const StyledCard = styled.div<StyledCardProps>`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: ${({ $width }) => $width || 'fit-content'};
+  width: ${({ $width }) => $width || '100%'};
   height: ${({ $height }) => $height || 'auto'};
 
   border: 1px solid
