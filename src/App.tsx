@@ -43,7 +43,7 @@ const App = () => {
               <Route path={ROUTES.login} element={<Login />} />
               <Route path={ROUTES.signup} element={<Signup />} />
               <Route path={ROUTES.notFound} element={<NotFound />} />
-              <Route path="/maintenance" element={<Maintenance />} />
+              <Route path={ROUTES.maintenance} element={<Maintenance />} />
             </Route>
           </Routes>
         </AppStatusProvider>

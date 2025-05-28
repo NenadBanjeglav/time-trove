@@ -4,4 +4,5 @@ export const ROUTES = {
   login: 'login',
   signup: 'signup',
   notFound: '*',
+  maintenance: 'maintenance',
 }

@@ -13,7 +13,7 @@ export const NotFound = () => {
         description="The page you are attempting to access is currently unavailable or does not exist."
         buttonLabel="Back home"
         onClick={() => navigate('/')}
-        imageMaxWidth="372px"
+        imageMaxWidth="23.25rem"
       />
     </PageWrapper>
   )

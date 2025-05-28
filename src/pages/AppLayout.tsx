@@ -12,6 +12,7 @@ export const AppLayout = () => {
   const { maintenance } = useAppStatus()
   const ref = useRef<HTMLElement>(null)
   const [navHeight, setNavHeight] = useState(56)
+  const { logout } = useLogout()
 
   useLayoutEffect(() => {
     if (!ref.current) return
@@ -27,7 +28,6 @@ export const AppLayout = () => {
 
   const effectiveHeight = maintenance ? 0 : navHeight
 
-  const { logout } = useLogout()
   return (
     <>
       <nav
