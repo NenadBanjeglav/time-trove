@@ -10,7 +10,7 @@ import { Modal } from '../../atoms/modal/Modal'
 import { Text } from '../../atoms/text/Text'
 
 import { getStatusLabel, priorityColorMap, statusColorMap } from './helpers'
-import type { TaskCardProps } from './task.types'
+import { TaskStatus, type TaskCardProps } from './task.types'
 import {
   ButtonWrapper,
   Footer,
@@ -20,7 +20,8 @@ import {
   TaskHeader,
 } from './taskCard.styles'
 
-export const TaskCard: FC<TaskCardProps> = ({ id, title, description, status, priority }) => {
+export const TaskCard: FC<TaskCardProps> = ({ id, title, description, done, priority }) => {
+  const status = done ? TaskStatus.DONE : TaskStatus.INPROGRESS
   return (
     <FullWidthCard>
       <TaskHeader>
@@ -52,10 +53,10 @@ export const TaskCard: FC<TaskCardProps> = ({ id, title, description, status, pr
           <Chip status={priorityColorMap[priority]} size={ChipSize.SMALL} label={priority} />
         </PriorityWrapper>
         <ButtonWrapper>
-          <Modal.Open opens={`edit ${id}`}>
+          <Modal.Open opens={`Details ${id}`}>
             <IconButton shape="square" variant="neutral" icon={EditIcon} />
           </Modal.Open>
-          <Modal.Open opens={`delete ${id}`}>
+          <Modal.Open opens={`Delete ${id}`}>
             <IconButton shape="square" variant="danger" color="hue0" icon={DeleteIcon} />
           </Modal.Open>
         </ButtonWrapper>

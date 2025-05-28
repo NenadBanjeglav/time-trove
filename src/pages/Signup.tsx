@@ -16,6 +16,7 @@ const PageWrapper = styled.div`
   justify-content: center;
   min-height: 100vh;
   background-color: ${({ theme }) => theme.colors.neutral.hue50};
+  padding: 16px 16px;
 `
 
 const LogoWrapper = styled.div`

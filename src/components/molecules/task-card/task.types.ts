@@ -13,6 +13,6 @@ export type TaskCardProps = {
   id: string
   title: string
   description: string
-  status: TaskStatus
+  done: boolean
   priority: TaskPriority
 }
