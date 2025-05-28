@@ -6,8 +6,9 @@ import { FullCenteredLayout } from '../../atoms/page-wrapper/pageWrapper.styles'
 import { FeedbackState } from '../../molecules/feedback-state/FeedbackState'
 import { Button } from '../../atoms/button/Button'
 import { Modal } from '../../atoms/modal/Modal'
-import { Text } from '../../atoms/text/Text'
+
 import { ButtonWrapper } from '../../molecules/feedback-state/feedbackState.styles'
+import { TaskForm } from '../../shared/task-form/TaskForm'
 
 type PageStateContainerProps = {
   navHeight: number
@@ -63,7 +64,7 @@ export const PageStateContainer = ({
                 </Button>
               </Modal.Open>
               <Modal.Window name="taskForm">
-                <Text>Task Form</Text>
+                <TaskForm />
               </Modal.Window>
             </ButtonWrapper>
           }

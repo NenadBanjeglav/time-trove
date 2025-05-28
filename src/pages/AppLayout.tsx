@@ -1,10 +1,7 @@
 import { useLayoutEffect, useRef, useState } from 'react'
-import { Outlet } from 'react-router-dom'
-
+import { Navigate, Outlet } from 'react-router-dom'
 import { LogoutIcon } from '../assets/icons/LogoutIcon'
-import { Button } from '../components/atoms/button/Button'
 import { Heading } from '../components/atoms/heading/Heading'
-import { Icon } from '../components/atoms/icon/Icon'
 import { useLogout } from '../hooks/useLogout'
 import { useAppStatus } from '../contexts/AppStatusContext'
 import { IconButton } from '../components/atoms/icon-button/IconButton'
@@ -31,6 +28,8 @@ export const AppLayout = () => {
   }, [])
 
   const effectiveHeight = maintenance ? 0 : navHeight
+
+  if (maintenance) return <Navigate to="/maintenance" replace />
 
   return (
     <Modal>
