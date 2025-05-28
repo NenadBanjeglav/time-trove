@@ -4,6 +4,10 @@ import { Spinner } from '../../atoms/icon/Spinner'
 import { PageWrapper } from '../../atoms/page-wrapper/PageWrapper'
 import { FullCenteredLayout } from '../../atoms/page-wrapper/pageWrapper.styles'
 import { FeedbackState } from '../../molecules/feedback-state/FeedbackState'
+import { Button } from '../../atoms/button/Button'
+import { Modal } from '../../atoms/modal/Modal'
+import { Text } from '../../atoms/text/Text'
+import { ButtonWrapper } from '../../molecules/feedback-state/feedbackState.styles'
 
 type PageStateContainerProps = {
   navHeight: number
@@ -35,9 +39,13 @@ export const PageStateContainer = ({
           imageSrc="/images/error.png"
           title="Something went wrong"
           description="An error occurred while attempting to retrieve data from the server."
-          buttonLabel="Try again"
-          buttonVariant="neutral"
-          onClick={onClick}
+          buttonElement={
+            <ButtonWrapper>
+              <Button variant="neutral" onClick={onClick} fullWidth size="xlarge">
+                Try again
+              </Button>
+            </ButtonWrapper>
+          }
           imageMaxWidth="15.25rem"
         />
       )}
@@ -47,8 +55,18 @@ export const PageStateContainer = ({
           imageSrc="/images/empty.png"
           title="Nothing here yet!"
           description="There are no tasks created"
-          buttonLabel="Create task"
-          onClick={onClick}
+          buttonElement={
+            <ButtonWrapper>
+              <Modal.Open opens="taskForm">
+                <Button variant="primary" fullWidth size="xlarge">
+                  Create task
+                </Button>
+              </Modal.Open>
+              <Modal.Window name="taskForm">
+                <Text>Task Form</Text>
+              </Modal.Window>
+            </ButtonWrapper>
+          }
           imageMaxWidth="11.25rem"
         />
       )}

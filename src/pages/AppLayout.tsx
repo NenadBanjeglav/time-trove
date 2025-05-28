@@ -7,6 +7,7 @@ import { Heading } from '../components/atoms/heading/Heading'
 import { Icon } from '../components/atoms/icon/Icon'
 import { useLogout } from '../hooks/useLogout'
 import { useAppStatus } from '../contexts/AppStatusContext'
+import { Modal } from '../components/atoms/modal/Modal'
 
 export const AppLayout = () => {
   const { maintenance } = useAppStatus()
@@ -29,7 +30,7 @@ export const AppLayout = () => {
   const effectiveHeight = maintenance ? 0 : navHeight
 
   return (
-    <>
+    <Modal>
       <nav
         ref={ref}
         style={{
@@ -48,6 +49,6 @@ export const AppLayout = () => {
       </nav>
 
       <Outlet context={{ navHeight: effectiveHeight }} />
-    </>
+    </Modal>
   )
 }

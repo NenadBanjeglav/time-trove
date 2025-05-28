@@ -11,15 +11,7 @@ export const Dashboard = () => {
 
   const isLoading = false
   const data: number[] = []
-  const error = false
-
-  const handleClick = () => {
-    if (error) {
-      console.log('Retrying fetch...')
-    } else if (!data.length) {
-      console.log('Opening add task modal...')
-    }
-  }
+  const error = true
 
   if (maintenance) return <Navigate to="/maintenance" replace />
 
@@ -29,7 +21,7 @@ export const Dashboard = () => {
       isLoading={isLoading}
       error={error}
       isEmpty={!data.length}
-      onClick={handleClick}
+      {...(error ? { onClick: () => console.log('something') } : {})}
     >
       {
         //content
