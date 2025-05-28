@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import { ROUTES } from './constants/routes'
@@ -10,12 +11,14 @@ import { Maintenance } from './pages/Maintenance'
 import { NotFound } from './pages/NotFound'
 import { ProtectedRoute } from './pages/ProtectedRoute'
 import { PublicLayout } from './pages/PublicLayout'
-import { Register } from './pages/Register'
+import { Signup } from './pages/Signup'
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 0,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
     },
   },
 })
@@ -38,13 +41,14 @@ const App = () => {
 
             <Route element={<PublicLayout />}>
               <Route path={ROUTES.login} element={<Login />} />
-              <Route path={ROUTES.register} element={<Register />} />
+              <Route path={ROUTES.signup} element={<Signup />} />
               <Route path={ROUTES.notFound} element={<NotFound />} />
-              <Route path="/maintenance" element={<Maintenance />} />
+              <Route path={ROUTES.maintenance} element={<Maintenance />} />
             </Route>
           </Routes>
         </AppStatusProvider>
       </BrowserRouter>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )
 }

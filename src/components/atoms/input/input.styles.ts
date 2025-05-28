@@ -11,14 +11,13 @@ export const InputWrapper = styled.div`
 
 export const StyledInput = styled.input<{ $error?: boolean }>`
   width: 100%;
-  max-width: 340px;
   padding: 14px 20px 10px;
   border-radius: 12px;
   background-color: ${({ theme }) => theme.colors.neutral.hue0};
   font-size: ${({ theme }) => theme.typography.fontSize.base};
   line-height: ${({ theme }) => theme.typography.lineHeight.base};
   font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
-  border: 1px solid ${({ theme }) => theme.colors.neutral.hue200};
+  border: 1px solid ${({ theme }) => theme.colors.neutral.hue100};
   outline: none;
   height: 56px;
 
