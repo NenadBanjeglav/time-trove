@@ -5,12 +5,13 @@ import { Card } from '../../atoms/card/Card'
 
 export const ResponsiveCardWrapper = styled(Card)`
   width: 100%;
-  max-width: 32.5rem;
   height: auto;
   padding: ${({ theme }) => theme.spacing.xLarge};
+  min-width: calc(100vw - 32px);
 
   @media (min-width: 640px) {
-    height: 19.25rem;
+    width: 100%;
+    min-width: 32.5rem;
   }
 `
 

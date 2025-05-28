@@ -19,7 +19,7 @@ type ConfirmDialogProps = {
   primaryActionLabel?: string
   secondaryActionLabel?: string
   onPrimaryAction?: () => void
-  onSecondaryAction?: () => void
+  onClose?: () => void
   loading?: boolean
 }
 
@@ -30,11 +30,16 @@ export const ConfirmDialog = ({
   primaryActionLabel,
   secondaryActionLabel,
   onPrimaryAction,
-  onSecondaryAction,
+  onClose,
+
   loading = false,
 }: ConfirmDialogProps) => {
   const pallete = getDialogVariant(variant)
   const icon = getDialogIcon(variant)
+
+  const handleCancel = () => {
+    onClose?.()
+  }
 
   return (
     <ResponsiveCardWrapper>
@@ -52,7 +57,7 @@ export const ConfirmDialog = ({
       </HeadingTextWrapper>
       <ButtonRow>
         {secondaryActionLabel && (
-          <Button variant="neutral" onClick={onSecondaryAction} size="xlarge" fullWidth>
+          <Button variant="neutral" onClick={handleCancel} size="xlarge" fullWidth>
             {secondaryActionLabel}
           </Button>
         )}

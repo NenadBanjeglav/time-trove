@@ -7,6 +7,7 @@ import type {
   LineHeightType,
   Pallete,
 } from '../../../styles/theme.types'
+
 import type { HeadingAlignType } from './Heading'
 
 type StyledProps<T extends Pallete = Pallete> = {

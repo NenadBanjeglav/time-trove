@@ -53,7 +53,7 @@ export const PageStateContainer = ({
         />
       )}
 
-      {!isLoading && !error && isEmpty && children}
+      {!isLoading && !error && !isEmpty && children}
     </PageWrapper>
   )
 }
