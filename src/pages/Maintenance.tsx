@@ -8,7 +8,7 @@ export const Maintenance = () => {
         imageSrc="/images/maintance.png"
         title="We’ll be right back!"
         description="This service is temporarily down for a bit of maintenance."
-        imageMaxWidth="392px"
+        imageMaxWidth="24.5rem"
       />
     </PageWrapper>
   )

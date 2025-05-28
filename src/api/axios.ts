@@ -8,36 +8,29 @@ export const axiosInstance = axios.create({
   withCredentials: false,
 })
 
-let accessToken: string | null = localStorage.getItem('accessToken')
-let refreshToken: string | null = localStorage.getItem('refreshToken')
-
-export const setRefreshToken = (token: string) => {
-  refreshToken = token
-  localStorage.setItem('refreshToken', token)
-}
-
-export const getRefreshToken = () => refreshToken
+export const getAccessToken = () => localStorage.getItem('accessToken')
+export const getRefreshToken = () => localStorage.getItem('refreshToken')
 
 export const setAccessToken = (token: string) => {
-  accessToken = token
   localStorage.setItem('accessToken', token)
 }
 
-export const getAccessToken = () => accessToken
+export const setRefreshToken = (token: string) => {
+  localStorage.setItem('refreshToken', token)
+}
 
 export const clearAccessToken = () => {
-  accessToken = null
   localStorage.removeItem('accessToken')
 }
 
 export const clearRefreshToken = () => {
-  refreshToken = null
   localStorage.removeItem('refreshToken')
 }
 
 axiosInstance.interceptors.request.use(config => {
-  if (accessToken && config.headers) {
-    config.headers.Authorization = `Bearer ${accessToken}`
+  const token = getAccessToken()
+  if (token && config.headers) {
+    config.headers.Authorization = `Bearer ${token}`
   }
   return config
 })
@@ -69,6 +62,7 @@ axiosInstance.interceptors.response.use(
         return Promise.reject(refreshError)
       }
     }
+
     return Promise.reject(error)
   }
 )

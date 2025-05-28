@@ -4,10 +4,10 @@ import { z } from 'zod'
 import { LogoutIcon } from '../assets/icons/LogoutIcon'
 import { AuthForm } from '../components/molecules/authform/AuthForm'
 
-import { useLoginMutation } from '../hooks/useLoginMutation'
+import { useSignupMutation } from '../hooks/useSignupMutation'
+import { Link } from 'react-router-dom'
 import { Logo } from '../components/atoms/logo/Logo'
 import { Text } from '../components/atoms/text/Text'
-import { Link } from 'react-router-dom'
 
 const PageWrapper = styled.div`
   display: flex;
@@ -32,37 +32,36 @@ export const StyledLink = styled(Link)`
   font-weight: bold;
 `
 
-const loginSchema = z.object({
+const signupSchema = z.object({
   username: z.string().email(),
   password: z.string().min(5),
 })
 
-type LoginFormValues = z.infer<typeof loginSchema>
+type SignupFormValues = z.infer<typeof signupSchema>
 
-export const Login = () => {
-  const { loginMutation, isLoggingIn } = useLoginMutation()
+export const Signup = () => {
+  const { signupMutation, isSigningUp } = useSignupMutation()
 
-  const handleLogin = async (data: LoginFormValues) => {
-    loginMutation(data)
+  const handleSignup = (data: SignupFormValues) => {
+    signupMutation(data)
   }
-
   return (
     <PageWrapper>
       <LogoWrapper>
         <Logo variant="full" />
       </LogoWrapper>
       <AuthForm
-        schema={loginSchema}
-        onSubmit={handleLogin}
+        schema={signupSchema}
+        onSubmit={handleSignup}
         icon={LogoutIcon}
-        title="Log in"
-        subtitle="Use your email to log in."
-        buttonLabel="Log in"
-        isLoading={isLoggingIn}
+        title="Sign up"
+        subtitle="Create an account for your TimeTrove Dashboard."
+        buttonLabel="Sign up"
+        isLoading={isSigningUp}
       />
       <TextLinkWrapper>
         <Text fontSize="small" lineHeight="small" fontWeight="regular" as="span">
-          Don't have an account yet? <StyledLink to="/signup">Sign up</StyledLink>
+          You already have an account? <StyledLink to="/login">Log in</StyledLink>
         </Text>
       </TextLinkWrapper>
     </PageWrapper>
