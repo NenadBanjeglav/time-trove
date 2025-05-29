@@ -1,11 +1,11 @@
 import { Navigate, useOutletContext } from 'react-router-dom'
 
-import { TaskList } from '../components/molecules/task-list/TaskList'
-import { PageStateContainer } from '../components/organisms/page-state-container/PageStateContainer'
-import { useAppStatus } from '../contexts/AppStatusContext'
 import { useTasks } from '../api/apiTasks'
 import { Pagination } from '../components/atoms/pagination/Pagination'
 import { TaskPriority, type TaskCardProps } from '../components/molecules/task-card/task.types'
+import { TaskList } from '../components/molecules/task-list/TaskList'
+import { PageStateContainer } from '../components/organisms/page-state-container/PageStateContainer'
+import { useAppStatus } from '../contexts/AppStatusContext'
 
 type LayoutContext = { navHeight: number }
 

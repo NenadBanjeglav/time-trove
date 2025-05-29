@@ -20,18 +20,29 @@ export const IconWrapper = styled.span`
   padding: ${({ theme }) => `${theme.spacing.small} ${theme.spacing.medium}`};
 `
 
-export const StyledInput = styled.input`
+type StyledInputProps = {
+  $hasValue?: boolean
+}
+
+export const StyledInput = styled.input<StyledInputProps>`
+  box-sizing: border-box;
   font-size: ${({ theme }) => theme.typography.fontSize.base};
   color: ${({ theme }) => theme.colors.neutral.hue500};
-  border: 1px solid ${({ theme }) => theme.colors.neutral.hue200};
   width: 100%;
-  border-radius: 8px;
   height: 100%;
   padding-left: 56px;
+  border-radius: 8px;
+  transition: border-color 0.2s;
+
+  border: 1px solid
+    ${({ theme, $hasValue }) =>
+      $hasValue ? theme.colors.primary.hue200 : theme.colors.neutral.hue100};
 
   &:focus {
-    border: 1px solid ${({ theme }) => theme.colors.primary.hue200};
+    outline: none;
+    border-color: ${({ theme }) => theme.colors.primary.hue200};
   }
+
   &::placeholder {
     color: ${({ theme }) => theme.colors.neutral.hue200};
   }

@@ -43,6 +43,7 @@ export const Search = ({ placeholder = 'Search' }: SearchProps) => {
         value={search}
         onChange={e => handleChange(e.target.value)}
         placeholder={placeholder}
+        $hasValue={!!search}
       />
       {search && (
         <ClearButton onClick={() => handleChange('')}>
