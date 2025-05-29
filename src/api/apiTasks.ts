@@ -1,4 +1,4 @@
-import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import type { TaskPriority } from '../components/molecules/task-card/task.types'
 import { useToast } from '../contexts/useToast'
@@ -41,7 +41,6 @@ export const useTasks = (params: GetTasksParams) => {
   return useQuery<TaskListResponse, Error>({
     queryKey: ['tasks', { ...params }],
     queryFn: () => getTasks(params),
-    placeholderData: keepPreviousData,
   })
 }
 

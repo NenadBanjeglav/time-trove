@@ -9,6 +9,7 @@ import { Modal } from '../../atoms/modal/Modal'
 import { Search } from '../../atoms/search/Search'
 import { ConfirmDialog } from '../../molecules/confirm-dialog/ConfirmDialog'
 import { DialogVariant } from '../../molecules/confirm-dialog/confirmDialog.types'
+import { TaskForm } from '../task-form/TaskForm'
 
 import { ButtonLogoutWrapper, NavbarContainer, StyledNavbar } from './navbar.styles'
 
@@ -19,24 +20,26 @@ const routeTitleMap: Record<string, string> = {
   [`/${ROUTES.maintenance}`]: 'Maintenance',
 }
 
-export const Navbar = ({
-  onLogout,
-  ...props
-}: React.HTMLProps<HTMLElement> & { onLogout: () => void }) => {
+export const Navbar = ({ onLogout }: React.HTMLProps<HTMLElement> & { onLogout: () => void }) => {
   const { pathname } = useLocation()
   const title = routeTitleMap[pathname] ?? 'Dashboard'
 
   return (
-    <StyledNavbar {...props}>
+    <StyledNavbar>
       <NavbarContainer>
         <Heading as="h2" pallete="neutral" color="hue400">
           {title}
         </Heading>
         <Search />
         <ButtonLogoutWrapper>
-          <Button variant="primary" size="medium">
-            Create task
-          </Button>
+          <Modal.Open opens="taskForm">
+            <Button variant="primary" fullWidth size="medium">
+              Create task
+            </Button>
+          </Modal.Open>
+          <Modal.Window name="taskForm">
+            <TaskForm />
+          </Modal.Window>
           <Modal.Open opens="logout">
             <IconButton icon={LogoutIcon} variant="danger" shape="circle" color="hue0" />
           </Modal.Open>

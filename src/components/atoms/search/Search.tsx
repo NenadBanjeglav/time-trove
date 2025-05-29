@@ -24,7 +24,7 @@ export const Search = ({ placeholder = 'Search' }: SearchProps) => {
         searchParams.delete('search')
       }
       setSearchParams(searchParams)
-    }, 300)
+    }, 150)
 
     return () => clearTimeout(timeout)
   }, [search, searchParams, setSearchParams])

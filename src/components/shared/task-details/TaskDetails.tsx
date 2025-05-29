@@ -53,7 +53,7 @@ export const TaskDetails: FC<TaskDetailsProps> = ({ task, onClose }) => {
 
           {task.done !== undefined && (
             <Chip
-              label={task.done ? 'Completed' : 'In progress'}
+              label={task.done ? 'Done' : 'In progress'}
               status={task.done ? ChipStatus.SUCCESS : ChipStatus.WARNING}
               size={ChipSize.SMALL}
             />
