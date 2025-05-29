@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 import { Card } from '../../atoms/card/Card'
 
 export const ResponsiveFormWrapper = styled(Card)`
@@ -9,9 +10,8 @@ export const ResponsiveFormWrapper = styled(Card)`
   box-sizing: border-box;
 
   @media (max-width: 744px) {
-    min-width: unset;
+    min-width: calc(100vw - 32px);
     width: 100%;
-    max-width: calc(100vw - 32px);
   }
 `
 

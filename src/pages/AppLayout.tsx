@@ -1,13 +1,16 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
+
 import { LogoutIcon } from '../assets/icons/LogoutIcon'
+import { Button } from '../components/atoms/button/Button'
 import { Heading } from '../components/atoms/heading/Heading'
-import { useLogout } from '../hooks/useLogout'
-import { useAppStatus } from '../contexts/AppStatusContext'
 import { IconButton } from '../components/atoms/icon-button/IconButton'
 import { Modal } from '../components/atoms/modal/Modal'
 import { ConfirmDialog } from '../components/molecules/confirm-dialog/ConfirmDialog'
 import { DialogVariant } from '../components/molecules/confirm-dialog/confirmDialog.types'
+import { TaskForm } from '../components/shared/task-form/TaskForm'
+import { useAppStatus } from '../contexts/AppStatusContext'
+import { useLogout } from '../hooks/useLogout'
 
 export const AppLayout = () => {
   const { maintenance } = useAppStatus()
@@ -42,9 +45,24 @@ export const AppLayout = () => {
           justifyContent: 'space-between',
         }}
       >
+        <Heading as="h2" pallete="neutral" color="hue400">
+          Dashboard
+        </Heading>
+
+        <Modal.Open opens="taskForm">
+          <Button variant="primary" size="medium">
+            Create task
+          </Button>
+        </Modal.Open>
+
+        <Modal.Window name="taskForm">
+          <TaskForm />
+        </Modal.Window>
+
         <Modal.Open opens="logout">
           <IconButton icon={LogoutIcon} variant="danger" shape="circle" color="hue0" />
         </Modal.Open>
+
         <Modal.Window name="logout">
           <ConfirmDialog
             variant={DialogVariant.DANGER}
@@ -55,9 +73,6 @@ export const AppLayout = () => {
             onPrimaryAction={() => logout()}
           />
         </Modal.Window>
-        <Heading as="h2" pallete="neutral" color="hue400">
-          Dashboard
-        </Heading>
       </nav>
 
       <Outlet context={{ navHeight: effectiveHeight }} />

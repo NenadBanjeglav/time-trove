@@ -1,12 +1,11 @@
 import type { ReactNode } from 'react'
 
+import { Button } from '../../atoms/button/Button'
 import { Spinner } from '../../atoms/icon/Spinner'
+import { Modal } from '../../atoms/modal/Modal'
 import { PageWrapper } from '../../atoms/page-wrapper/PageWrapper'
 import { FullCenteredLayout } from '../../atoms/page-wrapper/pageWrapper.styles'
 import { FeedbackState } from '../../molecules/feedback-state/FeedbackState'
-import { Button } from '../../atoms/button/Button'
-import { Modal } from '../../atoms/modal/Modal'
-
 import { ButtonWrapper } from '../../molecules/feedback-state/feedbackState.styles'
 import { TaskForm } from '../../shared/task-form/TaskForm'
 

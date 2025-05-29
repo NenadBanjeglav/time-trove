@@ -4,7 +4,7 @@ export const StyledPagination = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: ${({ theme }) => theme.spacing.medium} 0;
 `
 
@@ -26,6 +26,8 @@ export const PaginationButton = styled.button<{ $active?: boolean }>`
   height: 2.8rem;
   color: ${({ theme, $active }) =>
     $active ? theme.colors.primary.hue0 : theme.colors.neutral.hue500};
+  border: 1px solid
+    ${({ theme, $active }) => ($active ? theme.colors.primary.hue200 : theme.colors.neutral.hue100)};
   display: flex;
   align-items: center;
   justify-content: center;

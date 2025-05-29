@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import { useCreateTask, useEditTask, type Task } from '../../../api/apiTasks'
 import { EditIcon } from '../../../assets/icons/EditIcon'
 import { Button } from '../../atoms/button/Button'
 import { ChipSize, ChipStatus } from '../../atoms/chip/chip.types'
@@ -11,6 +12,7 @@ import { InputField } from '../../atoms/input/Input'
 import { Text } from '../../atoms/text/Text'
 import { TextareaField } from '../../atoms/textarea/Textarea'
 import { RadioGroup } from '../../molecules/radio-group/RadioGroup'
+import { TaskPriority } from '../../molecules/task-card/task.types'
 
 import {
   ErrorWrapper,
@@ -22,12 +24,12 @@ import {
   ResponsiveFormWrapper,
   Section,
 } from './taskForm.styles'
-import type { Task } from '../../../api/apiTasks'
 
 const taskSchema = z.object({
   title: z.string().min(1, 'Title is required'),
   description: z.string().min(1, 'Description is required'),
-  priority: z.enum(['low', 'medium', 'high'], {
+  priority: z.nativeEnum(TaskPriority, {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     required_error: 'Priority is required',
   }),
 })
@@ -35,26 +37,64 @@ const taskSchema = z.object({
 export type TaskFormValues = z.infer<typeof taskSchema>
 
 type TaskFormProps = {
-  task?: Task
   onClose?: () => void
+  task?: Partial<Task>
 }
 
 export const TaskForm = ({ task, onClose }: TaskFormProps) => {
-  const id = task?.id
-  const values = task ? { ...task } : {}
-  const isEditSession = Boolean(id)
+  const isEditSession = Boolean(task?.id)
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     control,
+    reset,
   } = useForm<TaskFormValues>({
-    defaultValues: values,
     resolver: zodResolver(taskSchema),
+    defaultValues: isEditSession
+      ? {
+          title: task?.title ?? '',
+          description: task?.description ?? '',
+          priority: task?.priority ?? undefined,
+        }
+      : {},
   })
 
-  const onSubmit = () => console.log('submit')
+  const { createTaskMutation, isCreating } = useCreateTask()
+  const { editTaskMutation, isEditing } = useEditTask()
+
+  const isWorking = isCreating || isEditing
+
+  const onSubmit = (values: TaskFormValues) => {
+    if (isEditSession && task?.id) {
+      editTaskMutation(
+        {
+          id: task.id,
+          values,
+        },
+        {
+          onSuccess: () => {
+            reset()
+            onClose?.()
+          },
+        }
+      )
+    } else {
+      createTaskMutation(
+        {
+          ...values,
+          priority: values.priority as TaskPriority,
+        },
+        {
+          onSuccess: () => {
+            reset()
+            onClose?.()
+          },
+        }
+      )
+    }
+  }
 
   return (
     <ResponsiveFormWrapper>
@@ -65,7 +105,7 @@ export const TaskForm = ({ task, onClose }: TaskFormProps) => {
               <Icon icon={EditIcon} pallete="neutral" color="hue200" />
             </IconWrapper>
             <Heading as="h2" fontWeight="bold" fontSize="large" lineHeight="large">
-              Create task
+              {isEditSession ? 'Edit task' : 'Create task'}
             </Heading>
           </IconTextWrapper>
 
@@ -76,7 +116,7 @@ export const TaskForm = ({ task, onClose }: TaskFormProps) => {
             pallete="neutral"
             color="hue200"
           >
-            Please provide the required details to create the task.
+            {isEditSession ? '' : ' Please provide the required details to create the task.'}
           </Text>
         </FormHeader>
 
@@ -105,9 +145,9 @@ export const TaskForm = ({ task, onClose }: TaskFormProps) => {
               <RadioGroup
                 name={field.name}
                 options={[
-                  { label: 'Low', value: 'low', status: ChipStatus.SUCCESS },
-                  { label: 'Medium', value: 'medium', status: ChipStatus.WARNING },
-                  { label: 'High', value: 'high', status: ChipStatus.DANGER },
+                  { label: 'Low', value: 'Low', status: ChipStatus.SUCCESS },
+                  { label: 'Medium', value: 'Medium', status: ChipStatus.WARNING },
+                  { label: 'High', value: 'High', status: ChipStatus.DANGER },
                 ]}
                 value={field.value}
                 onChange={field.onChange}
@@ -124,8 +164,8 @@ export const TaskForm = ({ task, onClose }: TaskFormProps) => {
           </ErrorWrapper>
         </PriorityWrapper>
 
-        <Button type="submit" loading={false} fullWidth size="xlarge">
-          Create task
+        <Button type="submit" loading={isWorking} fullWidth size="xlarge">
+          {isEditSession ? 'Edit task' : 'Create task'}
         </Button>
       </Form>
     </ResponsiveFormWrapper>
