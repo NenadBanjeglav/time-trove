@@ -7,12 +7,11 @@ import { StyledPagination, PaginationButton, ButtonsWrapper } from './pagination
 
 type PaginationProps = {
   count: number
+  currentPage: number
 }
 
-export const Pagination = ({ count }: PaginationProps) => {
+export const Pagination = ({ count, currentPage }: PaginationProps) => {
   const [searchParams, setSearchParams] = useSearchParams()
-
-  const currentPage = Number(searchParams.get('page') || '1')
   const pageCount = Math.ceil(count / PAGE_SIZE)
 
   const handlePageChange = (page: number) => {

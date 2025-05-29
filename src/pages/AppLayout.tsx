@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef, useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Navigate, Outlet } from 'react-router-dom'
 
 import { Modal } from '../components/atoms/modal/Modal'
 import { Navbar } from '../components/shared/navbar/Navbar'
@@ -25,6 +25,8 @@ export const AppLayout = () => {
   }, [])
 
   const effectiveHeight = maintenance ? 0 : navHeight
+
+  if (maintenance) return <Navigate to="/maintenance" replace />
 
   return (
     <Modal>

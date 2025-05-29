@@ -28,4 +28,7 @@ export const Illustration = styled.img<{ $maxWidth?: string }>`
 
 export const ButtonWrapper = styled.div`
   width: 320px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `

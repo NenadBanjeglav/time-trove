@@ -1,5 +1,5 @@
-import type { Pallete, RemSizeType } from '../../../styles/theme.types'
-import { Button } from '../../atoms/button/Button'
+import type { RemSizeType } from '../../../styles/theme.types'
+
 import { Heading } from '../../atoms/heading/Heading'
 import { Text } from '../../atoms/text/Text'
 
@@ -9,9 +9,8 @@ type FeedbackStateProps = {
   imageSrc: string
   title: string
   description: string
-  buttonLabel?: string
-  onClick?: () => void
-  buttonVariant?: Pallete
+  buttonElement?: React.ReactNode
+  onClick?: () => void | null
   imageMaxWidth?: RemSizeType
 }
 
@@ -19,9 +18,7 @@ export const FeedbackState = ({
   imageSrc,
   title,
   description,
-  buttonLabel,
-  onClick,
-  buttonVariant,
+  buttonElement,
   imageMaxWidth = '24.5rem',
 }: FeedbackStateProps) => {
   return (
@@ -48,13 +45,7 @@ export const FeedbackState = ({
         >
           {description}
         </Text>
-        {buttonLabel && onClick && (
-          <ButtonWrapper>
-            <Button fullWidth size="large" onClick={onClick} variant={buttonVariant ?? 'primary'}>
-              {buttonLabel}
-            </Button>
-          </ButtonWrapper>
-        )}
+        {buttonElement && <ButtonWrapper>{buttonElement}</ButtonWrapper>}
       </Wrapper>
     </StateLayout>
   )

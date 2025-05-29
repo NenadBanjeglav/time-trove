@@ -11,17 +11,16 @@ export const TextareaWrapper = styled.div`
 
 export const StyledTextarea = styled.textarea<{ $error?: boolean }>`
   width: 100%;
-  max-width: 340px;
   padding: 20px 20px 10px;
   border-radius: 12px;
   background-color: ${({ theme }) => theme.colors.neutral.hue0};
   font-size: ${({ theme }) => theme.typography.fontSize.base};
   line-height: ${({ theme }) => theme.typography.lineHeight.base};
   font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
-  border: 1px solid ${({ theme }) => theme.colors.neutral.hue200};
+  border: 1px solid ${({ theme }) => theme.colors.neutral.hue100};
   outline: none;
-  resize: vertical;
-  min-height: 120px;
+  resize: none;
+  height: calc(100% - 1em);
 
   &::placeholder {
     color: transparent;

@@ -1,10 +1,4 @@
-import {
-  axiosInstance,
-  clearAccessToken,
-  clearRefreshToken,
-  setAccessToken,
-  setRefreshToken,
-} from './axios'
+import { axiosInstance, clearTokens, setAccessToken, setRefreshToken } from './axios'
 
 export type LoginPayload = {
   username: string
@@ -19,6 +13,8 @@ export async function login({ username, password }: LoginPayload) {
   if (!accessToken || !refreshToken) {
     throw new Error('Missing tokens')
   }
+
+  if (!user) throw new Error('User data missing')
 
   setAccessToken(accessToken)
   setRefreshToken(refreshToken)
@@ -56,6 +52,5 @@ export const fetchUser = async (): Promise<User> => {
 }
 
 export const logout = () => {
-  clearAccessToken()
-  clearRefreshToken()
+  clearTokens()
 }
