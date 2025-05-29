@@ -9,6 +9,7 @@ import { Heading } from '../../atoms/heading/Heading'
 import { IconButton } from '../../atoms/icon-button/IconButton'
 import { Modal } from '../../atoms/modal/Modal'
 import { Text } from '../../atoms/text/Text'
+import { TaskDetails } from '../../shared/task-details/TaskDetails'
 import { TaskForm } from '../../shared/task-form/TaskForm'
 import { ConfirmDialog } from '../confirm-dialog/ConfirmDialog'
 import { DialogVariant } from '../confirm-dialog/confirmDialog.types'
@@ -78,7 +79,7 @@ export const TaskCard: FC<TaskCardProps> = ({ id, title, description, done, prio
       </Modal.Open>
 
       <Modal.Window name={`Card details for ${id}`}>
-        <Text>Card Details</Text>
+        <TaskDetails task={{ id, title, description, done, priority }} />
       </Modal.Window>
       <Modal.Window name={`Delete ${id}`}>
         <ConfirmDialog
