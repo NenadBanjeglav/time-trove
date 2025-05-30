@@ -10,7 +10,7 @@ import { Search } from '../../atoms/search/Search'
 import { ConfirmDialog } from '../../molecules/confirm-dialog/ConfirmDialog'
 import { DialogVariant } from '../../molecules/confirm-dialog/confirmDialog.types'
 
-import { ButtonLogoutWrapper, NavbarContainer, StyledNavbar } from './navbar.styles'
+import { ButtonIconWrapper, ButtonWrapper, NavbarContainer, StyledNavbar } from './navbar.styles'
 import { CreateTaskForm } from '../task-form-shell/CreateTaskForm'
 
 const routeTitleMap: Record<string, string> = {
@@ -30,16 +30,20 @@ export const Navbar = ({ onLogout }: React.HTMLProps<HTMLElement> & { onLogout: 
         <Heading as="h2" pallete="neutral" color="hue400">
           {title}
         </Heading>
+
         <Search />
-        <ButtonLogoutWrapper>
-          <Modal.Open opens="taskForm">
-            <Button variant="primary" fullWidth size="medium">
-              Create task
-            </Button>
-          </Modal.Open>
-          <Modal.Window name="taskForm">
-            <CreateTaskForm />
-          </Modal.Window>
+
+        <ButtonIconWrapper>
+          <ButtonWrapper>
+            <Modal.Open opens="taskForm">
+              <Button variant="primary" size="medium" fullWidth>
+                Create task
+              </Button>
+            </Modal.Open>
+            <Modal.Window name="taskForm">
+              <CreateTaskForm />
+            </Modal.Window>
+          </ButtonWrapper>
           <Modal.Open opens="logout">
             <IconButton icon={LogoutIcon} variant="danger" shape="circle" color="hue0" />
           </Modal.Open>
@@ -53,7 +57,7 @@ export const Navbar = ({ onLogout }: React.HTMLProps<HTMLElement> & { onLogout: 
               onPrimaryAction={onLogout}
             />
           </Modal.Window>
-        </ButtonLogoutWrapper>
+        </ButtonIconWrapper>
       </NavbarContainer>
     </StyledNavbar>
   )

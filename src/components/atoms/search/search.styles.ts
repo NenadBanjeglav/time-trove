@@ -10,6 +10,11 @@ export const SearchWrapper = styled.div`
   width: 100%;
   max-width: 340px;
   height: 40px;
+
+  @media (max-width: 760px) {
+    max-width: 100%;
+    order: 3;
+  }
 `
 
 export const IconWrapper = styled.span`

@@ -7,4 +7,5 @@ export enum ChipStatus {
   SUCCESS = 'success',
   WARNING = 'warning',
   DANGER = 'danger',
+  PRIMARY = 'primary',
 }

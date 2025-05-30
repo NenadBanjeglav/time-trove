@@ -3,6 +3,11 @@ import styled from 'styled-components'
 export const RadioGroupWrapper = styled.div`
   display: flex;
   gap: 16px;
+  order: 3;
+
+  @media (max-width: 760px) {
+    margin-inline: 16px;
+  }
 `
 
 export const RadioOptionWrapper = styled.div`

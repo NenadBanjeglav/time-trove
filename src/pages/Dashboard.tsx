@@ -6,6 +6,8 @@ import { TaskList } from '../components/molecules/task-list/TaskList'
 import { PageStateContainer } from '../components/organisms/page-state-container/PageStateContainer'
 import { PAGE_SIZE } from '../constants/constants'
 import { usePrefetchPaginatedTasks } from '../hooks/usePrefetchPaginatedTasks'
+import { PriorityFilters } from '../components/shared/priority-filters/PriorityFilter'
+import { TaskPriority } from '../components/molecules/task-card/task.types'
 
 type LayoutContext = { navHeight: number }
 
@@ -17,12 +19,27 @@ export const Dashboard = () => {
   const offset = (currentPage - 1) * PAGE_SIZE
 
   const search = searchParams.get('search') || ''
+  const priorityParam = searchParams.get('priority') || ''
+
+  const priority = (() => {
+    switch (priorityParam) {
+      case 'low':
+        return TaskPriority.LOW
+      case 'medium':
+        return TaskPriority.MEDIUM
+      case 'high':
+        return TaskPriority.HIGH
+      default:
+        return undefined
+    }
+  })()
 
   const { data, isPending, isError, refetch } = useTasks({
     limit: PAGE_SIZE,
     offset,
     direction: 'desc',
     title: search,
+    priority: priority,
   })
 
   usePrefetchPaginatedTasks({
@@ -45,6 +62,7 @@ export const Dashboard = () => {
       isEmpty={!data?.items.length}
       onClick={handleClick}
     >
+      <PriorityFilters />
       <TaskList tasks={data?.items || []} />
       <Pagination count={data?.totalItems || 0} currentPage={data?.page ?? 1} />
     </PageStateContainer>

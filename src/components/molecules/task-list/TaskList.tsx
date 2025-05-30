@@ -13,7 +13,7 @@ export const TaskListWrapper = styled.div`
   margin: 0 auto;
   width: 100%;
 
-  @media (max-width: 745px) {
+  @media (max-width: 760px) {
     grid-template-columns: 1fr;
   }
 `
