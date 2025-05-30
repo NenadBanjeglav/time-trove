@@ -8,7 +8,6 @@ import { ChipStatus, ChipSize } from '../../atoms/chip/chip.types'
 import { Heading } from '../../atoms/heading/Heading'
 import { Icon } from '../../atoms/icon/Icon'
 import { Text } from '../../atoms/text/Text'
-import { IconWrapper, ResponsiveFormWrapper } from '../task-form/taskForm.styles'
 
 import {
   TaskDetailsContainer,
@@ -16,6 +15,7 @@ import {
   TaskDetailsIconText,
   TaskDetailsSection,
 } from './taskDetails.styles'
+import { IconWrapper, ResponsiveFormWrapper } from '../task-form-shell/taskFormShell.styles'
 
 type TaskDetailsProps = {
   task: Partial<Task>
