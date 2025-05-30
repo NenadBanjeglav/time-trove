@@ -10,7 +10,6 @@ import { IconButton } from '../../atoms/icon-button/IconButton'
 import { Modal } from '../../atoms/modal/Modal'
 import { Text } from '../../atoms/text/Text'
 import { TaskDetails } from '../../shared/task-details/TaskDetails'
-import { TaskForm } from '../../shared/task-form/TaskForm'
 import { ConfirmDialog } from '../confirm-dialog/ConfirmDialog'
 import { DialogVariant } from '../confirm-dialog/confirmDialog.types'
 
@@ -24,6 +23,7 @@ import {
   TaskBody,
   TaskHeader,
 } from './taskCard.styles'
+import { EditTaskForm } from '../../shared/task-form-shell/EditTaskForm'
 
 export const TaskCard: FC<TaskCardProps> = ({ id, title, description, done, priority }) => {
   const { deleteTaskMutation, isDeleting } = useDeleteTask()
@@ -93,7 +93,7 @@ export const TaskCard: FC<TaskCardProps> = ({ id, title, description, done, prio
         />
       </Modal.Window>
       <Modal.Window name={`Edit ${id}`}>
-        <TaskForm task={{ id, title, description, done, priority }} />
+        <EditTaskForm task={{ id, title, description, done, priority }} />
       </Modal.Window>
     </>
   )

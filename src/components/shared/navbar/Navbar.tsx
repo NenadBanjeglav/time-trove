@@ -9,9 +9,9 @@ import { Modal } from '../../atoms/modal/Modal'
 import { Search } from '../../atoms/search/Search'
 import { ConfirmDialog } from '../../molecules/confirm-dialog/ConfirmDialog'
 import { DialogVariant } from '../../molecules/confirm-dialog/confirmDialog.types'
-import { TaskForm } from '../task-form/TaskForm'
 
 import { ButtonLogoutWrapper, NavbarContainer, StyledNavbar } from './navbar.styles'
+import { CreateTaskForm } from '../task-form-shell/CreateTaskForm'
 
 const routeTitleMap: Record<string, string> = {
   [ROUTES.root]: 'Dashboard',
@@ -38,7 +38,7 @@ export const Navbar = ({ onLogout }: React.HTMLProps<HTMLElement> & { onLogout: 
             </Button>
           </Modal.Open>
           <Modal.Window name="taskForm">
-            <TaskForm />
+            <CreateTaskForm />
           </Modal.Window>
           <Modal.Open opens="logout">
             <IconButton icon={LogoutIcon} variant="danger" shape="circle" color="hue0" />
