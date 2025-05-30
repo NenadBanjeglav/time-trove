@@ -8,6 +8,7 @@ import { PAGE_SIZE } from '../constants/constants'
 import { usePrefetchPaginatedTasks } from '../hooks/usePrefetchPaginatedTasks'
 import { PriorityFilters } from '../components/shared/priority-filters/PriorityFilter'
 import { TaskPriority } from '../components/molecules/task-card/task.types'
+import { FeedbackState } from '../components/molecules/feedback-state/FeedbackState'
 
 type LayoutContext = { navHeight: number }
 
@@ -20,6 +21,8 @@ export const Dashboard = () => {
 
   const search = searchParams.get('search') || ''
   const priorityParam = searchParams.get('priority') || ''
+
+  const hasActiveFilters = Boolean(searchParams.get('priority') || searchParams.get('search'))
 
   const priority = (() => {
     switch (priorityParam) {
@@ -59,12 +62,19 @@ export const Dashboard = () => {
       navHeight={navHeight}
       isLoading={isPending}
       error={isError}
-      isEmpty={!data?.items.length}
+      isEmpty={!data?.items.length && !(search || priority)}
       onClick={handleClick}
     >
       <PriorityFilters />
       <TaskList tasks={data?.items || []} />
       <Pagination count={data?.totalItems || 0} currentPage={data?.page ?? 1} />
+
+      {data?.items.length === 0 && hasActiveFilters && (
+        <FeedbackState
+          title="No results found!"
+          description="Please try searching for something else."
+        />
+      )}
     </PageStateContainer>
   )
 }

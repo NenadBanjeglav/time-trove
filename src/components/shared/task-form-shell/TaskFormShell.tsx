@@ -1,3 +1,4 @@
+import { forwardRef } from 'react'
 import type { ReactNode } from 'react'
 import { Button } from '../../atoms/button/Button'
 import { Heading } from '../../atoms/heading/Heading'
@@ -22,48 +23,43 @@ type TaskFormShellProps = {
   buttonLabel: string
 }
 
-export const TaskFormShell = ({
-  title,
-  description,
-  isSubmitting,
-  onSubmit,
-  children,
-  buttonLabel,
-}: TaskFormShellProps) => (
-  <ResponsiveFormWrapper>
-    <Form onSubmit={onSubmit}>
-      <FormHeader>
-        <IconTextWrapper>
-          <IconWrapper>
-            <Icon icon={EditIcon} pallete="neutral" color="hue200" />
-          </IconWrapper>
-          <Heading as="h2" fontWeight="bold" fontSize="large" lineHeight="large">
-            {title}
+export const TaskFormShell = forwardRef<HTMLDivElement, TaskFormShellProps>(
+  ({ title, description, isSubmitting, onSubmit, children, buttonLabel }) => (
+    <ResponsiveFormWrapper>
+      <Form onSubmit={onSubmit}>
+        <FormHeader>
+          <IconTextWrapper>
+            <IconWrapper>
+              <Icon icon={EditIcon} pallete="neutral" color="hue200" />
+            </IconWrapper>
+            <Heading as="h2" fontWeight="bold" fontSize="large" lineHeight="large">
+              {title}
+            </Heading>
+          </IconTextWrapper>
+          {description && (
+            <Text
+              fontWeight="regular"
+              fontSize="small"
+              lineHeight="small"
+              pallete="neutral"
+              color="hue200"
+            >
+              {description}
+            </Text>
+          )}
+        </FormHeader>
+
+        <Section>
+          <Heading as="h3" fontWeight="bold" fontSize="base" lineHeight="base" textAlign="start">
+            Task details
           </Heading>
-        </IconTextWrapper>
-        {description && (
-          <Text
-            fontWeight="regular"
-            fontSize="small"
-            lineHeight="small"
-            pallete="neutral"
-            color="hue200"
-          >
-            {description}
-          </Text>
-        )}
-      </FormHeader>
+          {children}
+        </Section>
 
-      <Section>
-        <Heading as="h3" fontWeight="bold" fontSize="base" lineHeight="base" textAlign="start">
-          Task details
-        </Heading>
-        {children}
-      </Section>
-
-      <Button type="submit" loading={isSubmitting} fullWidth size="xlarge">
-        {buttonLabel}
-      </Button>
-    </Form>
-  </ResponsiveFormWrapper>
+        <Button type="submit" loading={isSubmitting} fullWidth size="medium">
+          {buttonLabel}
+        </Button>
+      </Form>
+    </ResponsiveFormWrapper>
+  )
 )

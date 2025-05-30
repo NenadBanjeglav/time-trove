@@ -12,6 +12,7 @@ import { DialogVariant } from '../../molecules/confirm-dialog/confirmDialog.type
 
 import { ButtonIconWrapper, ButtonWrapper, NavbarContainer, StyledNavbar } from './navbar.styles'
 import { CreateTaskForm } from '../task-form-shell/CreateTaskForm'
+import { Link } from 'react-router-dom'
 
 const routeTitleMap: Record<string, string> = {
   [ROUTES.root]: 'Dashboard',
@@ -28,9 +29,8 @@ export const Navbar = ({ onLogout }: React.HTMLProps<HTMLElement> & { onLogout: 
     <StyledNavbar>
       <NavbarContainer>
         <Heading as="h2" pallete="neutral" color="hue400">
-          {title}
+          <Link to="/">{title}</Link>
         </Heading>
-
         <Search />
 
         <ButtonIconWrapper>

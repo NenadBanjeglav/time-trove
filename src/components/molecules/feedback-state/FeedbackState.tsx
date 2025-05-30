@@ -6,7 +6,7 @@ import { Text } from '../../atoms/text/Text'
 import { StateLayout, Wrapper, Illustration, ButtonWrapper } from './feedbackState.styles'
 
 type FeedbackStateProps = {
-  imageSrc: string
+  imageSrc?: string
   title: string
   description: string
   buttonElement?: React.ReactNode
@@ -24,7 +24,9 @@ export const FeedbackState = ({
   return (
     <StateLayout>
       <Wrapper>
-        <Illustration src={imageSrc} alt="empty-state-illustration" $maxWidth={imageMaxWidth} />
+        {imageSrc && (
+          <Illustration src={imageSrc} alt="empty-state-illustration" $maxWidth={imageMaxWidth} />
+        )}
         <Heading
           as="h1"
           pallete="neutral"

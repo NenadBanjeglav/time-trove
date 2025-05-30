@@ -30,5 +30,13 @@ export function createStyledHeading<T extends Pallete>() {
     color: ${({ theme, $pallete, $color }) => theme.colors[$pallete][$color] as string};
     margin: 0;
     text-align: ${({ $textAlign }) => $textAlign};
+
+    a {
+      all: unset;
+      color: inherit;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-block;
+    }
   `
 }

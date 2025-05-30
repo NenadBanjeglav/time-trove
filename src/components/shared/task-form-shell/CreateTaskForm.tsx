@@ -9,8 +9,8 @@ import { TextareaField } from '../../atoms/textarea/Textarea'
 import { RadioGroup } from '../../molecules/radio-group/RadioGroup'
 import { ChipSize, ChipStatus } from '../../atoms/chip/chip.types'
 import { Text } from '../../atoms/text/Text'
-import { ErrorWrapper, PriorityWrapper } from './taskFormShell.styles'
-import { TaskFormShell } from './TaskFormShell'
+import { ErrorWrapper, PriorityWrapper } from '../task-form-shell/taskFormShell.styles'
+import { TaskFormShell } from '../task-form-shell/TaskFormShell'
 
 const schema = z.object({
   title: z.string().min(1, 'Title is required'),

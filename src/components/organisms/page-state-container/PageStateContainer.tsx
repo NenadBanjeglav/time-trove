@@ -8,6 +8,7 @@ import { FullCenteredLayout } from '../../atoms/page-wrapper/pageWrapper.styles'
 import { FeedbackState } from '../../molecules/feedback-state/FeedbackState'
 import { ButtonWrapper } from '../../molecules/feedback-state/feedbackState.styles'
 import { CreateTaskForm } from '../../shared/task-form-shell/CreateTaskForm'
+import { useSearchParams } from 'react-router-dom'
 
 type PageStateContainerProps = {
   navHeight: number

@@ -25,6 +25,8 @@ export const PriorityFilters = () => {
       searchParams.set('priority', value)
     }
 
+    searchParams.delete('page')
+
     setSearchParams(searchParams)
   }
 

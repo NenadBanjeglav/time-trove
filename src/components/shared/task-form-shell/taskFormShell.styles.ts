@@ -58,7 +58,7 @@ export const Section = styled.div`
 
 export const PriorityWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   gap: ${({ theme }) => theme.spacing.medium};
   width: 100%;
   align-items: flex-start;
