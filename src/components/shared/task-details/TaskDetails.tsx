@@ -1,5 +1,3 @@
-import type { FC } from 'react'
-
 import { useEditTask, type Task } from '../../../api/apiTasks'
 import { FileIcon } from '../../../assets/icons/FileIcon'
 import { Button } from '../../atoms/button/Button'
@@ -8,6 +6,7 @@ import { ChipStatus, ChipSize } from '../../atoms/chip/chip.types'
 import { Heading } from '../../atoms/heading/Heading'
 import { Icon } from '../../atoms/icon/Icon'
 import { Text } from '../../atoms/text/Text'
+import { IconWrapper, ResponsiveFormWrapper } from '../task-form-shell/taskFormShell.styles'
 
 import {
   TaskDetailsContainer,
@@ -15,14 +14,13 @@ import {
   TaskDetailsIconText,
   TaskDetailsSection,
 } from './taskDetails.styles'
-import { IconWrapper, ResponsiveFormWrapper } from '../task-form-shell/taskFormShell.styles'
 
 type TaskDetailsProps = {
   task: Partial<Task>
-  onClose?: () => void
+  onEditSuccess: () => void
 }
 
-export const TaskDetails: FC<TaskDetailsProps> = ({ task, onClose }) => {
+export const TaskDetails = ({ task, onEditSuccess }: TaskDetailsProps) => {
   const { editTaskMutation, isEditing } = useEditTask()
 
   const handleMarkAsDone = () => {
@@ -32,7 +30,7 @@ export const TaskDetails: FC<TaskDetailsProps> = ({ task, onClose }) => {
       { id: task.id, values: { done: true } },
       {
         onSuccess: () => {
-          onClose?.()
+          onEditSuccess()
         },
       }
     )

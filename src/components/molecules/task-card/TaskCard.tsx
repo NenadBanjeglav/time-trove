@@ -104,8 +104,15 @@ export const TaskCard: FC<TaskCardProps> = ({ id, title, description, done, prio
       </FullWidthCard>
 
       <Modal isOpen={isDetailsOpen} onClose={() => setDetailsOpen(false)}>
-        <TaskDetails task={{ id, title, description, done, priority }} />
+        <TaskDetails
+          task={{ id, title, description, done, priority }}
+          onEditSuccess={() => {
+            setDetailsOpen(false)
+            resetEditState()
+          }}
+        />
       </Modal>
+
       <Modal isOpen={isDeleteOpen} onClose={() => setDeleteOpen(false)}>
         <ConfirmDialog
           variant={DialogVariant.DANGER}
