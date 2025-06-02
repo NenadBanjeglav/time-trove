@@ -1,5 +1,4 @@
 import type { RemSizeType } from '../../../styles/theme.types'
-
 import { Heading } from '../../atoms/heading/Heading'
 import { Text } from '../../atoms/text/Text'
 

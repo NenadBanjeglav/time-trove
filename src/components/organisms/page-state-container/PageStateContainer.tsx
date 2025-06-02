@@ -76,7 +76,7 @@ export const PageStateContainer = ({
         />
       )}
 
-      {isEmpty && hasActiveFilters && (
+      {isEmpty && !isLoading && hasActiveFilters && (
         <FeedbackState
           title="No results found!"
           description="Please try searching for something else."
