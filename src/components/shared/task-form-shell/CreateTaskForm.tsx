@@ -3,30 +3,32 @@ import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { useCreateTask } from '../../../api/apiTasks'
-import { TaskPriority } from '../../molecules/task-card/task.types'
+import { ChipSize, ChipStatus } from '../../atoms/chip/chip.types'
 import { InputField } from '../../atoms/input/Input'
+import { Text } from '../../atoms/text/Text'
 import { TextareaField } from '../../atoms/textarea/Textarea'
 import { RadioGroup } from '../../molecules/radio-group/RadioGroup'
-import { ChipSize, ChipStatus } from '../../atoms/chip/chip.types'
-import { Text } from '../../atoms/text/Text'
-import { ErrorWrapper, PriorityWrapper } from '../task-form-shell/taskFormShell.styles'
+import { TaskPriority } from '../../molecules/task-card/task.types'
 import { TaskFormShell } from '../task-form-shell/TaskFormShell'
+import { ErrorWrapper, PriorityWrapper } from '../task-form-shell/taskFormShell.styles'
 
 const schema = z.object({
   title: z.string().min(1, 'Title is required'),
   description: z.string().min(1, 'Description is required'),
   priority: z.nativeEnum(TaskPriority, {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     required_error: 'Priority is required',
   }),
 })
 
 type CreateTaskFormProps = {
-  onClose?: () => void
+  onChange?: () => void
+  onReset?: () => void
 }
 
 export type CreateTaskFormValues = z.infer<typeof schema>
 
-export const CreateTaskForm = ({ onClose }: CreateTaskFormProps) => {
+export const CreateTaskForm = ({ onChange, onReset }: CreateTaskFormProps) => {
   const {
     register,
     control,
@@ -48,7 +50,7 @@ export const CreateTaskForm = ({ onClose }: CreateTaskFormProps) => {
     createTaskMutation(values, {
       onSuccess: () => {
         reset()
-        onClose?.()
+        onReset?.()
       },
     })
   }
@@ -61,10 +63,18 @@ export const CreateTaskForm = ({ onClose }: CreateTaskFormProps) => {
       isSubmitting={isCreating}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <InputField label="Task title" {...register('title')} error={errors.title?.message} />
+      <InputField
+        label="Task title"
+        {...register('title', {
+          onChange: () => onChange?.(),
+        })}
+        error={errors.title?.message}
+      />
       <TextareaField
         label="Description"
-        {...register('description')}
+        {...register('description', {
+          onChange: () => onChange?.(),
+        })}
         error={errors.description?.message}
       />
 
@@ -81,7 +91,10 @@ export const CreateTaskForm = ({ onClose }: CreateTaskFormProps) => {
                 { label: 'High', value: 'High', status: ChipStatus.DANGER },
               ]}
               value={field.value}
-              onChange={field.onChange}
+              onChange={value => {
+                field.onChange(value)
+                onChange?.()
+              }}
               size={ChipSize.SMALL}
               error={!!errors.priority}
             />

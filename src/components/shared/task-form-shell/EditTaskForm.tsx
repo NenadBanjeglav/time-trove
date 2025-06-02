@@ -3,12 +3,13 @@ import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { useEditTask, type Task } from '../../../api/apiTasks'
-import { TaskPriority } from '../../molecules/task-card/task.types'
+import { ChipSize, ChipStatus } from '../../atoms/chip/chip.types'
 import { InputField } from '../../atoms/input/Input'
+import { Text } from '../../atoms/text/Text'
 import { TextareaField } from '../../atoms/textarea/Textarea'
 import { RadioGroup } from '../../molecules/radio-group/RadioGroup'
-import { ChipSize, ChipStatus } from '../../atoms/chip/chip.types'
-import { Text } from '../../atoms/text/Text'
+import { TaskPriority } from '../../molecules/task-card/task.types'
+
 import { TaskFormShell } from './TaskFormShell'
 import { ErrorWrapper, PriorityWrapper } from './taskFormShell.styles'
 
@@ -16,18 +17,20 @@ const schema = z.object({
   title: z.string().min(1, 'Title is required'),
   description: z.string().min(1, 'Description is required'),
   priority: z.nativeEnum(TaskPriority, {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     required_error: 'Priority is required',
   }),
 })
 
 type EditTaskFormProps = {
   task: Partial<Task> & { id: string }
-  onClose?: () => void
+  onReset?: () => void
+  onChange?: () => void
 }
 
 export type EditTaskFormValues = z.infer<typeof schema>
 
-export const EditTaskForm = ({ task, onClose }: EditTaskFormProps) => {
+export const EditTaskForm = ({ task, onReset, onChange }: EditTaskFormProps) => {
   const {
     register,
     control,
@@ -54,7 +57,7 @@ export const EditTaskForm = ({ task, onClose }: EditTaskFormProps) => {
       {
         onSuccess: () => {
           reset()
-          onClose?.()
+          onReset?.()
         },
       }
     )
@@ -67,10 +70,18 @@ export const EditTaskForm = ({ task, onClose }: EditTaskFormProps) => {
       isSubmitting={isEditing}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <InputField label="Task title" {...register('title')} error={errors.title?.message} />
+      <InputField
+        label="Task title"
+        {...register('title', {
+          onChange: () => onChange?.(),
+        })}
+        error={errors.title?.message}
+      />
       <TextareaField
         label="Description"
-        {...register('description')}
+        {...register('description', {
+          onChange: () => onChange?.(),
+        })}
         error={errors.description?.message}
       />
 
@@ -87,7 +98,10 @@ export const EditTaskForm = ({ task, onClose }: EditTaskFormProps) => {
                 { label: 'High', value: 'High', status: ChipStatus.DANGER },
               ]}
               value={field.value}
-              onChange={field.onChange}
+              onChange={value => {
+                field.onChange(value)
+                onChange?.()
+              }}
               size={ChipSize.SMALL}
               error={!!errors.priority}
             />
