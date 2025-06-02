@@ -1,9 +1,11 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
 import { LogoutIcon } from '../../../assets/icons/LogoutIcon'
 import { ROUTES } from '../../../constants/routes'
+import { TRANSLATION_KEYS as T } from '../../../constants/translationKeys'
 import { useUnsavedChangesModal } from '../../../hooks/useUnsavedCHangesModal'
 import { Button } from '../../atoms/button/Button'
 import { Heading } from '../../atoms/heading/Heading'
@@ -16,13 +18,6 @@ import { CreateTaskForm } from '../task-form-shell/CreateTaskForm'
 
 import { ButtonIconWrapper, ButtonWrapper, NavbarContainer, StyledNavbar } from './navbar.styles'
 
-const routeTitleMap: Record<string, string> = {
-  [ROUTES.root]: 'Dashboard',
-  [`/${ROUTES.login}`]: 'Login',
-  [`/${ROUTES.signup}`]: 'Sign Up',
-  [`/${ROUTES.maintenance}`]: 'Maintenance',
-}
-
 type NavbarProps = {
   onLogout: () => void
 }
@@ -30,6 +25,15 @@ type NavbarProps = {
 export const Navbar = ({ onLogout }: NavbarProps) => {
   const { pathname } = useLocation()
   const [isLogoutOpen, setLogoutOpen] = useState(false)
+  const { t } = useTranslation()
+
+  const routeTitleMap: Record<string, string> = {
+    [ROUTES.root]: t(T.NAVBAR.TITLE_DASHBOARD),
+    [`/${ROUTES.login}`]: t(T.NAVBAR.TITLE_LOGIN),
+    [`/${ROUTES.signup}`]: t(T.NAVBAR.TITLE_SIGNUP),
+    [`/${ROUTES.maintenance}`]: t(T.NAVBAR.TITLE_MAINTENANCE),
+  }
+
   const title = routeTitleMap[pathname] ?? 'Dashboard'
 
   const {
@@ -54,7 +58,7 @@ export const Navbar = ({ onLogout }: NavbarProps) => {
         <ButtonIconWrapper>
           <ButtonWrapper>
             <Button onClick={openTaskForm} variant="primary" size="medium" fullWidth>
-              Create task
+              {t(T.NAVBAR.CREATE_TASK)}
             </Button>
 
             <Modal isOpen={isTaskFormOpen} onClose={closeTaskForm}>
@@ -62,11 +66,11 @@ export const Navbar = ({ onLogout }: NavbarProps) => {
             </Modal>
             <Modal isOpen={isDiscardConfirmOpen} onClose={cancelDiscard} zIndex={1100}>
               <ConfirmDialog
-                title="Discard task?"
-                description="You have unsaved changes. Are you sure you want to close the form?"
+                title={t(T.NAVBAR.DISCARD_TITLE)}
+                description={t(T.NAVBAR.DISCARD_DESCRIPTION)}
                 variant={DialogVariant.DANGER}
-                primaryActionLabel="Discard"
-                secondaryActionLabel="Cancel"
+                primaryActionLabel={t(T.NAVBAR.DISCARD_CONFIRM)}
+                secondaryActionLabel={t(T.NAVBAR.DISCARD_CANCEL)}
                 onPrimaryAction={discardTaskForm}
                 onClose={cancelDiscard}
               />
@@ -84,10 +88,10 @@ export const Navbar = ({ onLogout }: NavbarProps) => {
           <Modal isOpen={isLogoutOpen} onClose={() => setLogoutOpen(false)}>
             <ConfirmDialog
               variant={DialogVariant.DANGER}
-              title="Log out"
-              description="Are you sure you want to log out?"
-              primaryActionLabel="Log out"
-              secondaryActionLabel="Cancel"
+              title={t(T.NAVBAR.LOGOUT_TITLE)}
+              description={t(T.NAVBAR.LOGOUT_DESCRIPTION)}
+              primaryActionLabel={t(T.NAVBAR.LOGOUT_CONFIRM)}
+              secondaryActionLabel={t(T.NAVBAR.LOGOUT_CANCEL)}
               onPrimaryAction={() => {
                 onLogout()
                 setLogoutOpen(false)

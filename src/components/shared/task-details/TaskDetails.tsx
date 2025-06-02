@@ -1,5 +1,8 @@
+import { useTranslation } from 'react-i18next'
+
 import { useEditTask, type Task } from '../../../api/apiTasks'
 import { FileIcon } from '../../../assets/icons/FileIcon'
+import { TRANSLATION_KEYS as T } from '../../../constants/translationKeys'
 import { Button } from '../../atoms/button/Button'
 import { Chip } from '../../atoms/chip/Chip'
 import { ChipStatus, ChipSize } from '../../atoms/chip/chip.types'
@@ -21,6 +24,7 @@ type TaskDetailsProps = {
 }
 
 export const TaskDetails = ({ task, onEditSuccess }: TaskDetailsProps) => {
+  const { t } = useTranslation()
   const { editTaskMutation, isEditing } = useEditTask()
 
   const handleMarkAsDone = () => {
@@ -45,13 +49,13 @@ export const TaskDetails = ({ task, onEditSuccess }: TaskDetailsProps) => {
               <Icon icon={FileIcon} pallete="neutral" color="hue200" iconSize="small" />
             </IconWrapper>
             <Heading as="h2" fontWeight="bold" fontSize="large" lineHeight="large">
-              Task details
+              {t(T.TASK_DETAILS.HEADING)}
             </Heading>
           </TaskDetailsIconText>
 
           {task.done !== undefined && (
             <Chip
-              label={task.done ? 'Done' : 'In progress'}
+              label={task.done ? t(T.TASK_DETAILS.DONE) : t(T.TASK_DETAILS.IN_PROGRESS)}
               status={task.done ? ChipStatus.SUCCESS : ChipStatus.WARNING}
               size={ChipSize.SMALL}
             />
@@ -66,7 +70,7 @@ export const TaskDetails = ({ task, onEditSuccess }: TaskDetailsProps) => {
           <Text>{task.description}</Text>
         </TaskDetailsSection>
         <Button size="xlarge" fullWidth onClick={handleMarkAsDone} loading={isEditing}>
-          Mark as done
+          {t(T.TASK_DETAILS.MARK_AS_DONE)}
         </Button>
       </TaskDetailsContainer>
     </ResponsiveFormWrapper>

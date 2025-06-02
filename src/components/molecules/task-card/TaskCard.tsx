@@ -1,8 +1,10 @@
 import { useState, type FC } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { useDeleteTask } from '../../../api/apiTasks'
 import { DeleteIcon } from '../../../assets/icons/DeleteIcon'
 import { EditIcon } from '../../../assets/icons/EditIcon'
+import { TRANSLATION_KEYS as T } from '../../../constants/translationKeys'
 import { useUnsavedChangesModal } from '../../../hooks/useUnsavedCHangesModal'
 import { Chip } from '../../atoms/chip/Chip'
 import { ChipSize } from '../../atoms/chip/chip.types'
@@ -27,6 +29,8 @@ import {
 } from './taskCard.styles'
 
 export const TaskCard: FC<TaskCardProps> = ({ id, title, description, done, priority }) => {
+  const { t } = useTranslation()
+
   const { deleteTaskMutation, isDeleting } = useDeleteTask()
   const [isDetailsOpen, setDetailsOpen] = useState(false)
   const [isDeleteOpen, setDeleteOpen] = useState(false)
@@ -57,7 +61,7 @@ export const TaskCard: FC<TaskCardProps> = ({ id, title, description, done, prio
           <Chip
             status={statusColorMap[status]}
             size={ChipSize.LARGE}
-            label={getStatusLabel(status)}
+            label={getStatusLabel(status, t)}
           />
         </TaskHeader>
         <TaskBody>
@@ -74,7 +78,7 @@ export const TaskCard: FC<TaskCardProps> = ({ id, title, description, done, prio
         <Footer>
           <PriorityWrapper>
             <Text fontSize="small" lineHeight="small" fontWeight="bold">
-              Priority
+              {t(T.TASK_CARD.PRIORITY)}
             </Text>
             <Chip status={priorityColorMap[priority]} size={ChipSize.SMALL} label={priority} />
           </PriorityWrapper>
@@ -116,10 +120,10 @@ export const TaskCard: FC<TaskCardProps> = ({ id, title, description, done, prio
       <Modal isOpen={isDeleteOpen} onClose={() => setDeleteOpen(false)}>
         <ConfirmDialog
           variant={DialogVariant.DANGER}
-          title="Delete this task?"
-          description="Are you sure you want to delete this task? This action cannot be undone."
-          primaryActionLabel="Delete"
-          secondaryActionLabel="Cancel"
+          title={t(T.TASK_CARD.DELETE_TITLE)}
+          description={t(T.TASK_CARD.DELETE_DESCRIPTION)}
+          primaryActionLabel={t(T.TASK_CARD.DELETE_CONFIRM)}
+          secondaryActionLabel={t(T.TASK_CARD.DELETE_CANCEL)}
           onPrimaryAction={() => {
             handleDelete()
             setDeleteOpen(false)
@@ -139,10 +143,10 @@ export const TaskCard: FC<TaskCardProps> = ({ id, title, description, done, prio
       <Modal isOpen={isDiscardConfirmOpen} onClose={cancelDiscardEdit} zIndex={1100}>
         <ConfirmDialog
           variant={DialogVariant.DANGER}
-          title="Discard changes?"
-          description="You have unsaved changes. Are you sure you want to discard them?"
-          primaryActionLabel="Discard"
-          secondaryActionLabel="Cancel"
+          title={t(T.TASK_CARD.DISCARD_TITLE)}
+          description={t(T.TASK_CARD.DISCARD_DESCRIPTION)}
+          primaryActionLabel={t(T.TASK_CARD.DISCARD_CONFIRM)}
+          secondaryActionLabel={t(T.TASK_CARD.DISCARD_CANCEL)}
           onPrimaryAction={discardEdit}
           onClose={cancelDiscardEdit}
         />

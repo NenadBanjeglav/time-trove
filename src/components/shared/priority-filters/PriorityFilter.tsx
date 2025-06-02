@@ -1,24 +1,30 @@
+import { useTranslation } from 'react-i18next'
 import { useSearchParams } from 'react-router-dom'
-import { FilterWrapper, HeadingWrapper, ResponsiveSeparator, TopRow } from './priorityFilter.styles'
-import { RadioGroup, type RadioOption } from '../../molecules/radio-group/RadioGroup'
+
+import { TRANSLATION_KEYS as T } from '../../../constants/translationKeys'
+import { Chip } from '../../atoms/chip/Chip'
 import { ChipSize, ChipStatus } from '../../atoms/chip/chip.types'
 import { Heading } from '../../atoms/heading/Heading'
 import { RadioButton } from '../../atoms/radio-button/RadioButton'
+import { RadioGroup, type RadioOption } from '../../molecules/radio-group/RadioGroup'
 import { RadioOptionLabel, RadioOptionWrapper } from '../../molecules/radio-group/radioGroup.styles'
-import { Chip } from '../../atoms/chip/Chip'
+import { LanguageSwitcher } from '../language-switcher/LanguageSwitcher'
 
-const PRIORITY_OPTIONS: RadioOption[] = [
-  { label: 'Low', value: 'low', status: ChipStatus.SUCCESS },
-  { label: 'Medium', value: 'medium', status: ChipStatus.WARNING },
-  { label: 'High', value: 'high', status: ChipStatus.DANGER },
-]
+import { FilterWrapper, HeadingWrapper, ResponsiveSeparator, TopRow } from './priorityFilter.styles'
 
 export const PriorityFilters = () => {
+  const { t } = useTranslation()
   const [searchParams, setSearchParams] = useSearchParams()
+
+  const PRIORITY_OPTIONS: RadioOption[] = [
+    { label: t(T.PRIORITY_FILTER.PRIORITY.LOW), value: 'low', status: ChipStatus.SUCCESS },
+    { label: t(T.PRIORITY_FILTER.PRIORITY.MEDIUM), value: 'medium', status: ChipStatus.WARNING },
+    { label: t(T.PRIORITY_FILTER.PRIORITY.HIGH), value: 'high', status: ChipStatus.DANGER },
+  ]
 
   const currentPriority = searchParams.get('priority') || ''
 
-  const handleChange = (value: string) => {
+  const handlePriorityChange = (value: string) => {
     if (value === '') {
       searchParams.delete('priority')
     } else {
@@ -34,8 +40,9 @@ export const PriorityFilters = () => {
     <FilterWrapper>
       <HeadingWrapper>
         <Heading fontSize="base" lineHeight="xSmall" fontWeight="bold">
-          Tasks
+          {t(T.PRIORITY_FILTER.HEADING)}
         </Heading>
+        <LanguageSwitcher />
       </HeadingWrapper>
       <TopRow>
         <RadioOptionLabel htmlFor="priority-all">
@@ -45,9 +52,13 @@ export const PriorityFilters = () => {
               name="priority"
               value=""
               checked={currentPriority === ''}
-              onChange={() => handleChange('')}
+              onChange={() => handlePriorityChange('')}
             />
-            <Chip size={ChipSize.SMALL} label="All tasks" status={ChipStatus.PRIMARY} />
+            <Chip
+              size={ChipSize.SMALL}
+              label={t(T.PRIORITY_FILTER.ALL_TASKS)}
+              status={ChipStatus.PRIMARY}
+            />
           </RadioOptionWrapper>
         </RadioOptionLabel>
       </TopRow>
@@ -58,7 +69,7 @@ export const PriorityFilters = () => {
         name="priority"
         options={PRIORITY_OPTIONS}
         value={currentPriority}
-        onChange={handleChange}
+        onChange={handlePriorityChange}
         size={ChipSize.SMALL}
       />
     </FilterWrapper>

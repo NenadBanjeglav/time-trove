@@ -1,6 +1,8 @@
 import { type ReactNode } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useSearchParams } from 'react-router-dom'
 
+import { TRANSLATION_KEYS as T } from '../../../constants/translationKeys'
 import { useUnsavedChangesModal } from '../../../hooks/useUnsavedCHangesModal'
 import { Button } from '../../atoms/button/Button'
 import { Spinner } from '../../atoms/icon/Spinner'
@@ -31,6 +33,7 @@ export const PageStateContainer = ({
   onClick = () => {},
 }: PageStateContainerProps) => {
   const [searchParams] = useSearchParams()
+  const { t } = useTranslation()
 
   const {
     isOpen: isTaskFormOpen,
@@ -53,11 +56,11 @@ export const PageStateContainer = ({
 
       <Modal isOpen={isDiscardConfirmOpen} onClose={cancelDiscard} zIndex={1100}>
         <ConfirmDialog
-          title="Discard task?"
-          description="You have unsaved changes. Are you sure you want to close the form?"
+          title={t(T.PAGE_STATE.DISCARD_TITLE)}
+          description={t(T.PAGE_STATE.DISCARD_DESCRIPTION)}
           variant={DialogVariant.DANGER}
-          primaryActionLabel="Discard"
-          secondaryActionLabel="Cancel"
+          primaryActionLabel={t(T.PAGE_STATE.DISCARD_CONFIRM)}
+          secondaryActionLabel={t(T.PAGE_STATE.DISCARD_CANCEL)}
           onPrimaryAction={discardTaskForm}
           onClose={cancelDiscard}
         />
@@ -72,12 +75,12 @@ export const PageStateContainer = ({
       {!isLoading && error && (
         <FeedbackState
           imageSrc="/images/error.png"
-          title="Something went wrong"
-          description="An error occurred while attempting to retrieve data from the server."
+          title={t(T.PAGE_STATE.ERROR_TITLE)}
+          description={t(T.PAGE_STATE.ERROR_DESCRIPTION)}
           buttonElement={
             <ButtonWrapper>
               <Button variant="neutral" onClick={onClick} fullWidth size="xlarge">
-                Try again
+                {t(T.PAGE_STATE.RETRY)}
               </Button>
             </ButtonWrapper>
           }
@@ -88,12 +91,12 @@ export const PageStateContainer = ({
       {!isLoading && !error && !hasActiveFilters && isEmpty && (
         <FeedbackState
           imageSrc="/images/empty.png"
-          title="Nothing here yet!"
-          description="There are no tasks created"
+          title={t(T.PAGE_STATE.EMPTY_TITLE)}
+          description={t(T.PAGE_STATE.EMPTY_DESCRIPTION)}
           buttonElement={
             <ButtonWrapper>
               <Button variant="primary" fullWidth size="xlarge" onClick={openTaskForm}>
-                Create task
+                {t(T.PAGE_STATE.CREATE_TASK)}
               </Button>
             </ButtonWrapper>
           }
@@ -103,8 +106,8 @@ export const PageStateContainer = ({
 
       {isEmpty && !isLoading && hasActiveFilters && (
         <FeedbackState
-          title="No results found!"
-          description="Please try searching for something else."
+          title={t(T.PAGE_STATE.NO_RESULTS_TITLE)}
+          description={t(T.PAGE_STATE.NO_RESULTS_DESCRIPTION)}
         />
       )}
 

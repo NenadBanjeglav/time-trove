@@ -18,6 +18,8 @@ type AuthFormProps<FormValues> = {
   title: string
   subtitle: string
   buttonLabel: string
+  emailLabel: string
+  passwordLabel: string
   isLoading: boolean
 }
 
@@ -28,6 +30,8 @@ export const AuthForm = <FormValues extends FieldValues>({
   title,
   subtitle,
   buttonLabel,
+  emailLabel,
+  passwordLabel,
   isLoading,
 }: AuthFormProps<FormValues>) => {
   const {
@@ -61,7 +65,7 @@ export const AuthForm = <FormValues extends FieldValues>({
       <InputField
         {...register('username' as Path<FormValues>)}
         error={(errors.username as { message?: string })?.message ?? ''}
-        label="Email"
+        label={emailLabel}
         type="email"
         autoComplete="username"
       />
@@ -69,7 +73,7 @@ export const AuthForm = <FormValues extends FieldValues>({
       <InputField
         {...register('password' as Path<FormValues>)}
         error={(errors.password as { message?: string })?.message ?? ''}
-        label="Password"
+        label={passwordLabel}
         type="password"
         autoComplete="current-password"
       />
