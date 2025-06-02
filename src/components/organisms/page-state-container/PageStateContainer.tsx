@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 import { Button } from '../../atoms/button/Button'
 import { Spinner } from '../../atoms/icon/Spinner'
@@ -8,7 +9,6 @@ import { FullCenteredLayout } from '../../atoms/page-wrapper/pageWrapper.styles'
 import { FeedbackState } from '../../molecules/feedback-state/FeedbackState'
 import { ButtonWrapper } from '../../molecules/feedback-state/feedbackState.styles'
 import { CreateTaskForm } from '../../shared/task-form-shell/CreateTaskForm'
-import { useSearchParams } from 'react-router-dom'
 
 type PageStateContainerProps = {
   navHeight: number
@@ -27,6 +27,10 @@ export const PageStateContainer = ({
   children,
   onClick = () => {},
 }: PageStateContainerProps) => {
+  const [searchParams] = useSearchParams()
+
+  const hasActiveFilters = Boolean(searchParams.get('priority') || searchParams.get('search'))
+
   return (
     <PageWrapper dynamicHeightOffset={navHeight}>
       {isLoading && (
@@ -51,7 +55,7 @@ export const PageStateContainer = ({
         />
       )}
 
-      {!isLoading && !error && isEmpty && (
+      {!isLoading && !error && !hasActiveFilters && isEmpty && (
         <FeedbackState
           imageSrc="/images/empty.png"
           title="Nothing here yet!"
@@ -69,6 +73,13 @@ export const PageStateContainer = ({
             </ButtonWrapper>
           }
           imageMaxWidth="11.25rem"
+        />
+      )}
+
+      {isEmpty && hasActiveFilters && (
+        <FeedbackState
+          title="No results found!"
+          description="Please try searching for something else."
         />
       )}
 
