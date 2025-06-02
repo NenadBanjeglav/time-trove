@@ -1,45 +1,43 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import styled from 'styled-components'
+import { useState } from 'react'
 
-import { Button } from '../button/Button'
+import { Button } from '../../atoms/button/Button'
 
 import { Modal } from './Modal'
 
 const meta: Meta<typeof Modal> = {
-  title: 'Components/Modal',
+  title: 'Atoms/Modal',
   component: Modal,
-  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
 }
 
 export default meta
+
 type Story = StoryObj<typeof Modal>
 
-const DummyContent = ({ onClose }: { onClose?: () => void }) => (
-  <ModalBody>
-    <h2>Example Modal</h2>
-    <p>This is a simple modal for Storybook.</p>
-    <Button variant="danger" onClick={onClose}>
-      Close
-    </Button>
-  </ModalBody>
-)
+export const Default: Story = {
+  render: () => {
+    const [isOpen, setIsOpen] = useState(false)
 
-const ModalBody = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.small};
-`
-
-export const Basic: Story = {
-  render: () => (
-    <Modal>
-      <Modal.Open opens="example">
-        <Button>Open Modal</Button>
-      </Modal.Open>
-
-      <Modal.Window name="example">
-        <DummyContent />
-      </Modal.Window>
-    </Modal>
-  ),
+    return (
+      <>
+        <Button onClick={() => setIsOpen(true)} variant="primary">
+          Open Modal
+        </Button>
+        <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+          <div style={{ padding: '2rem', maxWidth: '400px' }}>
+            <h2 style={{ marginBottom: '1rem' }}>Modal Title</h2>
+            <p style={{ marginBottom: '1rem' }}>
+              This is a modal. Click outside or press Escape to close it.
+            </p>
+            <Button onClick={() => setIsOpen(false)} variant="danger">
+              Close
+            </Button>
+          </div>
+        </Modal>
+      </>
+    )
+  },
 }
