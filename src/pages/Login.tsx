@@ -70,7 +70,7 @@ export const Login = () => {
         onSubmit={handleLogin}
         icon={LogoutIcon}
         title={t(T.AUTH.LOGIN)}
-        subtitle={t(T.AUTH.SUBTITLE)}
+        subtitle={t(T.AUTH.SIGNUP_SUBTITLE)}
         buttonLabel={t(T.AUTH.LOGIN)}
         emailLabel={t(T.AUTH.EMAIL)}
         passwordLabel={t(T.AUTH.PASSWORD)}
