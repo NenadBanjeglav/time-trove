@@ -1,33 +1,34 @@
-import type { FC } from 'react'
-import styled from 'styled-components'
+import { useTranslation } from 'react-i18next'
 
+import { TRANSLATION_KEYS as T } from '../../../constants/translationKeys'
+import { FlatList } from '../../atoms/flat-list/FlatList'
+import { FeedbackState } from '../feedback-state/FeedbackState'
 import { TaskCard } from '../task-card/TaskCard'
 import { type TaskCardProps } from '../task-card/task.types'
 
-export const TaskListWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-auto-rows: minmax(0, 1fr);
-  gap: ${({ theme }) => theme.spacing.medium};
-  max-width: 1240px;
-  margin: 0 auto;
-  width: 100%;
-
-  @media (max-width: 760px) {
-    grid-template-columns: 1fr;
-  }
-`
-
 type TaskListProps = {
   tasks: TaskCardProps[]
+  isLoading: boolean
+  hasActiveFilters: boolean
 }
 
-export const TaskList: FC<TaskListProps> = ({ tasks }) => {
+export const TaskList = ({ tasks, isLoading, hasActiveFilters }: TaskListProps) => {
+  const { t } = useTranslation()
+
+  const showEmpty = !isLoading && hasActiveFilters
+
   return (
-    <TaskListWrapper>
-      {tasks.map(task => (
-        <TaskCard key={task.id} {...task} />
-      ))}
-    </TaskListWrapper>
+    <FlatList
+      items={tasks}
+      render={task => <TaskCard key={task.id} {...task} />}
+      empty={
+        showEmpty ? (
+          <FeedbackState
+            title={t(T.PAGE_STATE.NO_RESULTS_TITLE)}
+            description={t(T.PAGE_STATE.NO_RESULTS_DESCRIPTION)}
+          />
+        ) : null
+      }
+    />
   )
 }

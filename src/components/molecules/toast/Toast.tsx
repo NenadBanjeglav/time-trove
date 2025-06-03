@@ -1,6 +1,6 @@
 import { RemoveIcon } from '../../../assets/icons/RemoveIcon'
-import { Heading } from '../heading/Heading'
-import { Icon } from '../icon/Icon'
+import { Heading } from '../../atoms/heading/Heading'
+import { Icon } from '../../atoms/icon/Icon'
 
 import { iconMap, palleteMap } from './helpers'
 import { CloseButton, Content, Message, ToastHeader, ToastWrapper } from './toast.styles'

@@ -1,6 +1,6 @@
 import { createContext } from 'react'
 
-import type { ToastInput } from '../components/atoms/toast/toast.types'
+import type { ToastInput } from '../components/molecules/toast/toast.types'
 
 type ToastContextType = {
   addToast: (toast: ToastInput) => void

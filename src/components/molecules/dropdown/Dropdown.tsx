@@ -4,8 +4,8 @@ import { CheckIcon } from '../../../assets/icons/CheckIcon'
 import { ChevronDown } from '../../../assets/icons/ChevronDown'
 import { ChevronUp } from '../../../assets/icons/ChevronUp'
 import { useOutsideClick } from '../../../hooks/useOutsideClick'
-import { Icon } from '../icon/Icon'
-import { Text } from '../text/Text'
+import { Icon } from '../../atoms/icon/Icon'
+import { Text } from '../../atoms/text/Text'
 
 import { DropdownWrapper, TriggerButton, Menu, MenuItem, IconWrapper } from './dropdown.styles'
 

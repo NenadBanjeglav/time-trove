@@ -68,11 +68,16 @@ export const Dashboard = () => {
       navHeight={navHeight}
       isLoading={isPending}
       error={isError}
-      isEmpty={!data?.items.length}
+      isEmpty={!data?.items.length && !search && !priority}
+      hasActiveFilters={!!search || !!priority}
       onClick={handleClick}
     >
       <PriorityFilters />
-      <TaskList tasks={data?.items || []} />
+      <TaskList
+        tasks={data?.items || []}
+        isLoading={isPending}
+        hasActiveFilters={!!search || !!priority}
+      />
       <Pagination count={data?.totalItems || 0} currentPage={data?.page ?? 1} />
     </PageStateContainer>
   )

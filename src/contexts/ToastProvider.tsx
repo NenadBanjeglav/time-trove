@@ -1,8 +1,8 @@
 import { type ReactNode, useState, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 
-import { Toast } from '../components/atoms/toast/Toast'
-import type { ToastProps, ToastInput } from '../components/atoms/toast/toast.types'
+import { Toast } from '../components/molecules/toast/Toast'
+import type { ToastProps, ToastInput } from '../components/molecules/toast/toast.types'
 
 import { ToastContext } from './ToastContext'
 import { ToastContainer } from './toastContext.styles'
