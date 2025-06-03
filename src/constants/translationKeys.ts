@@ -92,6 +92,12 @@ export const TRANSLATION_KEYS = {
     DISCARD_DESCRIPTION: 'taskCard.discardDescription',
     DISCARD_CONFIRM: 'taskCard.discardConfirm',
     DISCARD_CANCEL: 'taskCard.discardCancel',
+
+    PRIORITY_LABELS: {
+      LOW: 'priorityFilter.priority.low',
+      MEDIUM: 'priorityFilter.priority.medium',
+      HIGH: 'priorityFilter.priority.high',
+    },
   },
   TASK_STATUS: {
     DONE: 'taskStatus.done',

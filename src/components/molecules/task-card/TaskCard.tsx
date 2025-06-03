@@ -80,7 +80,15 @@ export const TaskCard: FC<TaskCardProps> = ({ id, title, description, done, prio
             <Text fontSize="small" lineHeight="small" fontWeight="bold">
               {t(T.TASK_CARD.PRIORITY)}
             </Text>
-            <Chip status={priorityColorMap[priority]} size={ChipSize.SMALL} label={priority} />
+            <Chip
+              status={priorityColorMap[priority]}
+              size={ChipSize.SMALL}
+              label={t(
+                T.TASK_CARD.PRIORITY_LABELS[
+                  priority.toUpperCase() as keyof typeof T.TASK_CARD.PRIORITY_LABELS
+                ]
+              )}
+            />
           </PriorityWrapper>
           <ButtonWrapper>
             <IconButton
