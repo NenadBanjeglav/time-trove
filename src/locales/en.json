@@ -132,5 +132,9 @@
     "successMessage": "“{{title}}” was successfully removed.",
     "errorTitle": "Deletion failed",
     "errorMessage": "Could not delete “{{title}}”."
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark"
   }
 }

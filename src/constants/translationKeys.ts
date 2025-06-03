@@ -133,4 +133,8 @@ export const TRANSLATION_KEYS = {
     ERROR_TITLE: 'deleteTask.errorTitle',
     ERROR_MESSAGE: 'deleteTask.errorMessage',
   },
+  THEME: {
+    LIGHT: 'theme.light',
+    DARK: 'theme.dark',
+  },
 }

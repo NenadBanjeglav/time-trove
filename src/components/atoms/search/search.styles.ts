@@ -5,7 +5,7 @@ export const SearchWrapper = styled.div`
   align-items: center;
   position: relative;
   gap: ${({ theme }) => theme.spacing.xSmall};
-  background-color: ${({ theme }) => theme.colors.neutral.hue0};
+  background-color: ${({ theme }) => theme.colors.neutral.hue50};
   border-radius: 8px;
   width: 100%;
   max-width: 340px;
@@ -33,6 +33,7 @@ export const StyledInput = styled.input<StyledInputProps>`
   box-sizing: border-box;
   font-size: ${({ theme }) => theme.typography.fontSize.base};
   color: ${({ theme }) => theme.colors.neutral.hue500};
+  background-color: ${({ theme }) => theme.colors.neutral.hue50};
   width: 100%;
   height: 100%;
   padding-left: 56px;

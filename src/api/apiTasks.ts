@@ -1,9 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
+import { useSearchParams } from 'react-router-dom'
 
 import type { TaskPriority } from '../components/molecules/task-card/task.types'
+import { PAGE_SIZE } from '../constants/constants'
 import { TRANSLATION_KEYS as T } from '../constants/translationKeys'
 import { useToast } from '../contexts/useToast'
+import { useAppState } from '../stores/useAppStore'
 
 import { axiosInstance } from './axios'
 
@@ -62,6 +65,9 @@ export const useCreateTask = () => {
   const { t } = useTranslation()
   const queryClient = useQueryClient()
   const { addToast } = useToast()
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  const totalTasks = useAppState(state => state.totalTasks)
 
   const { mutate: createTaskMutation, isPending: isCreating } = useMutation<
     Task,
@@ -76,6 +82,12 @@ export const useCreateTask = () => {
         message: t(T.CREATE_TASK.SUCCESS_MESSAGE),
       })
       queryClient.invalidateQueries({ queryKey: ['tasks'] })
+
+      const totalAfterInsert = totalTasks + 1
+      const totalPages = Math.ceil(totalAfterInsert / PAGE_SIZE)
+
+      searchParams.set('page', totalPages.toString())
+      setSearchParams(searchParams)
     },
     onError: err => {
       addToast({

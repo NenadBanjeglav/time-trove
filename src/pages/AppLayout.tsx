@@ -2,11 +2,11 @@ import { useLayoutEffect, useRef, useState } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 
 import { Navbar } from '../components/shared/navbar/Navbar'
-import { useAppStatus } from '../contexts/AppStatusContext'
 import { useLogout } from '../hooks/useLogout'
+import { useAppState } from '../stores/useAppStore'
 
 export const AppLayout = () => {
-  const { maintenance } = useAppStatus()
+  const maintenance = useAppState(state => state.maintenance)
   const ref = useRef<HTMLElement>(null)
   const [navHeight, setNavHeight] = useState(56)
   const { logout } = useLogout()

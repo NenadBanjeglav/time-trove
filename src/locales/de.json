@@ -132,5 +132,9 @@
     "successMessage": "„{{title}}“ wurde erfolgreich entfernt.",
     "errorTitle": "Löschen fehlgeschlagen",
     "errorMessage": "„{{title}}“ konnte nicht gelöscht werden."
+  },
+  "theme": {
+    "light": "Hell",
+    "dark": "Dunkel"
   }
 }
