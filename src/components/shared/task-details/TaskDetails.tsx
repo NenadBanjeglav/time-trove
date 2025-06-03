@@ -9,13 +9,14 @@ import { ChipStatus, ChipSize } from '../../atoms/chip/chip.types'
 import { Heading } from '../../atoms/heading/Heading'
 import { Icon } from '../../atoms/icon/Icon'
 import { Text } from '../../atoms/text/Text'
-import { IconWrapper, ResponsiveFormWrapper } from '../task-form-shell/taskFormShell.styles'
+import { IconWrapper } from '../task-form-shell/taskFormShell.styles'
 
 import {
   TaskDetailsContainer,
   TaskDetailsHeader,
   TaskDetailsIconText,
   TaskDetailsSection,
+  TaskDetailsWrapper,
 } from './taskDetails.styles'
 
 type TaskDetailsProps = {
@@ -41,7 +42,7 @@ export const TaskDetails = ({ task, onEditSuccess }: TaskDetailsProps) => {
   }
 
   return (
-    <ResponsiveFormWrapper>
+    <TaskDetailsWrapper>
       <TaskDetailsContainer as="div">
         <TaskDetailsHeader>
           <TaskDetailsIconText>
@@ -73,6 +74,6 @@ export const TaskDetails = ({ task, onEditSuccess }: TaskDetailsProps) => {
           {t(T.TASK_DETAILS.MARK_AS_DONE)}
         </Button>
       </TaskDetailsContainer>
-    </ResponsiveFormWrapper>
+    </TaskDetailsWrapper>
   )
 }
