@@ -1,15 +1,15 @@
 import { useTranslation } from 'react-i18next'
 import { FiMoon, FiSun } from 'react-icons/fi'
 
-import { useThemeMode } from '../../../ThemeModeProvider'
 import { TRANSLATION_KEYS as T } from '../../../constants/translationKeys'
+import { useAppState } from '../../../stores/useAppStore'
 
 import { SliderBackground, SliderWrapper, ToggleButton, ToggleWrapper } from './themeToggle.styles'
 
 export const ThemeToggle = () => {
-  const { themeMode, toggleTheme } = useThemeMode()
   const { t } = useTranslation()
-
+  const themeMode = useAppState(state => state.themeMode)
+  const toggleTheme = useAppState(state => state.toggleTheme)
   return (
     <ToggleWrapper>
       <ToggleButton

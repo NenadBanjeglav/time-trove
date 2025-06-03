@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 
 export const StyledPageWrapper = styled.div<{ $heightOffset?: number }>`
-  padding: 16px 16px;
+  padding: 16px;
+  padding-bottom: 16px;
   margin: 0 auto;
   width: 100%;
   min-height: ${({ $heightOffset }) =>
@@ -9,6 +10,10 @@ export const StyledPageWrapper = styled.div<{ $heightOffset?: number }>`
   background-color: ${({ theme }) => theme.colors.neutral.hue50};
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 1024px) {
+    padding-bottom: 6rem;
+  }
 `
 export const FullCenteredLayout = styled.div`
   flex: 1;
