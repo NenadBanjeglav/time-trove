@@ -15,9 +15,14 @@ export const FilterWrapper = styled.div`
 `
 
 export const HeadingWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
   @media (max-width: 760px) {
     margin-inline: 16px;
     margin-bottom: 16px;
+    width: 100%;
+    justify-content: space-between;
   }
 `
 

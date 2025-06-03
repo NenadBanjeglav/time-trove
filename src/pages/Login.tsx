@@ -1,15 +1,18 @@
+import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { z } from 'zod'
 
 import { LogoutIcon } from '../assets/icons/LogoutIcon'
-import { AuthForm } from '../components/molecules/authform/AuthForm'
-
-import { useLoginMutation } from '../hooks/useLoginMutation'
 import { Logo } from '../components/atoms/logo/Logo'
 import { Text } from '../components/atoms/text/Text'
-import { Link } from 'react-router-dom'
+import { AuthForm } from '../components/molecules/authform/AuthForm'
+import { LanguageSwitcher } from '../components/shared/language-switcher/LanguageSwitcher'
+import { TRANSLATION_KEYS as T } from '../constants/translationKeys'
+import { useLoginMutation } from '../hooks/useLoginMutation'
 
 const PageWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,6 +30,12 @@ const TextLinkWrapper = styled.div`
   margin-top: 20px;
 `
 
+const DropdownWrapper = styled.div`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+`
+
 export const StyledLink = styled(Link)`
   color: ${({ theme }) => theme.colors.primary.hue100};
   text-decoration: none;
@@ -42,6 +51,7 @@ type LoginFormValues = z.infer<typeof loginSchema>
 
 export const Login = () => {
   const { loginMutation, isLoggingIn } = useLoginMutation()
+  const { t } = useTranslation()
 
   const handleLogin = async (data: LoginFormValues) => {
     loginMutation(data)
@@ -49,6 +59,9 @@ export const Login = () => {
 
   return (
     <PageWrapper>
+      <DropdownWrapper>
+        <LanguageSwitcher />
+      </DropdownWrapper>
       <LogoWrapper>
         <Logo variant="full" />
       </LogoWrapper>
@@ -56,14 +69,16 @@ export const Login = () => {
         schema={loginSchema}
         onSubmit={handleLogin}
         icon={LogoutIcon}
-        title="Log in"
-        subtitle="Use your email to log in."
-        buttonLabel="Log in"
+        title={t(T.AUTH.LOGIN)}
+        subtitle={t(T.AUTH.SIGNUP_SUBTITLE)}
+        buttonLabel={t(T.AUTH.LOGIN)}
+        emailLabel={t(T.AUTH.EMAIL)}
+        passwordLabel={t(T.AUTH.PASSWORD)}
         isLoading={isLoggingIn}
       />
       <TextLinkWrapper>
         <Text fontSize="small" lineHeight="small" fontWeight="regular" as="span">
-          Don't have an account yet? <StyledLink to="/signup">Sign up</StyledLink>
+          {t('auth.noAccount')} <StyledLink to="/signup">{t('auth.signup')}</StyledLink>
         </Text>
       </TextLinkWrapper>
     </PageWrapper>

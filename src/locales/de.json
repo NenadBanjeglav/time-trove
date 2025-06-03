@@ -1,0 +1,136 @@
+{
+  "auth": {
+    "login": "Einloggen",
+    "signup": "Registrieren",
+    "noAccount": "Noch kein Konto?",
+    "subtitle": "Benutze deine E-Mail, um dich einzuloggen.",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "signupTitle": "Registrieren",
+    "signupSubtitle": "Erstelle ein Konto für dein TimeTrove-Dashboard.",
+    "signupButton": "Registrieren",
+    "hasAccount": "Du hast bereits ein Konto?"
+  },
+  "pageState": {
+    "discardTitle": "Aufgabe verwerfen?",
+    "discardDescription": "Du hast ungespeicherte Änderungen. Bist du sicher, dass du das Formular schließen möchtest?",
+    "discardConfirm": "Verwerfen",
+    "discardCancel": "Abbrechen",
+
+    "errorTitle": "Etwas ist schiefgelaufen",
+    "errorDescription": "Beim Abrufen der Daten vom Server ist ein Fehler aufgetreten.",
+    "retry": "Erneut versuchen",
+
+    "emptyTitle": "Hier ist noch nichts!",
+    "emptyDescription": "Es wurden keine Aufgaben erstellt",
+    "createTask": "Aufgabe erstellen",
+
+    "noResultsTitle": "Keine Ergebnisse gefunden!",
+    "noResultsDescription": "Bitte versuche, etwas anderes zu suchen."
+  },
+  "navbar": {
+    "titleDashboard": "Dashboard",
+    "titleLogin": "Einloggen",
+    "titleSignup": "Registrieren",
+    "titleMaintenance": "Wartung",
+
+    "createTask": "Aufgabe erstellen",
+
+    "discardTitle": "Aufgabe verwerfen?",
+    "discardDescription": "Du hast ungespeicherte Änderungen. Bist du sicher, dass du das Formular schließen möchtest?",
+    "discardConfirm": "Verwerfen",
+    "discardCancel": "Abbrechen",
+
+    "logoutTitle": "Abmelden",
+    "logoutDescription": "Bist du sicher, dass du dich abmelden möchtest?",
+    "logoutConfirm": "Abmelden",
+    "logoutCancel": "Abbrechen"
+  },
+  "search": {
+    "placeholder": "Suchen"
+  },
+  "taskForm": {
+    "createTitle": "Aufgabe erstellen",
+    "createDescription": "Bitte gib die erforderlichen Details ein, um die Aufgabe zu erstellen.",
+    "createButton": "Aufgabe erstellen",
+    "editTitle": "Aufgabe bearbeiten",
+    "editButton": "Änderungen speichern",
+    "titleLabel": "Aufgabentitel",
+    "descriptionLabel": "Beschreibung",
+    "priorityRequired": "Priorität ist erforderlich",
+    "titleRequired": "Titel ist erforderlich",
+    "descriptionRequired": "Beschreibung ist erforderlich",
+    "priority": {
+      "low": "Niedrig",
+      "medium": "Mittel",
+      "high": "Hoch"
+    },
+    "sectionHeading": "Aufgabendetails"
+  },
+  "priorityFilter": {
+    "heading": "Aufgaben",
+    "allTasks": "Alle Aufgaben",
+    "priority": {
+      "low": "Niedrig",
+      "medium": "Mittel",
+      "high": "Hoch"
+    }
+  },
+  "taskDetails": {
+    "heading": "Aufgabendetails",
+    "done": "Erledigt",
+    "inProgress": "In Bearbeitung",
+    "markAsDone": "Als erledigt markieren"
+  },
+  "taskCard": {
+    "priority": "Priorität",
+    "deleteTitle": "Diese Aufgabe löschen?",
+    "deleteDescription": "Bist du sicher, dass du diese Aufgabe löschen möchtest? Dies kann nicht rückgängig gemacht werden.",
+    "deleteConfirm": "Löschen",
+    "deleteCancel": "Abbrechen",
+
+    "discardTitle": "Änderungen verwerfen?",
+    "discardDescription": "Du hast ungespeicherte Änderungen. Möchtest du sie wirklich verwerfen?",
+    "discardConfirm": "Verwerfen",
+    "discardCancel": "Abbrechen"
+  },
+  "taskStatus": {
+    "done": "Erledigt",
+    "inProgress": "In Bearbeitung"
+  },
+  "toast": {
+    "error": "Fehler",
+    "success": "Erfolg"
+  },
+  "login": {
+    "successTitle": "Willkommen zurück!",
+    "successMessage": "Du hast dich erfolgreich eingeloggt.",
+    "errorTitle": "Anmeldung fehlgeschlagen",
+    "defaultError": "Ungültige Anfragedaten"
+  },
+  "signup": {
+    "successTitle": "Willkommen!",
+    "successMessage": "Registriert und eingeloggt als {{username}}.",
+    "autoLoginErrorTitle": "Automatische Anmeldung fehlgeschlagen",
+    "autoLoginErrorMessage": "Dein Konto wurde erstellt, aber die Anmeldung ist fehlgeschlagen. Bitte versuche es erneut.",
+    "errorTitle": "Registrierung fehlgeschlagen",
+    "defaultError": "Registrierung fehlgeschlagen."
+  },
+  "createTask": {
+    "successTitle": "Aufgabe erstellt",
+    "successMessage": "Deine neue Aufgabe wurde erfolgreich hinzugefügt.",
+    "errorTitle": "Erstellung fehlgeschlagen",
+    "defaultError": "Ein unerwarteter Fehler ist aufgetreten."
+  },
+  "editTask": {
+    "successTitle": "Aufgabe aktualisiert",
+    "successMessage": "Die Aufgabe wurde erfolgreich aktualisiert.",
+    "errorTitle": "Aktualisierung fehlgeschlagen"
+  },
+  "deleteTask": {
+    "successTitle": "Aufgabe gelöscht",
+    "successMessage": "„{{title}}“ wurde erfolgreich entfernt.",
+    "errorTitle": "Löschen fehlgeschlagen",
+    "errorMessage": "„{{title}}“ konnte nicht gelöscht werden."
+  }
+}

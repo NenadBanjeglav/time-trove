@@ -1,6 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
 
 import type { TaskPriority } from '../components/molecules/task-card/task.types'
+import { TRANSLATION_KEYS as T } from '../constants/translationKeys'
 import { useToast } from '../contexts/useToast'
 
 import { axiosInstance } from './axios'
@@ -57,6 +59,7 @@ export const createTask = async (payload: CreateTaskPayload): Promise<Task> => {
 }
 
 export const useCreateTask = () => {
+  const { t } = useTranslation()
   const queryClient = useQueryClient()
   const { addToast } = useToast()
 
@@ -69,16 +72,16 @@ export const useCreateTask = () => {
     onSuccess: () => {
       addToast({
         type: 'success',
-        title: 'Task created',
-        message: 'Your new task was successfully added.',
+        title: t(T.CREATE_TASK.SUCCESS_TITLE),
+        message: t(T.CREATE_TASK.SUCCESS_MESSAGE),
       })
       queryClient.invalidateQueries({ queryKey: ['tasks'] })
     },
     onError: err => {
       addToast({
         type: 'error',
-        title: 'Creation failed',
-        message: err.message || 'An unexpected error occurred.',
+        title: t(T.CREATE_TASK.ERROR_TITLE),
+        message: err.message || t(T.CREATE_TASK.DEFAULT_ERROR),
       })
     },
   })
@@ -95,6 +98,7 @@ export const updateTask = async (id: string, values: UpdateTaskPayload): Promise
 }
 
 export const useEditTask = () => {
+  const { t } = useTranslation()
   const queryClient = useQueryClient()
   const { addToast } = useToast()
 
@@ -108,14 +112,14 @@ export const useEditTask = () => {
       queryClient.invalidateQueries({ queryKey: ['tasks'] })
       addToast({
         type: 'success',
-        title: 'Task updated',
-        message: 'The task was successfully updated.',
+        title: t(T.EDIT_TASK.SUCCESS_TITLE),
+        message: t(T.EDIT_TASK.SUCCESS_MESSAGE),
       })
     },
     onError: err => {
       addToast({
         type: 'error',
-        title: 'Update failed',
+        title: t(T.EDIT_TASK.ERROR_TITLE),
         message: err.message,
       })
     },
@@ -130,6 +134,7 @@ export const deleteTask = async (id: string): Promise<void> => {
 }
 
 export const useDeleteTask = () => {
+  const { t } = useTranslation()
   const queryClient = useQueryClient()
   const { addToast } = useToast()
 
@@ -143,15 +148,15 @@ export const useDeleteTask = () => {
       queryClient.invalidateQueries({ queryKey: ['tasks'] })
       addToast({
         type: 'success',
-        title: 'Task deleted',
-        message: `“${title}” was successfully removed.`,
+        title: t(T.DELETE_TASK.SUCCESS_TITLE),
+        message: t(T.DELETE_TASK.SUCCESS_MESSAGE, { title }),
       })
     },
     onError: (_error, { title }) => {
       addToast({
         type: 'error',
-        title: 'Deletion failed',
-        message: `Could not delete “${title}”.`,
+        title: t(T.DELETE_TASK.ERROR_TITLE),
+        message: t(T.DELETE_TASK.ERROR_MESSAGE, { title }),
       })
     },
   })

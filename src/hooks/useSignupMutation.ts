@@ -1,12 +1,15 @@
 import { useMutation } from '@tanstack/react-query'
 import type { AxiosError } from 'axios'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
 import { signup, login } from '../api/apiAuth'
 import type { SignUpPayload, UserResponse } from '../api/apiAuth'
+import { TRANSLATION_KEYS as T } from '../constants/translationKeys'
 import { useToast } from '../contexts/useToast'
 
 export const useSignupMutation = () => {
+  const { t } = useTranslation()
   const { addToast } = useToast()
   const navigate = useNavigate()
 
@@ -23,8 +26,8 @@ export const useSignupMutation = () => {
 
         addToast({
           type: 'success',
-          title: 'Welcome!',
-          message: `Signed up and logged in as ${user.username}`,
+          title: t(T.SIGNUP.SUCCESS_TITLE),
+          message: t(T.SIGNUP.SUCCESS_MESSAGE, { username: user.username }),
         })
 
         navigate('/')
@@ -33,8 +36,8 @@ export const useSignupMutation = () => {
 
         addToast({
           type: 'error',
-          title: 'Auto-login failed',
-          message: 'Your account was created, but login failed. Please try again.',
+          title: t(T.SIGNUP.AUTOLOGIN_ERROR_TITLE),
+          message: t(T.SIGNUP.AUTOLOGIN_ERROR_MESSAGE),
         })
 
         navigate('/login')
@@ -47,7 +50,7 @@ export const useSignupMutation = () => {
 
       addToast({
         type: 'error',
-        title: 'Signup failed',
+        title: t(T.SIGNUP.ERROR_TITLE),
         message: serverMsg,
       })
     },

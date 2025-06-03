@@ -1,3 +1,4 @@
+import { TRANSLATION_KEYS as T } from '../../../constants/translationKeys'
 import { ChipStatus } from '../../atoms/chip/chip.types'
 
 import { TaskPriority, TaskStatus } from './task.types'
@@ -13,6 +14,6 @@ export const statusColorMap: Record<TaskStatus, ChipStatus> = {
   [TaskStatus.DONE]: ChipStatus.SUCCESS,
 }
 
-export const getStatusLabel = (status: TaskStatus) => {
-  return status === TaskStatus.INPROGRESS ? 'In Progress' : 'Done'
+export const getStatusLabel = (status: TaskStatus, t: (key: string) => string) => {
+  return status === TaskStatus.DONE ? t(T.TASK_STATUS.DONE) : t(T.TASK_STATUS.IN_PROGRESS)
 }

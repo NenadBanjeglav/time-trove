@@ -1,8 +1,12 @@
+import type { schema } from '@hookform/resolvers/ajv/src/__tests__/__fixtures__/data.js'
 import { zodResolver } from '@hookform/resolvers/zod'
+import type { TFunction } from 'i18next'
 import { Controller, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { z } from 'zod'
 
 import { useCreateTask } from '../../../api/apiTasks'
+import { TRANSLATION_KEYS as T } from '../../../constants/translationKeys'
 import { ChipSize, ChipStatus } from '../../atoms/chip/chip.types'
 import { InputField } from '../../atoms/input/Input'
 import { Text } from '../../atoms/text/Text'
@@ -12,23 +16,27 @@ import { TaskPriority } from '../../molecules/task-card/task.types'
 import { TaskFormShell } from '../task-form-shell/TaskFormShell'
 import { ErrorWrapper, PriorityWrapper } from '../task-form-shell/taskFormShell.styles'
 
-const schema = z.object({
-  title: z.string().min(1, 'Title is required'),
-  description: z.string().min(1, 'Description is required'),
-  priority: z.nativeEnum(TaskPriority, {
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    required_error: 'Priority is required',
-  }),
-})
-
 type CreateTaskFormProps = {
   onChange?: () => void
   onReset?: () => void
 }
 
+const getSchema = (t: TFunction) =>
+  z.object({
+    title: z.string().min(1, t(T.TASK_FORM.TITLE_REQUIRED)),
+    description: z.string().min(1, t(T.TASK_FORM.DESCRIPTION_REQUIRED)),
+    priority: z.nativeEnum(TaskPriority, {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      required_error: t(T.TASK_FORM.PRIORITY_REQUIRED),
+    }),
+  })
+
 export type CreateTaskFormValues = z.infer<typeof schema>
 
 export const CreateTaskForm = ({ onChange, onReset }: CreateTaskFormProps) => {
+  const { t } = useTranslation()
+  const schema = getSchema(t)
+
   const {
     register,
     control,
@@ -57,21 +65,21 @@ export const CreateTaskForm = ({ onChange, onReset }: CreateTaskFormProps) => {
 
   return (
     <TaskFormShell
-      title="Create task"
-      description="Please provide the required details to create the task."
-      buttonLabel="Create task"
+      title={t(T.TASK_FORM.CREATE_TITLE)}
+      description={t(T.TASK_FORM.CREATE_DESCRIPTION)}
+      buttonLabel={t(T.TASK_FORM.CREATE_BUTTON)}
       isSubmitting={isCreating}
       onSubmit={handleSubmit(onSubmit)}
     >
       <InputField
-        label="Task title"
+        label={t(T.TASK_FORM.TITLE_LABEL)}
         {...register('title', {
           onChange: () => onChange?.(),
         })}
         error={errors.title?.message}
       />
       <TextareaField
-        label="Description"
+        label={t(T.TASK_FORM.DESCRIPTION_LABEL)}
         {...register('description', {
           onChange: () => onChange?.(),
         })}
@@ -86,9 +94,21 @@ export const CreateTaskForm = ({ onChange, onReset }: CreateTaskFormProps) => {
             <RadioGroup
               name={field.name}
               options={[
-                { label: 'Low', value: 'Low', status: ChipStatus.SUCCESS },
-                { label: 'Medium', value: 'Medium', status: ChipStatus.WARNING },
-                { label: 'High', value: 'High', status: ChipStatus.DANGER },
+                {
+                  label: t(T.TASK_FORM.PRIORITY.LOW),
+                  value: TaskPriority.LOW,
+                  status: ChipStatus.SUCCESS,
+                },
+                {
+                  label: t(T.TASK_FORM.PRIORITY.MEDIUM),
+                  value: TaskPriority.MEDIUM,
+                  status: ChipStatus.WARNING,
+                },
+                {
+                  label: t(T.TASK_FORM.PRIORITY.HIGH),
+                  value: TaskPriority.HIGH,
+                  status: ChipStatus.DANGER,
+                },
               ]}
               value={field.value}
               onChange={value => {

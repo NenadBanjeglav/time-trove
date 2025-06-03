@@ -1,13 +1,15 @@
+import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { z } from 'zod'
 
 import { LogoutIcon } from '../assets/icons/LogoutIcon'
-import { AuthForm } from '../components/molecules/authform/AuthForm'
-
-import { useSignupMutation } from '../hooks/useSignupMutation'
-import { Link } from 'react-router-dom'
 import { Logo } from '../components/atoms/logo/Logo'
 import { Text } from '../components/atoms/text/Text'
+import { AuthForm } from '../components/molecules/authform/AuthForm'
+import { LanguageSwitcher } from '../components/shared/language-switcher/LanguageSwitcher'
+import { TRANSLATION_KEYS as T } from '../constants/translationKeys'
+import { useSignupMutation } from '../hooks/useSignupMutation'
 
 const PageWrapper = styled.div`
   display: flex;
@@ -27,6 +29,12 @@ const TextLinkWrapper = styled.div`
   margin-top: 20px;
 `
 
+const DropdownWrapper = styled.div`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+`
+
 export const StyledLink = styled(Link)`
   color: ${({ theme }) => theme.colors.primary.hue100};
   text-decoration: none;
@@ -42,12 +50,16 @@ type SignupFormValues = z.infer<typeof signupSchema>
 
 export const Signup = () => {
   const { signupMutation, isSigningUp } = useSignupMutation()
+  const { t } = useTranslation()
 
   const handleSignup = (data: SignupFormValues) => {
     signupMutation(data)
   }
   return (
     <PageWrapper>
+      <DropdownWrapper>
+        <LanguageSwitcher />
+      </DropdownWrapper>
       <LogoWrapper>
         <Logo variant="full" />
       </LogoWrapper>
@@ -55,14 +67,16 @@ export const Signup = () => {
         schema={signupSchema}
         onSubmit={handleSignup}
         icon={LogoutIcon}
-        title="Sign up"
-        subtitle="Create an account for your TimeTrove Dashboard."
-        buttonLabel="Sign up"
+        title={t(T.AUTH.SIGNUP_TITLE)}
+        subtitle={t(T.AUTH.SIGNUP_SUBTITLE)}
+        buttonLabel={t(T.AUTH.SIGNUP_BUTTON)}
+        emailLabel={t(T.AUTH.EMAIL)}
+        passwordLabel={t(T.AUTH.PASSWORD)}
         isLoading={isSigningUp}
       />
       <TextLinkWrapper>
         <Text fontSize="small" lineHeight="small" fontWeight="regular" as="span">
-          You already have an account? <StyledLink to="/login">Log in</StyledLink>
+          {t(T.AUTH.HAS_ACCOUNT)} <StyledLink to="/login">{t(T.AUTH.LOGIN)}</StyledLink>
         </Text>
       </TextLinkWrapper>
     </PageWrapper>

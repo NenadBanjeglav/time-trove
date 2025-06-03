@@ -1,20 +1,19 @@
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useSearchParams } from 'react-router-dom'
 
 import { RemoveIcon } from '../../../assets/icons/RemoveIcon'
 import { SearchIcon } from '../../../assets/icons/SearchIcon'
+import { TRANSLATION_KEYS as T } from '../../../constants/translationKeys'
 import { Icon } from '../icon/Icon'
 
 import { ClearButton, IconWrapper, SearchWrapper, StyledInput } from './search.styles'
 
-type SearchProps = {
-  placeholder?: string
-}
-
-export const Search = ({ placeholder = 'Search' }: SearchProps) => {
+export const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const currentSearch = searchParams.get('search')
   const [search, setSearch] = useState(currentSearch || '')
+  const { t } = useTranslation()
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -42,7 +41,7 @@ export const Search = ({ placeholder = 'Search' }: SearchProps) => {
         type="text"
         value={search}
         onChange={e => handleChange(e.target.value)}
-        placeholder={placeholder}
+        placeholder={t(T.SEARCH.PLACEHOLDER)}
         $hasValue={!!search}
         id="search"
       />

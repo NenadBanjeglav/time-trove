@@ -36,5 +36,5 @@ export const ButtonIconWrapper = styled.div`
 
 export const ButtonWrapper = styled.div`
   width: 100%;
-  max-width: 123px;
+  max-width: fit-content;
 `
