@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSearchParams } from 'react-router-dom'
 
@@ -13,15 +13,28 @@ export const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const currentSearch = searchParams.get('search')
   const [search, setSearch] = useState(currentSearch || '')
+  const previousSearchRef = useRef(search)
   const { t } = useTranslation()
 
   useEffect(() => {
     const timeout = setTimeout(() => {
+      const prevSearch = previousSearchRef.current
+      const isSearchChanged = prevSearch !== search
+
       if (search) {
         searchParams.set('search', search)
+        if (isSearchChanged) {
+          searchParams.delete('page')
+        }
       } else {
         searchParams.delete('search')
+        if (prevSearch) {
+          searchParams.delete('page')
+        }
       }
+
+      previousSearchRef.current = search
+
       setSearchParams(searchParams)
     }, 150)
 
