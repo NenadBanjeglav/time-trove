@@ -4,7 +4,6 @@ import { Card } from '../../atoms/card/Card'
 
 export const FullWidthCard = styled(Card)`
   width: 100%;
-  max-width: 612px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

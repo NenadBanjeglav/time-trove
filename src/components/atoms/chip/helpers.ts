@@ -34,6 +34,6 @@ export const getChipPallete = (status?: ChipStatus): Pallete => {
     case ChipStatus.DANGER:
       return 'danger'
     default:
-      return 'success'
+      return 'primary'
   }
 }

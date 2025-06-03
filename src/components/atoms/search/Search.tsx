@@ -24,7 +24,7 @@ export const Search = ({ placeholder = 'Search' }: SearchProps) => {
         searchParams.delete('search')
       }
       setSearchParams(searchParams)
-    }, 300)
+    }, 150)
 
     return () => clearTimeout(timeout)
   }, [search, searchParams, setSearchParams])
@@ -43,6 +43,8 @@ export const Search = ({ placeholder = 'Search' }: SearchProps) => {
         value={search}
         onChange={e => handleChange(e.target.value)}
         placeholder={placeholder}
+        $hasValue={!!search}
+        id="search"
       />
       {search && (
         <ClearButton onClick={() => handleChange('')}>

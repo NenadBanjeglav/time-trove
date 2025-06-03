@@ -1,30 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react'
-
 import { FeedbackState } from './FeedbackState'
+import { Button } from '../../atoms/button/Button'
 
 const meta: Meta<typeof FeedbackState> = {
-  title: 'Components/FeedbackState',
+  title: 'Molecules/FeedbackState',
   component: FeedbackState,
   tags: ['autodocs'],
-  argTypes: {
-    imageSrc: { control: 'text' },
-    title: { control: 'text' },
-    description: { control: 'text' },
-    buttonLabel: { control: 'text' },
-    buttonVariant: {
-      control: 'select',
-      options: ['primary', 'neutral', 'success', 'warning', 'danger'],
-    },
-    imageMaxWidth: { control: 'text' },
-    onClick: { action: 'clicked' },
-  },
   args: {
-    imageSrc: '/images/empty.png',
-    title: 'Nothing here yet!',
-    description: 'There are no items to show at the moment.',
-    buttonLabel: 'Create',
-    buttonVariant: 'primary',
-    imageMaxWidth: '24.5rem',
+    title: 'Something went wrong',
+    description: 'An error occurred while attempting to retrieve data from the server.',
+    imageSrc: '/images/error.png',
   },
 }
 
@@ -32,35 +17,16 @@ export default meta
 
 type Story = StoryObj<typeof FeedbackState>
 
-export const Empty: Story = {}
+export const Default: Story = {}
 
-export const Error: Story = {
+export const WithButton: Story = {
   args: {
-    imageSrc: '/images/error.png',
-    title: 'Something went wrong',
-    description: 'An error occurred while attempting to retrieve data from the server.',
-    buttonLabel: 'Try again',
-    buttonVariant: 'danger',
+    buttonElement: <Button size="large">Try Again</Button>,
   },
 }
 
-export const NotFound: Story = {
+export const CustomImageSize: Story = {
   args: {
-    imageSrc: '/images/notFound.png',
-    title: 'Page not found!',
-    description:
-      'The page you are attempting to access is currently unavailable or does not exist.',
-    buttonLabel: 'Back home',
-    buttonVariant: 'neutral',
-  },
-}
-
-export const Maintenance: Story = {
-  args: {
-    imageSrc: '/images/maintance.png',
-    title: "We'll be right back!",
-    description: 'We are currently performing scheduled maintenance. Please check back soon.',
-    buttonLabel: 'Refresh',
-    buttonVariant: 'primary',
+    imageMaxWidth: '16rem',
   },
 }

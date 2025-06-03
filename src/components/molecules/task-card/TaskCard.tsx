@@ -1,13 +1,19 @@
-import type { FC } from 'react'
+import { useState, type FC } from 'react'
 
+import { useDeleteTask } from '../../../api/apiTasks'
 import { DeleteIcon } from '../../../assets/icons/DeleteIcon'
 import { EditIcon } from '../../../assets/icons/EditIcon'
+import { useUnsavedChangesModal } from '../../../hooks/useUnsavedCHangesModal'
 import { Chip } from '../../atoms/chip/Chip'
 import { ChipSize } from '../../atoms/chip/chip.types'
 import { Heading } from '../../atoms/heading/Heading'
 import { IconButton } from '../../atoms/icon-button/IconButton'
 import { Modal } from '../../atoms/modal/Modal'
 import { Text } from '../../atoms/text/Text'
+import { TaskDetails } from '../../shared/task-details/TaskDetails'
+import { EditTaskForm } from '../../shared/task-form-shell/EditTaskForm'
+import { ConfirmDialog } from '../confirm-dialog/ConfirmDialog'
+import { DialogVariant } from '../confirm-dialog/confirmDialog.types'
 
 import { getStatusLabel, priorityColorMap, statusColorMap } from './helpers'
 import { TaskStatus, type TaskCardProps } from './task.types'
@@ -19,60 +25,95 @@ import {
   TaskBody,
   TaskHeader,
 } from './taskCard.styles'
-import { ConfirmDialog } from '../confirm-dialog/ConfirmDialog'
-import { DialogVariant } from '../confirm-dialog/confirmDialog.types'
 
 export const TaskCard: FC<TaskCardProps> = ({ id, title, description, done, priority }) => {
+  const { deleteTaskMutation, isDeleting } = useDeleteTask()
+  const [isDetailsOpen, setDetailsOpen] = useState(false)
+  const [isDeleteOpen, setDeleteOpen] = useState(false)
+
+  const {
+    isOpen: isEditOpen,
+    confirmOpen: isDiscardConfirmOpen,
+    open: openEditModal,
+    requestClose: requestCloseEdit,
+    discard: discardEdit,
+    cancelClose: cancelDiscardEdit,
+    onChange: markEditDirty,
+    reset: resetEditState,
+  } = useUnsavedChangesModal()
+
+  const handleDelete = () => {
+    deleteTaskMutation({ id, title })
+  }
+
   const status = done ? TaskStatus.DONE : TaskStatus.INPROGRESS
   return (
     <>
-      <Modal.Open opens={`Card details for ${id}`}>
-        <FullWidthCard>
-          <TaskHeader>
-            <Heading as="h3" fontSize="base" lineHeight="base" fontWeight="bold">
-              {title}
-            </Heading>
-            <Chip
-              status={statusColorMap[status]}
-              size={ChipSize.LARGE}
-              label={getStatusLabel(status)}
-            />
-          </TaskHeader>
-          <TaskBody>
-            <Text
-              fontSize="small"
-              color="hue300"
-              lineHeight="small"
-              fontWeight="regular"
-              textAlign="start"
-            >
-              {description}
+      <FullWidthCard onClick={() => setDetailsOpen(true)}>
+        <TaskHeader>
+          <Heading as="h3" fontSize="base" lineHeight="base" fontWeight="bold">
+            {title}
+          </Heading>
+          <Chip
+            status={statusColorMap[status]}
+            size={ChipSize.LARGE}
+            label={getStatusLabel(status)}
+          />
+        </TaskHeader>
+        <TaskBody>
+          <Text
+            fontSize="small"
+            color="hue300"
+            lineHeight="small"
+            fontWeight="regular"
+            textAlign="start"
+          >
+            {description}
+          </Text>
+        </TaskBody>
+        <Footer>
+          <PriorityWrapper>
+            <Text fontSize="small" lineHeight="small" fontWeight="bold">
+              Priority
             </Text>
-          </TaskBody>
-          <Footer>
-            <PriorityWrapper>
-              <Text fontSize="small" lineHeight="small" fontWeight="bold">
-                Priority
-              </Text>
-              <Chip status={priorityColorMap[priority]} size={ChipSize.SMALL} label={priority} />
-            </PriorityWrapper>
-            <ButtonWrapper>
-              <Modal.Open opens={`Edit ${id}`}>
-                <IconButton shape="square" variant="neutral" icon={EditIcon} />
-              </Modal.Open>
+            <Chip status={priorityColorMap[priority]} size={ChipSize.SMALL} label={priority} />
+          </PriorityWrapper>
+          <ButtonWrapper>
+            <IconButton
+              onClick={e => {
+                e.stopPropagation()
+                openEditModal()
+              }}
+              shape="square"
+              variant="neutral"
+              icon={EditIcon}
+            />
 
-              <Modal.Open opens={`Delete ${id}`}>
-                <IconButton shape="square" variant="danger" color="hue0" icon={DeleteIcon} />
-              </Modal.Open>
-            </ButtonWrapper>
-          </Footer>
-        </FullWidthCard>
-      </Modal.Open>
+            <IconButton
+              onClick={e => {
+                e.stopPropagation()
+                setDeleteOpen(true)
+              }}
+              shape="square"
+              variant="danger"
+              color="hue0"
+              icon={DeleteIcon}
+            />
+          </ButtonWrapper>
+        </Footer>
+      </FullWidthCard>
 
-      <Modal.Window name={`Card details for ${id}`}>
-        <Text>Card Details</Text>
-      </Modal.Window>
-      <Modal.Window name={`Delete ${id}`}>
+      <Modal isOpen={isDetailsOpen} onClose={() => setDetailsOpen(false)}>
+        <TaskDetails
+          task={{ id, title, description, done, priority }}
+          onEditSuccess={() => {
+            setDetailsOpen(false)
+            resetEditState()
+          }}
+        />
+      </Modal>
+
+      <Modal isOpen={isDeleteOpen} onClose={() => setDeleteOpen(false)}>
         <ConfirmDialog
           variant={DialogVariant.DANGER}
           title="Delete this task?"
@@ -80,13 +121,32 @@ export const TaskCard: FC<TaskCardProps> = ({ id, title, description, done, prio
           primaryActionLabel="Delete"
           secondaryActionLabel="Cancel"
           onPrimaryAction={() => {
-            console.log('Deleting task with ID:', id)
+            handleDelete()
+            setDeleteOpen(false)
           }}
+          onClose={() => setDeleteOpen(false)}
+          loading={isDeleting}
         />
-      </Modal.Window>
-      <Modal.Window name={`Edit ${id}`}>
-        <Text>Edit Task Form</Text>
-      </Modal.Window>
+      </Modal>
+
+      <Modal isOpen={isEditOpen} onClose={requestCloseEdit}>
+        <EditTaskForm
+          task={{ id, title, description, done, priority }}
+          onReset={resetEditState}
+          onChange={markEditDirty}
+        />
+      </Modal>
+      <Modal isOpen={isDiscardConfirmOpen} onClose={cancelDiscardEdit} zIndex={1100}>
+        <ConfirmDialog
+          variant={DialogVariant.DANGER}
+          title="Discard changes?"
+          description="You have unsaved changes. Are you sure you want to discard them?"
+          primaryActionLabel="Discard"
+          secondaryActionLabel="Cancel"
+          onPrimaryAction={discardEdit}
+          onClose={cancelDiscardEdit}
+        />
+      </Modal>
     </>
   )
 }

@@ -1,10 +1,6 @@
 import type { FC } from 'react'
 import styled from 'styled-components'
 
-import { Modal } from '../../atoms/modal/Modal'
-import { Text } from '../../atoms/text/Text'
-import { ConfirmDialog } from '../confirm-dialog/ConfirmDialog'
-import { DialogVariant } from '../confirm-dialog/confirmDialog.types'
 import { TaskCard } from '../task-card/TaskCard'
 import { type TaskCardProps } from '../task-card/task.types'
 
@@ -17,7 +13,7 @@ export const TaskListWrapper = styled.div`
   margin: 0 auto;
   width: 100%;
 
-  @media (max-width: 745px) {
+  @media (max-width: 760px) {
     grid-template-columns: 1fr;
   }
 `

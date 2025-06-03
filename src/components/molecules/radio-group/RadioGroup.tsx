@@ -6,13 +6,13 @@ import { RadioButton } from '../../atoms/radio-button/RadioButton'
 
 import { RadioGroupWrapper, RadioOptionLabel, RadioOptionWrapper } from './radioGroup.styles'
 
-type RadioOption = {
+export type RadioOption = {
   label: string
   value: string
   status: ChipStatus
 }
 
-type RadioGroupProps = {
+export type RadioGroupProps = {
   name: string
   options: RadioOption[]
   value: string
@@ -20,6 +20,7 @@ type RadioGroupProps = {
   disabled?: boolean
   size: ChipSize
   error?: boolean
+  isSeparate?: boolean
 }
 
 export const RadioGroup = ({
