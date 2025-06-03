@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useOutletContext, useSearchParams } from 'react-router-dom'
 
 import { useTasks } from '../api/apiTasks'
@@ -8,12 +9,14 @@ import { PageStateContainer } from '../components/organisms/page-state-container
 import { PriorityFilters } from '../components/shared/priority-filters/PriorityFilter'
 import { PAGE_SIZE } from '../constants/constants'
 import { usePrefetchPaginatedTasks } from '../hooks/usePrefetchPaginatedTasks'
+import { useAppState } from '../stores/useAppStore'
 
 type LayoutContext = { navHeight: number }
 
 export const Dashboard = () => {
   const { navHeight } = useOutletContext<LayoutContext>()
   const [searchParams] = useSearchParams()
+  const { setTotalTasks } = useAppState()
 
   const currentPage = Number(searchParams.get('page') || '1')
   const offset = (currentPage - 1) * PAGE_SIZE
@@ -47,6 +50,12 @@ export const Dashboard = () => {
     totalPages: data?.totalPages,
     search,
   })
+
+  useEffect(() => {
+    if (data?.totalItems != null) {
+      setTotalTasks(data.totalItems)
+    }
+  }, [data?.totalItems, setTotalTasks])
 
   const handleClick = () => {
     if (isError) {
