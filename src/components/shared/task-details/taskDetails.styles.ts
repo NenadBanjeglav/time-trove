@@ -4,13 +4,13 @@ import { Card } from '../../atoms/card/Card'
 
 export const TaskDetailsWrapper = styled(Card)`
   width: 100%;
-  min-width: 672px;
+  max-width: 672px;
   height: auto;
   padding: ${({ theme }) => theme.spacing.medium};
   box-sizing: border-box;
 
   @media (max-width: 744px) {
-    min-width: calc(100vw - 32px);
+    max-width: calc(100vw - 32px);
     width: 100%;
   }
 `
