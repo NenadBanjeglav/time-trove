@@ -35,7 +35,7 @@ export const Search = () => {
   return (
     <SearchWrapper>
       <IconWrapper>
-        <Icon icon={SearchIcon} pallete="neutral" color="hue500" iconSize="small" />
+        <Icon icon={SearchIcon} pallete="neutral" color="hue300" iconSize="small" />
       </IconWrapper>
       <StyledInput
         type="text"
@@ -47,7 +47,7 @@ export const Search = () => {
       />
       {search && (
         <ClearButton onClick={() => handleChange('')}>
-          <Icon icon={RemoveIcon} pallete="neutral" color="hue300" iconSize="small" />
+          <Icon icon={RemoveIcon} pallete="neutral" color="hue200" iconSize="small" />
         </ClearButton>
       )}
     </SearchWrapper>

@@ -14,6 +14,7 @@ export const StyledTextarea = styled.textarea<{ $error?: boolean }>`
   padding: 20px 20px 10px;
   border-radius: 12px;
   background-color: ${({ theme }) => theme.colors.neutral.hue0};
+  color: ${({ theme }) => theme.colors.neutral.hue500};
   font-size: ${({ theme }) => theme.typography.fontSize.base};
   line-height: ${({ theme }) => theme.typography.lineHeight.base};
   font-weight: ${({ theme }) => theme.typography.fontWeight.medium};

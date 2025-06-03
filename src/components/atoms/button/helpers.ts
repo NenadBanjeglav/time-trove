@@ -39,7 +39,7 @@ export const getVariantStyle = <T extends Pallete>(
 
   return css`
     background-color: ${bg as string};
-    color: white;
+    color: ${neutral.hue0};
     border: none;
 
     &:hover {

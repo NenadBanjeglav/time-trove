@@ -1,6 +1,7 @@
 import { type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSearchParams } from 'react-router-dom'
+import styled from 'styled-components'
 
 import { TRANSLATION_KEYS as T } from '../../../constants/translationKeys'
 import { useUnsavedChangesModal } from '../../../hooks/useUnsavedCHangesModal'
@@ -13,6 +14,7 @@ import { ConfirmDialog } from '../../molecules/confirm-dialog/ConfirmDialog'
 import { DialogVariant } from '../../molecules/confirm-dialog/confirmDialog.types'
 import { FeedbackState } from '../../molecules/feedback-state/FeedbackState'
 import { ButtonWrapper } from '../../molecules/feedback-state/feedbackState.styles'
+import { ThemeToggle } from '../../molecules/theme-toggle/ThemeToggle'
 import { CreateTaskForm } from '../../shared/task-form-shell/CreateTaskForm'
 
 type PageStateContainerProps = {
@@ -23,6 +25,14 @@ type PageStateContainerProps = {
   children?: ReactNode
   onClick?: () => void
 }
+
+export const FixedBottomCenter = styled.div`
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999; // higher than content, but below modals
+`
 
 export const PageStateContainer = ({
   navHeight,
@@ -112,6 +122,10 @@ export const PageStateContainer = ({
       )}
 
       {!isLoading && !error && !isEmpty && children}
+
+      <FixedBottomCenter>
+        <ThemeToggle />
+      </FixedBottomCenter>
     </PageWrapper>
   )
 }
