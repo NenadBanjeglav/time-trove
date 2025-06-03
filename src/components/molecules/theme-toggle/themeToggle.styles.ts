@@ -37,3 +37,10 @@ export const SliderBackground = styled(motion.span)`
     `linear-gradient(to right, ${theme.colors.primary.hue100}, ${theme.colors.primary.hue200})`};
   z-index: 0;
 `
+export const SliderWrapper = styled.div<{ $themeMode: 'light' | 'dark' }>`
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: ${({ $themeMode }) => ($themeMode === 'dark' ? 'flex-end' : 'flex-start')};
+  z-index: 0;
+`
