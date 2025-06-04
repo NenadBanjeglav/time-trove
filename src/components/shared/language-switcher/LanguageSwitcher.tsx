@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 
 import { languages } from '../../../constants/languages'
-import { Dropdown } from '../../atoms/dropdown/Dropdown'
+import { Dropdown } from '../../molecules/dropdown/Dropdown'
 
 export const LanguageSwitcher = () => {
   const { i18n: i18nInstance } = useTranslation()

@@ -1,6 +1,5 @@
 import { type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useSearchParams } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { TRANSLATION_KEYS as T } from '../../../constants/translationKeys'
@@ -22,6 +21,7 @@ type PageStateContainerProps = {
   isLoading: boolean
   error?: boolean
   isEmpty: boolean
+  hasActiveFilters: boolean
   children?: ReactNode
   onClick?: () => void
 }
@@ -31,7 +31,7 @@ export const FixedBottomCenter = styled.div`
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 999; // higher than content, but below modals
+  z-index: 999;
 `
 
 export const PageStateContainer = ({
@@ -39,10 +39,10 @@ export const PageStateContainer = ({
   isLoading,
   error,
   isEmpty,
+  hasActiveFilters,
   children,
   onClick = () => {},
 }: PageStateContainerProps) => {
-  const [searchParams] = useSearchParams()
   const { t } = useTranslation()
 
   const {
@@ -55,8 +55,6 @@ export const PageStateContainer = ({
     onChange: markTaskFormDirty,
     reset,
   } = useUnsavedChangesModal()
-
-  const hasActiveFilters = Boolean(searchParams.get('priority') || searchParams.get('search'))
 
   return (
     <PageWrapper dynamicHeightOffset={navHeight}>
@@ -111,13 +109,6 @@ export const PageStateContainer = ({
             </ButtonWrapper>
           }
           imageMaxWidth="11.25rem"
-        />
-      )}
-
-      {isEmpty && !isLoading && hasActiveFilters && (
-        <FeedbackState
-          title={t(T.PAGE_STATE.NO_RESULTS_TITLE)}
-          description={t(T.PAGE_STATE.NO_RESULTS_DESCRIPTION)}
         />
       )}
 
