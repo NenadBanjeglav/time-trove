@@ -37,6 +37,13 @@ export type GetTasksParams = {
   priority?: TaskPriority
 }
 
+const getTasksQueryParams = (page: number): GetTasksParams => ({
+  direction: 'desc',
+  limit: PAGE_SIZE,
+  offset: (page - 1) * PAGE_SIZE,
+  title: '',
+})
+
 export const getTasks = async (params: GetTasksParams = {}): Promise<TaskListResponse> => {
   const { data } = await axiosInstance.get<TaskListResponse>('/tasks', { params })
   return data
@@ -120,6 +127,7 @@ export const useEditTask = () => {
     { id: string; values: Partial<Task> }
   >({
     mutationFn: ({ id, values }) => updateTask(id, values),
+
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['tasks'] })
       addToast({
@@ -149,37 +157,67 @@ export const useDeleteTask = () => {
   const { t } = useTranslation()
   const queryClient = useQueryClient()
   const { addToast } = useToast()
-
-  const [searchParams, setSearchParams] = useSearchParams()
-
   const totalTasks = useAppState(state => state.totalTasks)
+  const [searchParams, setSearchParams] = useSearchParams()
 
   const { mutate: deleteTaskMutation, isPending: isDeleting } = useMutation<
     void,
     Error,
-    DeleteTaskPayload
+    DeleteTaskPayload,
+    {
+      previousTasks: TaskListResponse | undefined
+      currentParams: GetTasksParams
+    }
   >({
     mutationFn: ({ id }) => deleteTask(id),
+
+    onMutate: async ({ id }) => {
+      const currentPage = Number(searchParams.get('page') || '1')
+      const totalAfterDelete = totalTasks - 1
+      const totalPagesAfterDelete = Math.max(1, Math.ceil(totalAfterDelete / PAGE_SIZE))
+      const currentParams = getTasksQueryParams(currentPage)
+
+      await queryClient.cancelQueries({ queryKey: ['tasks', currentParams] })
+
+      const previousTasks = queryClient.getQueryData<TaskListResponse>(['tasks', currentParams])
+
+      if (currentPage > totalPagesAfterDelete) {
+        const fallbackPage = totalPagesAfterDelete
+        const fallbackParams = getTasksQueryParams(fallbackPage)
+
+        const fallbackTasks = queryClient.getQueryData<TaskListResponse>(['tasks', fallbackParams])
+
+        if (fallbackTasks) {
+          queryClient.setQueryData(['tasks', currentParams], fallbackTasks)
+          searchParams.set('page', fallbackPage.toString())
+          setSearchParams(searchParams)
+        }
+      }
+
+      queryClient.setQueryData<TaskListResponse>(['tasks', currentParams], old => {
+        if (!old || !Array.isArray(old.items)) return old
+        return {
+          ...old,
+          tasks: old.items.filter(task => task.id !== id),
+        }
+      })
+
+      return { previousTasks, currentParams }
+    },
+
     onSuccess: (_data, { title }) => {
-      queryClient.invalidateQueries({ queryKey: ['tasks'] })
       addToast({
         type: 'success',
         title: t(T.DELETE_TASK.SUCCESS_TITLE),
         message: t(T.DELETE_TASK.SUCCESS_MESSAGE, { title }),
       })
+    },
 
-      const currentPage = searchParams.get('page')
-
-      const totalAfterDelete = totalTasks - 1
-      const totalPagesAfterDelete = Math.ceil(totalAfterDelete / PAGE_SIZE)
-
-      if (Number(currentPage) > totalPagesAfterDelete) {
-        searchParams.set('page', totalPagesAfterDelete.toString())
+    onError: (_error, { title }, context) => {
+      if (context?.previousTasks && context?.currentParams) {
+        queryClient.setQueryData(['tasks', context.currentParams], context.previousTasks)
       }
 
-      setSearchParams(searchParams)
-    },
-    onError: (_error, { title }) => {
       addToast({
         type: 'error',
         title: t(T.DELETE_TASK.ERROR_TITLE),
