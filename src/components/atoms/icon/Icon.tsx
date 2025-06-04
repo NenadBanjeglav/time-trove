@@ -2,29 +2,25 @@ import type { FC, SVGProps, HTMLAttributes } from 'react'
 import { useTheme } from 'styled-components'
 
 import type { Color, IconSize, Pallete } from '../../../styles/theme.types'
+import { StyledIcon } from './icon.styles'
 
-import { createStyledIcon } from './icon.styles'
-
-type IconProps<T extends Pallete = Pallete> = {
+type IconProps = {
   iconSize?: IconSize
-  pallete?: T
-  color?: Color<T>
+  pallete?: Pallete
+  color?: Color<Pallete>
   icon: FC<SVGProps<SVGSVGElement>>
 } & HTMLAttributes<HTMLSpanElement>
 
-export const Icon = <T extends Pallete>({
+export const Icon = ({
   icon: IconComponent,
   iconSize = 'small',
-  pallete = 'primary' as T,
+  pallete = 'primary',
   color,
   ...rest
-}: IconProps<T>) => {
+}: IconProps) => {
   const theme = useTheme()
   const resolvedSize = theme.iconSize[iconSize]
-
-  const resolvedColor = (color ?? 'hue200') as Color<T>
-
-  const StyledIcon = createStyledIcon<T>()
+  const resolvedColor = (color ?? 'hue200') as Color<Pallete>
 
   return (
     <StyledIcon $size={resolvedSize} $pallete={pallete} $color={resolvedColor} {...rest}>

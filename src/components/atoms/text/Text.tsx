@@ -6,7 +6,7 @@ import type {
   Pallete,
 } from '../../../styles/theme.types'
 
-import { createStyledText } from './text.styles'
+import { StyledText } from './text.styles'
 
 export type TextAlignType = 'start' | 'end' | 'center' | 'justify'
 
@@ -17,23 +17,20 @@ type BaseTextProps = {
   fontWeight?: FontWeightType
   textAlign?: TextAlignType
   children?: React.ReactNode
+  pallete?: Pallete
+  color?: Color<Pallete>
 }
 
-export const Text = <T extends Pallete = 'neutral'>({
+export const Text = ({
   as = 'p',
   fontSize = 'base',
   fontWeight = 'regular',
   lineHeight = 'base',
   textAlign = 'start',
   children = 'Random Text',
-  pallete = 'neutral' as T,
-  color = 'hue500' as Color<T>,
-}: BaseTextProps & {
-  pallete?: T
-  color?: Color<T>
-}) => {
-  const StyledText = createStyledText<T>()
-
+  pallete = 'neutral',
+  color = 'hue200',
+}: BaseTextProps) => {
   return (
     <StyledText
       as={as}

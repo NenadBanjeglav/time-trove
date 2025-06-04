@@ -3,28 +3,26 @@ import type { ButtonHTMLAttributes, FC, SVGProps } from 'react'
 import type { Pallete, Color, IconSize } from '../../../styles/theme.types'
 import { Icon } from '../icon/Icon'
 
-import { createStyledIconButton } from './iconButton.styles'
+import { StyledIconButton } from './iconButton.styles'
 
 type ButtonShape = 'circle' | 'square'
 
-type IconButtonProps<T extends Pallete = 'primary'> = ButtonHTMLAttributes<HTMLButtonElement> & {
+type IconButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   icon: FC<SVGProps<SVGSVGElement>>
   iconSize?: IconSize
-  variant: T
-  color?: Color<T>
+  variant: Pallete
+  color?: Color<Pallete>
   shape?: ButtonShape
 }
 
-export const IconButton = <T extends Pallete = 'primary'>({
+export const IconButton = ({
   icon,
   iconSize = 'small',
-  variant = 'primary' as T,
+  variant = 'primary',
   color,
   shape = 'circle',
   ...rest
-}: IconButtonProps<T>) => {
-  const StyledIconButton = createStyledIconButton<T>()
-
+}: IconButtonProps) => {
   return (
     <StyledIconButton
       $variant={variant}
