@@ -2,29 +2,26 @@ import type { ButtonHTMLAttributes, ReactNode } from 'react'
 
 import type { Pallete, ButtonSize, Color } from '../../../styles/theme.types'
 import { Spinner } from '../icon/Spinner'
+import { StyledButton } from './button.styles'
 
-import { createStyledButton } from './button.styles'
-
-type ButtonProps<T extends Pallete = 'primary'> = ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: T
-  color?: Color<T>
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  variant?: Pallete
+  color?: Color<Pallete>
   size?: ButtonSize
   fullWidth?: boolean
   loading?: boolean
   children?: ReactNode
 }
 
-export const Button = <T extends Pallete = 'primary'>({
-  variant = 'primary' as T,
+export const Button = ({
+  variant = 'primary',
   color,
   size = 'medium',
   fullWidth = false,
   loading = false,
   children = 'Button',
   ...rest
-}: ButtonProps<T>) => {
-  const StyledButton = createStyledButton<T>()
-
+}: ButtonProps) => {
   return (
     <StyledButton
       $variant={variant}
