@@ -2,19 +2,23 @@ import { useEffect } from 'react'
 import { useOutletContext, useSearchParams } from 'react-router-dom'
 
 import { useTasks } from '../api/apiTasks'
-import { Pagination } from '../components/atoms/pagination/Pagination'
 import { TaskPriority } from '../components/molecules/task-card/task.types'
 import { TaskList } from '../components/molecules/task-list/TaskList'
 import { PageStateContainer } from '../components/organisms/page-state-container/PageStateContainer'
-import { PriorityFilters } from '../components/shared/priority-filters/PriorityFilter'
+import { DashboardHeading } from '../components/shared/priority-filters/DashboardHeading'
 import { PAGE_SIZE } from '../constants/constants'
 import { usePrefetchPaginatedTasks } from '../hooks/usePrefetchPaginatedTasks'
 import { useAppState } from '../stores/useAppStore'
+import styled from 'styled-components'
+import { PageWrapper } from '../components/atoms/page-wrapper/PageWrapper'
 
 type LayoutContext = { navHeight: number }
 
+const StyledDashboard = styled.main``
+
 export const Dashboard = () => {
   const { navHeight } = useOutletContext<LayoutContext>()
+
   const [searchParams] = useSearchParams()
   const { setTotalTasks } = useAppState()
 
@@ -64,21 +68,24 @@ export const Dashboard = () => {
   }
 
   return (
-    <PageStateContainer
-      navHeight={navHeight}
-      isLoading={isPending}
-      error={isError}
-      isEmpty={!data?.items.length && !search && !priority}
-      hasActiveFilters={!!search || !!priority}
-      onClick={handleClick}
-    >
-      <PriorityFilters />
-      <TaskList
-        tasks={data?.items || []}
+    <PageWrapper dynamicHeightOffset={navHeight}>
+      {!isError && <DashboardHeading />}
+      <PageStateContainer
+        navHeight={navHeight}
         isLoading={isPending}
+        error={isError}
+        isEmpty={!isPending && data?.items.length === 0 && !search && !priority}
         hasActiveFilters={!!search || !!priority}
-      />
-      <Pagination count={data?.totalItems || 0} currentPage={data?.page ?? 1} />
-    </PageStateContainer>
+        onClick={handleClick}
+      >
+        <TaskList
+          tasks={data?.items || []}
+          isLoading={isPending}
+          hasActiveFilters={!!search || !!priority}
+          currentPage={currentPage}
+          count={data?.totalItems || 0}
+        />
+      </PageStateContainer>
+    </PageWrapper>
   )
 }

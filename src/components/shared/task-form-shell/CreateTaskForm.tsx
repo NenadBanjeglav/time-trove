@@ -45,6 +45,8 @@ export const CreateTaskForm = ({ onChange, onReset }: CreateTaskFormProps) => {
     reset,
   } = useForm<CreateTaskFormValues>({
     resolver: zodResolver(schema),
+    mode: 'onChange',
+    reValidateMode: 'onChange',
     defaultValues: {
       title: '',
       description: '',

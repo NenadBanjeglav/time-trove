@@ -7,8 +7,7 @@ import type {
   LineHeightType,
   Pallete,
 } from '../../../styles/theme.types'
-
-export type TextAlignType = 'start' | 'end' | 'center' | 'justify'
+import type { TextAlignType } from './Text'
 
 type StyledProps = {
   $fontSize: FontSizeType

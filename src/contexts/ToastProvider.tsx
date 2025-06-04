@@ -15,21 +15,23 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
   }, [])
 
   const addToast = useCallback(
-    ({ type, title, message, duration = 5000 }: ToastInput) => {
+    ({ type, title, message, duration = 1000 }: ToastInput) => {
       const id = crypto.randomUUID()
-
       const onClose = () => removeToast(id)
 
-      setToasts(prev => [
-        ...prev,
-        {
-          id,
-          type,
-          title,
-          message,
-          onClose,
-        },
-      ])
+      setToasts(prev => {
+        const next = prev.length >= 3 ? prev.slice(1) : prev
+        return [
+          ...next,
+          {
+            id,
+            type,
+            title,
+            message,
+            onClose,
+          },
+        ]
+      })
 
       setTimeout(() => {
         removeToast(id)

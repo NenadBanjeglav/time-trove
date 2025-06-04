@@ -7,7 +7,6 @@ import { useUnsavedChangesModal } from '../../../hooks/useUnsavedCHangesModal'
 import { Button } from '../../atoms/button/Button'
 import { Spinner } from '../../atoms/icon/Spinner'
 import { Modal } from '../../atoms/modal/Modal'
-import { PageWrapper } from '../../atoms/page-wrapper/PageWrapper'
 import { FullCenteredLayout } from '../../atoms/page-wrapper/pageWrapper.styles'
 import { ConfirmDialog } from '../../molecules/confirm-dialog/ConfirmDialog'
 import { DialogVariant } from '../../molecules/confirm-dialog/confirmDialog.types'
@@ -35,7 +34,6 @@ export const FixedBottomCenter = styled.div`
 `
 
 export const PageStateContainer = ({
-  navHeight,
   isLoading,
   error,
   isEmpty,
@@ -57,7 +55,7 @@ export const PageStateContainer = ({
   } = useUnsavedChangesModal()
 
   return (
-    <PageWrapper dynamicHeightOffset={navHeight}>
+    <>
       <Modal isOpen={isTaskFormOpen} onClose={closeTaskForm}>
         <CreateTaskForm onChange={markTaskFormDirty} onReset={reset} />
       </Modal>
@@ -117,6 +115,6 @@ export const PageStateContainer = ({
       <FixedBottomCenter>
         <ThemeToggle />
       </FixedBottomCenter>
-    </PageWrapper>
+    </>
   )
 }

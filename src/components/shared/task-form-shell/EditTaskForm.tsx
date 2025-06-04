@@ -46,6 +46,8 @@ export const EditTaskForm = ({ task, onReset, onChange }: EditTaskFormProps) => 
     reset,
   } = useForm<EditTaskFormValues>({
     resolver: zodResolver(schema),
+    mode: 'onChange',
+    reValidateMode: 'onChange',
     defaultValues: {
       title: task.title,
       description: task.description,

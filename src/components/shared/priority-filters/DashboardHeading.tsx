@@ -10,9 +10,15 @@ import { RadioGroup, type RadioOption } from '../../molecules/radio-group/RadioG
 import { RadioOptionLabel, RadioOptionWrapper } from '../../molecules/radio-group/radioGroup.styles'
 import { LanguageSwitcher } from '../language-switcher/LanguageSwitcher'
 
-import { FilterWrapper, HeadingWrapper, ResponsiveSeparator, TopRow } from './priorityFilter.styles'
+import {
+  HeadingWrapper,
+  LayoutWrap,
+  ResponsiveSeparator,
+  TopRow,
+  Wrapper,
+} from './dashboardHeading.styles'
 
-export const PriorityFilters = () => {
+export const DashboardHeading = () => {
   const { t } = useTranslation()
   const [searchParams, setSearchParams] = useSearchParams()
 
@@ -37,41 +43,43 @@ export const PriorityFilters = () => {
   }
 
   return (
-    <FilterWrapper>
-      <HeadingWrapper>
-        <Heading fontSize="base" lineHeight="xSmall" fontWeight="bold">
-          {t(T.PRIORITY_FILTER.HEADING)}
-        </Heading>
-        <LanguageSwitcher />
-      </HeadingWrapper>
-      <TopRow>
-        <RadioOptionLabel htmlFor="priority-all">
-          <RadioOptionWrapper>
-            <RadioButton
-              id="priority-all"
-              name="priority"
-              value=""
-              checked={currentPriority === ''}
-              onChange={() => handlePriorityChange('')}
-            />
-            <Chip
-              size={ChipSize.SMALL}
-              label={t(T.PRIORITY_FILTER.ALL_TASKS)}
-              status={ChipStatus.PRIMARY}
-            />
-          </RadioOptionWrapper>
-        </RadioOptionLabel>
-      </TopRow>
+    <Wrapper>
+      <LayoutWrap>
+        <HeadingWrapper>
+          <Heading fontSize="base" lineHeight="xSmall" fontWeight="bold">
+            {t(T.PRIORITY_FILTER.HEADING)}
+          </Heading>
+          <LanguageSwitcher />
+        </HeadingWrapper>
+        <TopRow>
+          <RadioOptionLabel htmlFor="priority-all">
+            <RadioOptionWrapper>
+              <RadioButton
+                id="priority-all"
+                name="priority"
+                value=""
+                checked={currentPriority === ''}
+                onChange={() => handlePriorityChange('')}
+              />
+              <Chip
+                size={ChipSize.SMALL}
+                label={t(T.PRIORITY_FILTER.ALL_TASKS)}
+                status={ChipStatus.PRIMARY}
+              />
+            </RadioOptionWrapper>
+          </RadioOptionLabel>
+        </TopRow>
 
-      <ResponsiveSeparator />
+        <ResponsiveSeparator />
 
-      <RadioGroup
-        name="priority"
-        options={PRIORITY_OPTIONS}
-        value={currentPriority}
-        onChange={handlePriorityChange}
-        size={ChipSize.SMALL}
-      />
-    </FilterWrapper>
+        <RadioGroup
+          name="priority"
+          options={PRIORITY_OPTIONS}
+          value={currentPriority}
+          onChange={handlePriorityChange}
+          size={ChipSize.SMALL}
+        />
+      </LayoutWrap>
+    </Wrapper>
   )
 }

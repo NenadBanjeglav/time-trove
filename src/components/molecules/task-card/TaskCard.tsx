@@ -67,6 +67,8 @@ export const TaskCard: FC<TaskCardProps> = ({ id, title, description, done, prio
         <TaskBody>
           <Text
             fontSize="small"
+            pallete="neutral"
+            //@ts-ignore
             color="hue300"
             lineHeight="small"
             fontWeight="regular"

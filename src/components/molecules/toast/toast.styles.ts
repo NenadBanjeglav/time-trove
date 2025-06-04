@@ -2,6 +2,11 @@ import styled from 'styled-components'
 
 import { palleteMap } from './helpers'
 import type { ToastType } from './toast.types'
+import { motion } from 'motion/react'
+
+export const AnimatedToastWrapper = styled(motion.div)`
+  width: 100%;
+`
 
 export const ToastWrapper = styled.div<{ $type: ToastType }>`
   display: flex;
