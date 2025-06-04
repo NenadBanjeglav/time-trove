@@ -150,6 +150,10 @@ export const useDeleteTask = () => {
   const queryClient = useQueryClient()
   const { addToast } = useToast()
 
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  const totalTasks = useAppState(state => state.totalTasks)
+
   const { mutate: deleteTaskMutation, isPending: isDeleting } = useMutation<
     void,
     Error,
@@ -163,6 +167,17 @@ export const useDeleteTask = () => {
         title: t(T.DELETE_TASK.SUCCESS_TITLE),
         message: t(T.DELETE_TASK.SUCCESS_MESSAGE, { title }),
       })
+
+      const currentPage = searchParams.get('page')
+
+      const totalAfterDelete = totalTasks - 1
+      const totalPagesAfterDelete = Math.ceil(totalAfterDelete / PAGE_SIZE)
+
+      if (Number(currentPage) > totalPagesAfterDelete) {
+        searchParams.set('page', totalPagesAfterDelete.toString())
+      }
+
+      setSearchParams(searchParams)
     },
     onError: (_error, { title }) => {
       addToast({
