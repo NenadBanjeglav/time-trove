@@ -37,7 +37,7 @@ export const Dashboard = () => {
     }
   })()
 
-  const { data, isPending, isError, refetch } = useTasks({
+  const { data, isPending, isFetching, isError, refetch } = useTasks({
     limit: PAGE_SIZE,
     offset,
     direction: 'desc',
@@ -68,7 +68,7 @@ export const Dashboard = () => {
       navHeight={navHeight}
       isLoading={isPending}
       error={isError}
-      isEmpty={!data?.items.length}
+      isEmpty={!data || (data.items.length === 0 && !isFetching)}
       onClick={handleClick}
     >
       <PriorityFilters />

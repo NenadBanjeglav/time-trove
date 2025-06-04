@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 import { useSearchParams } from 'react-router-dom'
 
@@ -53,6 +53,7 @@ export const useTasks = (params: GetTasksParams) => {
   return useQuery<TaskListResponse, Error>({
     queryKey: ['tasks', { ...params }],
     queryFn: () => getTasks(params),
+    placeholderData: keepPreviousData,
   })
 }
 
@@ -73,28 +74,38 @@ export const useCreateTask = () => {
   const queryClient = useQueryClient()
   const { addToast } = useToast()
   const [searchParams, setSearchParams] = useSearchParams()
-
+  const { setTotalTasks } = useAppState()
   const totalTasks = useAppState(state => state.totalTasks)
 
   const { mutate: createTaskMutation, isPending: isCreating } = useMutation<
     Task,
     Error,
-    CreateTaskPayload
+    CreateTaskPayload,
+    {
+      currentParams: GetTasksParams
+      previousTasks: TaskListResponse | undefined
+    }
   >({
     mutationFn: createTask,
-    onSuccess: () => {
+    onSuccess: (newTask, _payload) => {
+      const totalAfterInsert = totalTasks + 1
+      const totalPages = Math.ceil(totalAfterInsert / PAGE_SIZE)
+      const currentPage = Number(searchParams.get('page') || '1')
+
       addToast({
         type: 'success',
         title: t(T.CREATE_TASK.SUCCESS_TITLE),
-        message: t(T.CREATE_TASK.SUCCESS_MESSAGE),
+        message: t(T.CREATE_TASK.SUCCESS_MESSAGE, { title: newTask.title }),
       })
-      queryClient.invalidateQueries({ queryKey: ['tasks'] })
 
-      const totalAfterInsert = totalTasks + 1
-      const totalPages = Math.ceil(totalAfterInsert / PAGE_SIZE)
+      setTotalTasks(totalAfterInsert)
 
-      searchParams.set('page', totalPages.toString())
-      setSearchParams(searchParams)
+      queryClient.invalidateQueries({ queryKey: ['tasks'] }).then(() => {
+        if (currentPage !== totalPages) {
+          searchParams.set('page', totalPages.toString())
+          setSearchParams(searchParams)
+        }
+      })
     },
     onError: err => {
       addToast({
