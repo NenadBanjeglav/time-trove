@@ -1,18 +1,17 @@
 import { css } from 'styled-components'
-
 import type { Pallete, ThemeType, Color } from '../../../styles/theme.types'
 
-export const getIconButtonVariantStyle = <T extends Pallete>(
+export const getIconButtonVariantStyle = (
   theme: ThemeType,
-  variant: T,
-  color?: Color<T>
+  variant: Pallete,
+  color?: Color<Pallete>
 ) => {
   const palette = theme.colors[variant]
   const neutral = theme.colors.neutral
 
-  const bg = palette[color ?? 'hue100'] as string
-  const hover = palette.hue50 as string
-  const active = palette.hue200 as string
+  const bg = palette[color ?? 'hue100']
+  const hover = palette.hue50
+  const active = palette.hue200
 
   const iconDefault = variant === 'neutral' ? neutral.hue0 : palette.hue200
   const iconHover = variant === 'neutral' ? neutral.hue200 : palette.hue0

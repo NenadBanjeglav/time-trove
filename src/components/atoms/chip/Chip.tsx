@@ -1,6 +1,5 @@
 import type { HTMLAttributes } from 'react'
-
-import { createStyledChip } from './chip.styles'
+import { StyledChip } from './chip.styles'
 import { ChipStatus, type ChipSize } from './chip.types'
 
 type ChipProps = HTMLAttributes<HTMLDivElement> & {
@@ -10,8 +9,6 @@ type ChipProps = HTMLAttributes<HTMLDivElement> & {
 }
 
 export const Chip = ({ size, label, status = ChipStatus.SUCCESS, ...rest }: ChipProps) => {
-  const StyledChip = createStyledChip()
-
   return (
     <StyledChip $status={status} $size={size} {...rest}>
       {label}

@@ -18,15 +18,12 @@ const SpinnerWrapper = styled.span`
   animation: ${spin} 1s linear infinite;
 `
 
-type SpinnerProps<T extends Pallete = 'primary'> = {
-  pallete?: T
+type SpinnerProps = {
+  pallete?: Pallete
   size?: IconSize
 }
 
-export const Spinner = <T extends Pallete = 'primary'>({
-  pallete = 'primary' as T,
-  size = 'large',
-}: SpinnerProps<T>) => {
+export const Spinner = ({ pallete = 'primary', size = 'large' }: SpinnerProps) => {
   return (
     <SpinnerWrapper>
       <Icon icon={EclipseIcon} pallete={pallete} iconSize={size} />

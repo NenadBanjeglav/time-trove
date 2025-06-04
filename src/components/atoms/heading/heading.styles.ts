@@ -1,42 +1,37 @@
 import styled from 'styled-components'
 
 import type {
-  Color,
   FontSizeType,
   FontWeightType,
   LineHeightType,
   Pallete,
+  Color,
 } from '../../../styles/theme.types'
 
-import type { HeadingAlignType } from './Heading'
+export type HeadingAlignType = 'start' | 'end' | 'center' | 'justify'
 
-type StyledProps<T extends Pallete = Pallete> = {
+type StyledHeadingProps = {
   $fontSize: FontSizeType
   $fontWeight: FontWeightType
   $lineHeight: LineHeightType
-  $pallete: T
-  $color: Color<T>
+  $pallete: Pallete
+  $color: Color<Pallete>
   $textAlign: HeadingAlignType
 }
 
-export function createStyledHeading<T extends Pallete>() {
-  return styled.h1.withConfig({
-    shouldForwardProp: prop =>
-      !['$fontSize', '$fontWeight', '$lineHeight', '$pallete', '$color'].includes(prop),
-  })<StyledProps<T>>`
-    font-size: ${({ theme, $fontSize }) => theme.typography.fontSize[$fontSize]};
-    font-weight: ${({ theme, $fontWeight }) => theme.typography.fontWeight[$fontWeight]};
-    line-height: ${({ theme, $lineHeight }) => theme.typography.lineHeight[$lineHeight]};
-    color: ${({ theme, $pallete, $color }) => theme.colors[$pallete][$color] as string};
-    margin: 0;
-    text-align: ${({ $textAlign }) => $textAlign};
+export const StyledHeading = styled.h2<StyledHeadingProps>`
+  font-size: ${({ theme, $fontSize }) => theme.typography.fontSize[$fontSize]};
+  font-weight: ${({ theme, $fontWeight }) => theme.typography.fontWeight[$fontWeight]};
+  line-height: ${({ theme, $lineHeight }) => theme.typography.lineHeight[$lineHeight]};
+  color: ${({ theme, $pallete, $color }) => theme.colors[$pallete][$color]};
+  text-align: ${({ $textAlign }) => $textAlign};
+  margin: 0;
 
-    a {
-      all: unset;
-      color: inherit;
-      text-decoration: none;
-      cursor: pointer;
-      display: inline-block;
-    }
-  `
-}
+  a {
+    all: unset;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+  }
+`

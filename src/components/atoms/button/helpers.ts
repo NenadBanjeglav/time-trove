@@ -1,12 +1,7 @@
 import { css } from 'styled-components'
-
 import type { Pallete, ThemeType, Color } from '../../../styles/theme.types'
 
-export const getVariantStyle = <T extends Pallete>(
-  theme: ThemeType,
-  variant: T,
-  color?: Color<T>
-) => {
+export const getVariantStyle = (theme: ThemeType, variant: Pallete, color?: Color<Pallete>) => {
   const palette = theme.colors[variant]
   const neutral = theme.colors.neutral
 
