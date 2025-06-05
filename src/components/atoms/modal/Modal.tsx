@@ -1,9 +1,11 @@
+import { AnimatePresence } from 'motion/react'
 import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 
 import { useOutsideClick } from '../../../hooks/useOutsideClick'
 
 import { Overlay, StyledModal } from './modal.styles'
+import { modalVariants, overlayVariants } from './modal.variants'
 
 type ModalProps = {
   isOpen: boolean
@@ -26,14 +28,29 @@ export const Modal = ({ isOpen, onClose, children, zIndex }: ModalProps) => {
     return () => document.removeEventListener('keydown', handleEscape)
   }, [onClose])
 
-  if (!isOpen) return null
-
   return createPortal(
-    <Overlay style={{ zIndex: zIndex ?? 1000 }}>
-      <StyledModal ref={ref} style={{ zIndex: (zIndex ?? 1000) + 1 }}>
-        {children}
-      </StyledModal>
-    </Overlay>,
+    <AnimatePresence>
+      {isOpen && (
+        <Overlay
+          variants={overlayVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          style={{ zIndex: zIndex ?? 1000 }}
+        >
+          <StyledModal
+            ref={ref}
+            variants={modalVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            style={{ zIndex: (zIndex ?? 1000) + 1 }}
+          >
+            {children}
+          </StyledModal>
+        </Overlay>
+      )}
+    </AnimatePresence>,
     document.body
   )
 }
