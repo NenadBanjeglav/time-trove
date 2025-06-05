@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import { LogoutIcon } from '../../../assets/icons/LogoutIcon'
 import { ROUTES } from '../../../constants/routes'
 import { TRANSLATION_KEYS as T } from '../../../constants/translationKeys'
-import { useUnsavedChangesModal } from '../../../hooks/useUnsavedCHangesModal'
+import { useUnsavedChangesModal } from '../../../hooks/useUnsavedChangesModal'
 import { Button } from '../../atoms/button/Button'
 import { Heading } from '../../atoms/heading/Heading'
 import { IconButton } from '../../atoms/icon-button/IconButton'
@@ -50,7 +50,12 @@ export const Navbar = ({ onLogout }: NavbarProps) => {
   return (
     <StyledNavbar>
       <NavbarContainer>
-        <Heading as="h2" pallete="neutral" color="hue400">
+        <Heading
+          as="h2"
+          pallete="neutral"
+          //@ts-ignore
+          color="hue400"
+        >
           <Link to="/">{title}</Link>
         </Heading>
         <Search />
