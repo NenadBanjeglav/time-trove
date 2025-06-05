@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom'
 import type { TaskPriority } from '../components/molecules/task-card/task.types'
 import { PAGE_SIZE } from '../constants/constants'
 import { TRANSLATION_KEYS as T } from '../constants/translationKeys'
-import { useToast } from '../contexts/useToast'
+import { useToast } from '../hooks/useToast'
 import { useAppState } from '../stores/useAppStore'
 
 import { axiosInstance } from './axios'

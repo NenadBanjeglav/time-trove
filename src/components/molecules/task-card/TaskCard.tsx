@@ -5,7 +5,7 @@ import { useDeleteTask } from '../../../api/apiTasks'
 import { DeleteIcon } from '../../../assets/icons/DeleteIcon'
 import { EditIcon } from '../../../assets/icons/EditIcon'
 import { TRANSLATION_KEYS as T } from '../../../constants/translationKeys'
-import { useUnsavedChangesModal } from '../../../hooks/useUnsavedCHangesModal'
+import { useUnsavedChangesModal } from '../../../hooks/useUnsavedChangesModal'
 import { Chip } from '../../atoms/chip/Chip'
 import { ChipSize } from '../../atoms/chip/chip.types'
 import { Heading } from '../../atoms/heading/Heading'
@@ -67,6 +67,8 @@ export const TaskCard: FC<TaskCardProps> = ({ id, title, description, done, prio
         <TaskBody>
           <Text
             fontSize="small"
+            pallete="neutral"
+            //@ts-ignore
             color="hue300"
             lineHeight="small"
             fontWeight="regular"

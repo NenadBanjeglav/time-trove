@@ -1,13 +1,17 @@
 import styled from 'styled-components'
 
-export const FilterWrapper = styled.div`
+export const Wrapper = styled.div`
+  padding: 16px 0;
+  width: 100%;
+  background-color: ${({ theme }) => theme.colors.neutral.hue50};
+`
+
+export const LayoutWrap = styled.div`
+  margin: 0 auto;
+  max-width: 1240px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1240px;
-  margin: 0 auto;
-  margin-bottom: 16px;
-  width: 100%;
 
   @media (max-width: 760px) {
     flex-wrap: wrap;

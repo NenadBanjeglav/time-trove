@@ -136,5 +136,12 @@
   "theme": {
     "light": "Hell",
     "dark": "Dunkel"
+  },
+  "validation": {
+    "required": "Dieses Feld ist erforderlich.",
+    "invalid": "Ungültige Eingabe.",
+    "email": "Ungültige E-Mail-Adresse.",
+    "tooShort": "Die Mindestlänge beträgt {{min}} Zeichen.",
+    "default": "Ungültige Eingabe."
   }
 }

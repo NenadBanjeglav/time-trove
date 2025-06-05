@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { signup, login } from '../api/apiAuth'
 import type { SignUpPayload, UserResponse } from '../api/apiAuth'
 import { TRANSLATION_KEYS as T } from '../constants/translationKeys'
-import { useToast } from '../contexts/useToast'
+import { useToast } from './useToast'
 
 export const useSignupMutation = () => {
   const { t } = useTranslation()

@@ -1,6 +1,5 @@
 import { type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useSearchParams } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { TRANSLATION_KEYS as T } from '../../../constants/translationKeys'
@@ -8,7 +7,6 @@ import { useUnsavedChangesModal } from '../../../hooks/useUnsavedCHangesModal'
 import { Button } from '../../atoms/button/Button'
 import { Spinner } from '../../atoms/icon/Spinner'
 import { Modal } from '../../atoms/modal/Modal'
-import { PageWrapper } from '../../atoms/page-wrapper/PageWrapper'
 import { FullCenteredLayout } from '../../atoms/page-wrapper/pageWrapper.styles'
 import { ConfirmDialog } from '../../molecules/confirm-dialog/ConfirmDialog'
 import { DialogVariant } from '../../molecules/confirm-dialog/confirmDialog.types'
@@ -22,6 +20,7 @@ type PageStateContainerProps = {
   isLoading: boolean
   error?: boolean
   isEmpty: boolean
+  hasActiveFilters: boolean
   children?: ReactNode
   onClick?: () => void
 }
@@ -31,18 +30,17 @@ export const FixedBottomCenter = styled.div`
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 999; // higher than content, but below modals
+  z-index: 999;
 `
 
 export const PageStateContainer = ({
-  navHeight,
   isLoading,
   error,
   isEmpty,
+  hasActiveFilters,
   children,
   onClick = () => {},
 }: PageStateContainerProps) => {
-  const [searchParams] = useSearchParams()
   const { t } = useTranslation()
 
   const {
@@ -56,10 +54,8 @@ export const PageStateContainer = ({
     reset,
   } = useUnsavedChangesModal()
 
-  const hasActiveFilters = Boolean(searchParams.get('priority') || searchParams.get('search'))
-
   return (
-    <PageWrapper dynamicHeightOffset={navHeight}>
+    <>
       <Modal isOpen={isTaskFormOpen} onClose={closeTaskForm}>
         <CreateTaskForm onChange={markTaskFormDirty} onReset={reset} />
       </Modal>
@@ -114,18 +110,11 @@ export const PageStateContainer = ({
         />
       )}
 
-      {isEmpty && !isLoading && hasActiveFilters && (
-        <FeedbackState
-          title={t(T.PAGE_STATE.NO_RESULTS_TITLE)}
-          description={t(T.PAGE_STATE.NO_RESULTS_DESCRIPTION)}
-        />
-      )}
-
       {!isLoading && !error && !isEmpty && children}
 
       <FixedBottomCenter>
         <ThemeToggle />
       </FixedBottomCenter>
-    </PageWrapper>
+    </>
   )
 }

@@ -5,7 +5,8 @@ import { useSearchParams } from 'react-router-dom'
 import { RemoveIcon } from '../../../assets/icons/RemoveIcon'
 import { SearchIcon } from '../../../assets/icons/SearchIcon'
 import { TRANSLATION_KEYS as T } from '../../../constants/translationKeys'
-import { Icon } from '../icon/Icon'
+import { useDebouncedValue } from '../../../hooks/useDebounce'
+import { Icon } from '../../atoms/icon/Icon'
 
 import { ClearButton, IconWrapper, SearchWrapper, StyledInput } from './search.styles'
 
@@ -13,33 +14,29 @@ export const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const currentSearch = searchParams.get('search')
   const [search, setSearch] = useState(currentSearch || '')
+  const debouncedSearch = useDebouncedValue(search, 500)
   const previousSearchRef = useRef(search)
   const { t } = useTranslation()
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      const prevSearch = previousSearchRef.current
-      const isSearchChanged = prevSearch !== search
+    const prevSearch = previousSearchRef.current
+    const isSearchChanged = prevSearch !== debouncedSearch
 
-      if (search) {
-        searchParams.set('search', search)
-        if (isSearchChanged) {
-          searchParams.delete('page')
-        }
-      } else {
-        searchParams.delete('search')
-        if (prevSearch) {
-          searchParams.delete('page')
-        }
+    if (debouncedSearch) {
+      searchParams.set('search', debouncedSearch)
+      if (isSearchChanged) {
+        searchParams.delete('page')
       }
+    } else {
+      searchParams.delete('search')
+      if (prevSearch) {
+        searchParams.delete('page')
+      }
+    }
 
-      previousSearchRef.current = search
-
-      setSearchParams(searchParams)
-    }, 150)
-
-    return () => clearTimeout(timeout)
-  }, [search, searchParams, setSearchParams])
+    previousSearchRef.current = debouncedSearch
+    setSearchParams(searchParams)
+  }, [debouncedSearch, searchParams, setSearchParams])
 
   const handleChange = (value: string) => {
     setSearch(value)
@@ -48,7 +45,13 @@ export const Search = () => {
   return (
     <SearchWrapper>
       <IconWrapper>
-        <Icon icon={SearchIcon} pallete="neutral" color="hue300" iconSize="small" />
+        <Icon
+          icon={SearchIcon}
+          pallete="neutral"
+          //@ts-ignore
+          color="hue300"
+          iconSize="small"
+        />
       </IconWrapper>
       <StyledInput
         type="text"

@@ -1,9 +1,10 @@
+import { motion } from 'motion/react'
 import styled from 'styled-components'
 
 import { palleteMap } from './helpers'
 import type { ToastType } from './toast.types'
 
-export const ToastWrapper = styled.div<{ $type: ToastType }>`
+export const ToastWrapper = styled(motion.div)<{ $type: ToastType }>`
   display: flex;
   flex-direction: column;
   align-items: center;
