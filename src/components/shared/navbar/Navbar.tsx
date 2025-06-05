@@ -6,14 +6,14 @@ import { Link } from 'react-router-dom'
 import { LogoutIcon } from '../../../assets/icons/LogoutIcon'
 import { ROUTES } from '../../../constants/routes'
 import { TRANSLATION_KEYS as T } from '../../../constants/translationKeys'
-import { useUnsavedChangesModal } from '../../../hooks/useUnsavedCHangesModal'
+import { useUnsavedChangesModal } from '../../../hooks/useUnsavedChangesModal'
 import { Button } from '../../atoms/button/Button'
 import { Heading } from '../../atoms/heading/Heading'
 import { IconButton } from '../../atoms/icon-button/IconButton'
 import { Modal } from '../../atoms/modal/Modal'
-import { Search } from '../../atoms/search/Search'
 import { ConfirmDialog } from '../../molecules/confirm-dialog/ConfirmDialog'
 import { DialogVariant } from '../../molecules/confirm-dialog/confirmDialog.types'
+import { Search } from '../../molecules/search/Search'
 import { CreateTaskForm } from '../task-form-shell/CreateTaskForm'
 
 import { ButtonIconWrapper, ButtonWrapper, NavbarContainer, StyledNavbar } from './navbar.styles'
@@ -50,7 +50,12 @@ export const Navbar = ({ onLogout }: NavbarProps) => {
   return (
     <StyledNavbar>
       <NavbarContainer>
-        <Heading as="h2" pallete="neutral" color="hue400">
+        <Heading
+          as="h2"
+          pallete="neutral"
+          //@ts-ignore
+          color="hue400"
+        >
           <Link to="/">{title}</Link>
         </Heading>
         <Search />

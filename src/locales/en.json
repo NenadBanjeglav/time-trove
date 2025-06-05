@@ -136,5 +136,12 @@
   "theme": {
     "light": "Light",
     "dark": "Dark"
+  },
+  "validation": {
+    "required": "This field is required.",
+    "invalid": "Invalid input.",
+    "email": "Invalid email address.",
+    "tooShort": "Minimum length is {{min}} characters.",
+    "default": "Invalid input."
   }
 }

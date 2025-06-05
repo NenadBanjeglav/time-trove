@@ -143,4 +143,11 @@ export const TRANSLATION_KEYS = {
     LIGHT: 'theme.light',
     DARK: 'theme.dark',
   },
+  VALIDATION: {
+    REQUIRED: 'validation.required',
+    INVALID: 'validation.invalid',
+    EMAIL: 'validation.email',
+    TOO_SHORT: 'validation.tooShort',
+    DEFAULT: 'validation.default',
+  },
 }

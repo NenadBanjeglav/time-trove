@@ -12,7 +12,7 @@ export const StyledPageWrapper = styled.div<{ $heightOffset?: number }>`
   flex-direction: column;
 
   @media (max-width: 1024px) {
-    padding-bottom: 6rem;
+    padding-bottom: 12rem;
   }
 `
 export const FullCenteredLayout = styled.div`

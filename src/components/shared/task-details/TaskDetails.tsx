@@ -68,7 +68,17 @@ export const TaskDetails = ({ task, onEditSuccess }: TaskDetailsProps) => {
             {task.title}
           </Heading>
 
-          <Text>{task.description}</Text>
+          <Text
+            fontSize="small"
+            pallete="neutral"
+            //@ts-ignore
+            color="hue300"
+            lineHeight="small"
+            fontWeight="regular"
+            textAlign="start"
+          >
+            {task.description}
+          </Text>
         </TaskDetailsSection>
         <Button size="xlarge" fullWidth onClick={handleMarkAsDone} loading={isEditing}>
           {t(T.TASK_DETAILS.MARK_AS_DONE)}
