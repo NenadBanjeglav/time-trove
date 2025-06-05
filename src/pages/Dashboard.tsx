@@ -38,7 +38,7 @@ export const Dashboard = () => {
     }
   })()
 
-  const { data, isPending, isFetching, isError, refetch } = useTasks({
+  const { data, isPending, isError, refetch } = useTasks({
     limit: PAGE_SIZE,
     offset,
     direction: 'desc',
