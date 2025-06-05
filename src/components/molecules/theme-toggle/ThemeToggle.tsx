@@ -27,7 +27,11 @@ export const ThemeToggle = () => {
         {t(T.THEME.DARK)}
       </ToggleButton>
       <SliderWrapper $themeMode={themeMode}>
-        <SliderBackground layout transition={{ type: 'spring', damping: 15, stiffness: 250 }} />
+        <SliderBackground
+          layout
+          initial={false}
+          transition={{ type: 'spring', damping: 15, stiffness: 250 }}
+        />
       </SliderWrapper>
     </ToggleWrapper>
   )

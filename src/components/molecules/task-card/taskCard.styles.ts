@@ -8,7 +8,7 @@ export const FullWidthCard = styled(Card)`
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  max-height: 165px;
+  min-height: 156px;
   cursor: pointer;
 `
 

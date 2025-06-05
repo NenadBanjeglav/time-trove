@@ -2,11 +2,11 @@ import { useTranslation } from 'react-i18next'
 
 import { TRANSLATION_KEYS as T } from '../../../constants/translationKeys'
 import { FlatList } from '../../atoms/flat-list/FlatList'
+import { Spinner } from '../../atoms/icon/Spinner'
+import { Pagination } from '../../atoms/pagination/Pagination'
 import { FeedbackState } from '../feedback-state/FeedbackState'
 import { TaskCard } from '../task-card/TaskCard'
 import { type TaskCardProps } from '../task-card/task.types'
-import { Pagination } from '../../atoms/pagination/Pagination'
-import { Spinner } from '../../atoms/icon/Spinner'
 
 type TaskListProps = {
   tasks: TaskCardProps[]

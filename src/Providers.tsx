@@ -3,15 +3,15 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { useEffect, type ReactNode } from 'react'
 import { I18nextProvider } from 'react-i18next'
 import { ThemeProvider } from 'styled-components'
+import { z } from 'zod'
 
-import { ToastProvider } from './contexts/ToastProvider'
+import { ToastProvider } from './contexts/ToastContext'
 import i18n from './locales/i18n'
+import { zodI18nMap } from './locales/zodErrorMap'
 import { useAppState } from './stores/useAppStore'
 import { darkTheme } from './styles/darkTheme'
 import GlobalStyles from './styles/globalStyles'
 import { theme } from './styles/theme'
-import { z } from 'zod'
-import { zodI18nMap } from './locales/zodErrorMap'
 
 const queryClient = new QueryClient({
   defaultOptions: {

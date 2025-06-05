@@ -9,7 +9,6 @@ export const FlatListWrapper = styled.div`
   max-width: 1240px;
   margin: 0 auto;
   width: 100%;
-  min-height: 542px;
 
   @media (max-width: 760px) {
     grid-template-columns: 1fr;

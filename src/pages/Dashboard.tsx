@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useOutletContext, useSearchParams } from 'react-router-dom'
 
 import { useTasks } from '../api/apiTasks'
+import { PageWrapper } from '../components/atoms/page-wrapper/PageWrapper'
 import { TaskPriority } from '../components/molecules/task-card/task.types'
 import { TaskList } from '../components/molecules/task-list/TaskList'
 import { PageStateContainer } from '../components/organisms/page-state-container/PageStateContainer'
@@ -9,12 +10,8 @@ import { DashboardHeading } from '../components/shared/priority-filters/Dashboar
 import { PAGE_SIZE } from '../constants/constants'
 import { usePrefetchPaginatedTasks } from '../hooks/usePrefetchPaginatedTasks'
 import { useAppState } from '../stores/useAppStore'
-import styled from 'styled-components'
-import { PageWrapper } from '../components/atoms/page-wrapper/PageWrapper'
 
 type LayoutContext = { navHeight: number }
-
-const StyledDashboard = styled.main``
 
 export const Dashboard = () => {
   const { navHeight } = useOutletContext<LayoutContext>()
