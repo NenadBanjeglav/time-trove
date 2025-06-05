@@ -6,6 +6,7 @@ import { z } from 'zod'
 
 import { useEditTask, type Task } from '../../../api/apiTasks'
 import { TRANSLATION_KEYS as T } from '../../../constants/translationKeys'
+import { getChangedValues } from '../../../utils/getChangedValues'
 import { ChipSize, ChipStatus } from '../../atoms/chip/chip.types'
 import { InputField } from '../../atoms/input/Input'
 import { Text } from '../../atoms/text/Text'
@@ -58,14 +59,18 @@ export const EditTaskForm = ({ task, onReset, onChange }: EditTaskFormProps) => 
   const { editTaskMutation, isEditing } = useEditTask()
 
   const onSubmit = (values: EditTaskFormValues) => {
+    const changedValues = getChangedValues(task, values)
+
+    if (Object.keys(changedValues).length === 0) return
+
     editTaskMutation(
       {
         id: task.id,
-        values,
+        values: changedValues,
       },
       {
         onSuccess: () => {
-          reset()
+          reset(values)
           onReset?.()
         },
       }

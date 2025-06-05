@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 
 import { TRANSLATION_KEYS as T } from '../../../constants/translationKeys'
-import { useUnsavedChangesModal } from '../../../hooks/useUnsavedCHangesModal'
+import { useUnsavedChangesModal } from '../../../hooks/useUnsavedChangesModal'
 import { Button } from '../../atoms/button/Button'
 import { Spinner } from '../../atoms/icon/Spinner'
 import { Modal } from '../../atoms/modal/Modal'
