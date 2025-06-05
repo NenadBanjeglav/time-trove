@@ -87,7 +87,7 @@ export const useCreateTask = () => {
     }
   >({
     mutationFn: createTask,
-    onSuccess: (newTask, _payload) => {
+    onSuccess: newTask => {
       const totalAfterInsert = totalTasks + 1
       const totalPages = Math.ceil(totalAfterInsert / PAGE_SIZE)
       const currentPage = Number(searchParams.get('page') || '1')
