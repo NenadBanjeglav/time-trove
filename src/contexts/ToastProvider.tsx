@@ -1,8 +1,10 @@
+import { AnimatePresence } from 'motion/react'
 import { type ReactNode, useState, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 
 import { Toast } from '../components/molecules/toast/Toast'
 import type { ToastProps, ToastInput } from '../components/molecules/toast/toast.types'
+import { EXIT_ANIMATION_MS, TOAST_DISPLAY_MS } from '../constants/toastTimers'
 
 import { ToastContext } from './ToastContext'
 import { ToastContainer } from './toastContext.styles'
@@ -15,7 +17,7 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
   }, [])
 
   const addToast = useCallback(
-    ({ type, title, message, duration = 1000 }: ToastInput) => {
+    ({ type, title, message, duration = TOAST_DISPLAY_MS }: ToastInput) => {
       const id = crypto.randomUUID()
       const onClose = () => removeToast(id)
 
@@ -35,7 +37,7 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
 
       setTimeout(() => {
         removeToast(id)
-      }, duration)
+      }, duration + EXIT_ANIMATION_MS)
     },
     [removeToast]
   )
@@ -45,9 +47,11 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
       {children}
       {createPortal(
         <ToastContainer>
-          {toasts.map(toast => (
-            <Toast key={toast.id} {...toast} />
-          ))}
+          <AnimatePresence>
+            {toasts.map(toast => (
+              <Toast key={toast.id} {...toast} />
+            ))}
+          </AnimatePresence>
         </ToastContainer>,
         document.body
       )}
