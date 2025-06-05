@@ -1,12 +1,13 @@
+import { motion } from 'motion/react'
 import styled from 'styled-components'
 
-export const StyledModal = styled.div`
+export const StyledModal = styled(motion.div)`
   position: relative;
   background-color: ${({ theme }) => theme.colors.neutral.hue0};
   border-radius: 12px;
   z-index: 1001;
 `
-export const Overlay = styled.div`
+export const Overlay = styled(motion.div)`
   position: fixed;
   top: 0;
   left: 0;
