@@ -26,7 +26,6 @@ export const useUnsavedChangesModal = () => {
   const onChange = () => setHasUnsavedChanges(true)
 
   const reset = () => {
-    console.log('[useUnsavedChangesModal] reset called')
     setHasUnsavedChanges(false)
     setIsOpen(false)
     setConfirmOpen(false)
