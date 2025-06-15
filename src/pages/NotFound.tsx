@@ -12,6 +12,7 @@ export const NotFound = () => {
         title="Page not found!"
         description="The page you are attempting to access is currently unavailable or does not exist."
         buttonLabel="Back home"
+        //@ts-ignore
         onClick={() => navigate('/')}
         imageMaxWidth="23.25rem"
       />

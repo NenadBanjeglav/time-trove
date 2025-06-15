@@ -29,6 +29,7 @@ export const FeedbackState = ({
         <Heading
           as="h1"
           pallete="neutral"
+          //@ts-ignore
           color="hue500"
           fontSize="h1"
           fontWeight="bold"
