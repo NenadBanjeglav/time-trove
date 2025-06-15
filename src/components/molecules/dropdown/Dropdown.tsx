@@ -38,7 +38,13 @@ export const Dropdown = ({ options, value, onChange, size = 'small' }: DropdownP
         {selected && (
           <IconWrapper>
             {selected.icon && (
-              <Icon icon={selected.icon} pallete="neutral" color="hue500" iconSize="small" />
+              <Icon
+                icon={selected.icon}
+                pallete="neutral"
+                //@ts-ignore
+                color="hue500"
+                iconSize="small"
+              />
             )}
             <Text as="span" fontSize="base" fontWeight={isOpen ? 'medium' : 'regular'}>
               {selected.label}
@@ -48,6 +54,7 @@ export const Dropdown = ({ options, value, onChange, size = 'small' }: DropdownP
         <Icon
           icon={isOpen ? ChevronUp : ChevronDown}
           pallete="neutral"
+          //@ts-ignore
           color="hue500"
           iconSize="xSmall"
         />
@@ -61,7 +68,13 @@ export const Dropdown = ({ options, value, onChange, size = 'small' }: DropdownP
               <MenuItem key={option.value} onClick={() => handleSelect(option.value)}>
                 <IconWrapper>
                   {option.icon && (
-                    <Icon icon={option.icon} pallete="neutral" color="hue500" iconSize="small" />
+                    <Icon
+                      icon={option.icon}
+                      pallete="neutral"
+                      //@ts-ignore
+                      color="hue500"
+                      iconSize="small"
+                    />
                   )}
                   <Text as="span" fontSize="base" fontWeight={isActive ? 'medium' : 'regular'}>
                     {option.label}

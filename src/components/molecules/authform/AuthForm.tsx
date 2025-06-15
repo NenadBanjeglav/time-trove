@@ -53,7 +53,7 @@ export const AuthForm = <FormValues extends FieldValues>({
     if (Object.keys(errors).length > 0) {
       trigger()
     }
-  }, [i18n.language, trigger])
+  }, [i18n.language, trigger, errors])
 
   return (
     <Wrapper onSubmit={handleSubmit(onSubmit)}>

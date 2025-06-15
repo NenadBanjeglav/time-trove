@@ -1,3 +1,4 @@
+// eslint-disable-next-line check-file/filename-naming-convention
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 

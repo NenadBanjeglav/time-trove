@@ -1,59 +1,66 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Modal } from '../../atoms/modal/Modal'
-
 import { TaskCard } from './TaskCard'
-import { TaskPriority, TaskStatus } from './task.types'
+import { TaskPriority } from './task.types'
 
 const meta: Meta<typeof TaskCard> = {
-  title: 'Components/TaskCard',
+  title: 'Components/Task/TaskCard',
   component: TaskCard,
-  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
   args: {
     id: 'task-123',
-    title: 'Design Review',
-    description: 'Review the design system updates and provide feedback to the design team.',
-    status: TaskStatus.INPROGRESS,
+    title: 'Prepare presentation',
+    description: 'Prepare slides and speaking notes for the upcoming client meeting.',
+    done: false,
     priority: TaskPriority.MEDIUM,
   },
   argTypes: {
-    status: {
-      control: 'select',
-      options: Object.values(TaskStatus),
+    done: {
+      control: 'boolean',
     },
     priority: {
       control: 'select',
       options: Object.values(TaskPriority),
     },
   },
-  decorators: [
-    Story => (
-      <Modal>
-        <Story />
-      </Modal>
-    ),
-  ],
 }
 
 export default meta
+
 type Story = StoryObj<typeof TaskCard>
 
-export const InProgressMedium: Story = {}
+export const Default: Story = {}
 
-export const DoneHigh: Story = {
+export const DoneTask: Story = {
   args: {
-    status: TaskStatus.DONE,
-    priority: TaskPriority.HIGH,
-    title: 'Submit Final Report',
-    description: 'Submit the final report to the stakeholders and archive the documents.',
+    done: true,
+    title: 'Submit project report',
+    description: 'Final report submitted to client. No further action needed.',
   },
 }
 
-export const InProgressLow: Story = {
+export const HighPriority: Story = {
   args: {
-    status: TaskStatus.INPROGRESS,
+    priority: TaskPriority.HIGH,
+    title: 'Fix critical bug',
+    description: 'Resolve the login crash on mobile devices ASAP.',
+  },
+}
+
+export const LowPriority: Story = {
+  args: {
     priority: TaskPriority.LOW,
-    title: 'Refactor Codebase',
-    description: 'Clean up and organize the code for better maintainability.',
+    title: 'Clean up backlog',
+    description: 'Organize old tasks and remove irrelevant items.',
+  },
+}
+
+export const LongDescription: Story = {
+  args: {
+    title: 'Research competitors',
+    description:
+      'Explore competitor products, review features, pricing models, and user experience. Summarize the findings in a shared document with links and screenshots for comparison.',
   },
 }

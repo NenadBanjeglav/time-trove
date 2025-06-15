@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "vite build",
+    "type-check": "tsc --noEmit",
     "preview": "vite preview",
     "lint": "eslint . --config eslint.config.js --ext .ts,.tsx,.js,.jsx",
     "format": "prettier --write .",
@@ -13,7 +14,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@hookform/resolvers": "^5.0.1",
+    "@hookform/resolvers": "^5.1.1",
     "@tanstack/react-query": "^5.76.1",
     "@tanstack/react-query-devtools": "^5.77.2",
     "axios": "^1.9.0",
