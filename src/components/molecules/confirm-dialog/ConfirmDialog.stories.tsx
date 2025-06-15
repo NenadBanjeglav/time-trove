@@ -11,21 +11,11 @@ const meta: Meta<typeof ConfirmDialog> = {
       control: 'select',
       options: Object.values(DialogVariant),
     },
-    title: {
-      control: 'text',
-    },
-    description: {
-      control: 'text',
-    },
-    primaryActionLabel: {
-      control: 'text',
-    },
-    secondaryActionLabel: {
-      control: 'text',
-    },
-    loading: {
-      control: 'boolean',
-    },
+    title: { control: 'text' },
+    description: { control: 'text' },
+    primaryActionLabel: { control: 'text' },
+    secondaryActionLabel: { control: 'text' },
+    loading: { control: 'boolean' },
   },
   args: {
     variant: DialogVariant.SUCCESS,
@@ -41,31 +31,46 @@ const meta: Meta<typeof ConfirmDialog> = {
 }
 
 export default meta
+
 type Story = StoryObj<typeof ConfirmDialog>
 
-export const Default: Story = {
+export const SuccessDialog: Story = {
   args: {
-    onPrimaryAction: () => alert('Primary action'),
-    onSecondaryAction: () => alert('Secondary action'),
+    onPrimaryAction: () => alert('Item deleted'),
+    onClose: () => alert('Dialog closed'),
   },
 }
 
-export const LoadingState: Story = {
-  args: {
-    loading: true,
-    onPrimaryAction: () => alert('Submitting...'),
-    onSecondaryAction: () => alert('Cancel'),
-  },
-}
-
-export const DangerVariant: Story = {
+export const DangerDialog: Story = {
   args: {
     variant: DialogVariant.DANGER,
-    title: 'Critical action',
-    primaryActionLabel: 'Proceed',
-    description: 'This operation is irreversible. Are you absolutely sure?',
-    onPrimaryAction: () => alert('Proceeding...'),
-    onSecondaryAction: () => alert('Abort'),
+    title: 'Permanent deletion',
+    description: 'This action will remove the item permanently.',
+    primaryActionLabel: 'Delete permanently',
+    secondaryActionLabel: 'Back',
+    onPrimaryAction: () => alert('Permanently deleted'),
+    onClose: () => alert('Cancelled'),
+  },
+}
+
+export const InfoDialog: Story = {
+  args: {
+    variant: DialogVariant.WARNING,
+    title: 'Session expired',
+    description: 'Please log in again to continue.',
+    primaryActionLabel: 'Log In',
+    secondaryActionLabel: 'Close',
+    onPrimaryAction: () => alert('Redirecting to login'),
+    onClose: () => alert('Dialog closed'),
+  },
+}
+
+export const LoadingDialog: Story = {
+  args: {
+    loading: true,
+    primaryActionLabel: 'Processing...',
+    onPrimaryAction: () => alert('Processing...'),
+    onClose: () => alert('Cancelled'),
   },
 }
 
@@ -73,5 +78,6 @@ export const WithoutSecondaryButton: Story = {
   args: {
     secondaryActionLabel: undefined,
     onPrimaryAction: () => alert('Confirmed!'),
+    onClose: () => alert('Dialog closed'),
   },
 }

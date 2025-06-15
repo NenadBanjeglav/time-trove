@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect, type FC, type SVGProps } from 'react'
 import { useForm, type FieldValues, type Path } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import type { ZodSchema } from 'zod'
 
 import { Button } from '../../atoms/button/Button'
@@ -10,7 +11,6 @@ import { InputField } from '../../atoms/input/Input'
 import { Text } from '../../atoms/text/Text'
 
 import { Wrapper, FormHeader, IconWrapper } from './authForm.styles'
-import { useTranslation } from 'react-i18next'
 
 type AuthFormProps<FormValues> = {
   schema: ZodSchema<FormValues>
@@ -52,7 +52,7 @@ export const AuthForm = <FormValues extends FieldValues>({
     if (Object.keys(errors).length > 0) {
       trigger()
     }
-  }, [i18n.language, trigger])
+  }, [i18n.language, trigger, errors])
 
   return (
     <Wrapper onSubmit={handleSubmit(onSubmit)}>

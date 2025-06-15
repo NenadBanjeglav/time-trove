@@ -46,6 +46,7 @@ export const CenteredContent: Story = {
         <Heading
           as="h1"
           pallete="neutral"
+          //@ts-ignore
           color="hue500"
           fontSize="h2"
           fontWeight="bold"
