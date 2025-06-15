@@ -48,7 +48,14 @@ export const ConfirmDialog = ({
       </IconWrapper>
 
       <HeadingTextWrapper>
-        <Heading as="h2" fontSize="h2" fontWeight="semiBold" pallete="neutral" color="hue500">
+        <Heading
+          as="h2"
+          fontSize="h2"
+          fontWeight="semiBold"
+          pallete="neutral"
+          //@ts-ignore
+          color="hue500"
+        >
           {title}
         </Heading>
         <Text fontSize="small" fontWeight="regular" pallete="neutral" color="hue200">
